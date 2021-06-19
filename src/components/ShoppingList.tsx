@@ -1,4 +1,4 @@
-import { Box, VStack } from '@chakra-ui/layout';
+import { Box, Heading, HStack, VStack } from '@chakra-ui/layout';
 import { cloneDeep } from 'lodash';
 import React, { useEffect, useState } from 'react';
 import shoppingListGenerator from '../client/shoppingListGenerator';
@@ -11,10 +11,12 @@ type ShoppingListProps = {
 
 export function ShoppingList(props: ShoppingListProps) {
   const [list, setList] = useState<KeyValue<ListKey, LocatedItem[]>[]>([]);
+  const [price, setPrice] = useState(0);
 
   useEffect(() => {
     shoppingListGenerator.GetShoppingList(props.gear).then((res) => {
-      setList(res);
+      setPrice(res[0]);
+      setList(res[1]);
     })
   }, [props.gear]);
 
@@ -34,7 +36,18 @@ export function ShoppingList(props: ShoppingListProps) {
   }
 
   return (
-    <Box marginTop='20pt' width='fit-content' marginBottom='50pt'>
+    <Box marginTop='10pt' width='fit-content' marginBottom='50pt'>
+      <Box marginBottom='10pt'>
+        <HStack flex={1}>
+          {list.length > 0 ? 
+            <>
+              <Heading fontSize='sm'>{`Estimated purchase price: `}</Heading>
+              <Heading paddingLeft='50pt' fontSize='sm'>{`${formatter.format(price)} aUEC`}</Heading> 
+            </>
+            : ''
+          }
+        </HStack>
+      </Box>
       <VStack>
         {list.map(l => <ShoppingListLocation items={l} boughtSetter={setItemBought} key={l.key.id} />)}
       </VStack>

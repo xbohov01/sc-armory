@@ -69,6 +69,13 @@ class ApiClient {
     return result.data.value
   }
 
+  async GetUsable(filter: string = ''): Promise<RetailProductVM[]> {
+    let result = await this.instance.get(
+      this.url + RetailProductsEndpoint + `?$filter=RetailType eq 'Usable' and contains(tolower(LocalizedName),'${filter.toLowerCase()}')`
+    );
+    return result.data.value
+  }
+
   async GetWeapons(filter: string = ''): Promise<RetailProductVM[]> {
     let rifles = await this.instance.get(
       this.url + RetailProductsEndpoint + `?$filter=contains(tolower(LocalizedName),'rifle') and contains(tolower(LocalizedName),'${filter.toLowerCase()}')`

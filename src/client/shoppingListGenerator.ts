@@ -4,12 +4,15 @@ import client from "./client";
 
 
 class ShoppingListGenerator {
-  async GetShoppingList(loadout:string[]): Promise<KeyValue<ListKey, LocatedItem[]>[]>{
+  async GetShoppingList(loadout:string[]): Promise<[number, KeyValue<ListKey, LocatedItem[]>[]]>{
     let list:KeyValue<ListKey, LocatedItem[]>[] = [];
     let locatedItems:LocatedItem[] = [];
+    let price = 0;
 
     for (let gear of loadout){
       let saleLocations = await client.GetSaleLocations(gear);
+
+      price += saleLocations[0].price;
 
       for (let saleLocation of saleLocations){
         let lItem:LocatedItem = {
@@ -26,6 +29,7 @@ class ShoppingListGenerator {
     }
 
     for (let entry of locatedItems){
+      
       if(!list.some(e => e.key.id === entry.storeId)){
         list.push({
           key:{
@@ -40,7 +44,7 @@ class ShoppingListGenerator {
       }
     } 
 
-    return orderBy(list, i => i.value.length).reverse();
+    return [price, orderBy(list, i => i.value.length).reverse()];
   }
 }
 

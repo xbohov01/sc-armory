@@ -31,6 +31,10 @@ class GearProvider {
         result = await client.GetUndersuits(filter);
         break;
 
+      case 'Usable':
+        result = await client.GetUsable(filter);
+        break;
+
       case 'Primary':
       case 'Secondary':
         result = await client.GetWeapons(filter);
@@ -49,7 +53,7 @@ class GearProvider {
     });
   }
 
-  public async GetCore(name:string):Promise<RetailProductVM>{
+  public async GetCore(name: string): Promise<RetailProductVM> {
     let result = await client.GetCoreByName(name);
     return result.value[0];
   }
