@@ -23,28 +23,28 @@ class ApiClient {
    */
   async GetArms(filter: string = ''): Promise<RetailProductVM[]> {
     let result = await this.instance.get(
-      this.url + RetailProductsEndpoint + `?$filter=contains(tolower(LocalizedName),'arms') and contains(tolower(LocalizedName),'${filter.toLowerCase()}')`
+      this.url + RetailProductsEndpoint + `?$filter=contains(tolower(LocalizedName),'arms') and contains(tolower(LocalizedName),'${filter.toLowerCase()}') and RetailType eq 'Armor'`
     );
     return orderBy(result.data.value, (v:RetailProductVM) => v.LocalizedName);
   }
 
   async GetUndersuits(filter: string = ''): Promise<RetailProductVM[]> {
     let result = await this.instance.get(
-      this.url + RetailProductsEndpoint + `?$filter=contains(tolower(LocalizedName),'undersuit') and contains(tolower(LocalizedName),'${filter.toLowerCase()}')`
+      this.url + RetailProductsEndpoint + `?$filter=contains(tolower(LocalizedName),'undersuit') and contains(tolower(LocalizedName),'${filter.toLowerCase()}') and RetailType eq 'Armor'`
     );
     return orderBy(result.data.value, (v:RetailProductVM) => v.LocalizedName);
   }
 
   async GetHelmets(filter: string = ''): Promise<RetailProductVM[]> {
     let result = await this.instance.get(
-      this.url + RetailProductsEndpoint + `?$filter=contains(tolower(LocalizedName),'helmet') and contains(tolower(LocalizedName),'${filter.toLowerCase()}')`
+      this.url + RetailProductsEndpoint + `?$filter=contains(tolower(LocalizedName),'helmet') and contains(tolower(LocalizedName),'${filter.toLowerCase()}') and RetailType eq 'Armor'`
     );
     return orderBy(result.data.value, (v:RetailProductVM) => v.LocalizedName);
   }
 
   async GetCores(filter: string = ''): Promise<RetailProductVM[]> {
     let result = await this.instance.get(
-      this.url + RetailProductsEndpoint + `?$filter=contains(tolower(LocalizedName),'core') and contains(tolower(LocalizedName),'${filter.toLowerCase()}')`
+      this.url + RetailProductsEndpoint + `?$filter=contains(tolower(LocalizedName),'core') and contains(tolower(LocalizedName),'${filter.toLowerCase()}') and RetailType eq 'Armor'`
     );
     return orderBy(result.data.value, (v:RetailProductVM) => v.LocalizedName);
   }
@@ -58,7 +58,7 @@ class ApiClient {
 
   async GetLegs(filter: string = ''): Promise<RetailProductVM[]> {
     let result = await this.instance.get(
-      this.url + RetailProductsEndpoint + `?$filter=contains(tolower(LocalizedName),'legs') and contains(tolower(LocalizedName),'${filter.toLowerCase()}')`
+      this.url + RetailProductsEndpoint + `?$filter=contains(tolower(LocalizedName),'legs') and contains(tolower(LocalizedName),'${filter.toLowerCase()}') and RetailType eq 'Armor'`
     );
     return orderBy(result.data.value, (v:RetailProductVM) => v.LocalizedName);
   }
