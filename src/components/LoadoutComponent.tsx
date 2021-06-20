@@ -19,7 +19,7 @@ export function LoadoutComponent(props: LoadoutComponentProps) {
   }
 
   return (
-    <Box id={'component-' + props.type} padding='2pt'>
+    <Box maxWidth='300pt' id={'component-' + props.type} padding='2pt' margin='auto'>
       <Heading fontSize='md'>{props.type}</Heading>
       <Box paddingTop='2pt'>
         <AsyncSelect

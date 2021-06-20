@@ -27,7 +27,7 @@ export function OptionalLoadoutComponent(props: OptionalLoadoutComponentProps) {
   }
 
   return (
-    <Box>
+    <Box maxWidth='300pt' margin='auto'>
       <Heading fontSize='md'>Optional gear</Heading>
       <HStack id={'component-' + props.type} padding='2pt'>
         <Box paddingTop='2pt'>

@@ -5,7 +5,7 @@ export function AppNotice() {
   const [hidden, setHidden] = useState(false);
 
   return (
-    <Box width='40vw' marginBottom='20pt' hidden={hidden}>
+    <Box width='800pt' marginBottom='20pt' hidden={hidden}>
       <Alert status="info" variant='solid' borderRadius='3pt'>
         <AlertIcon />
         <AlertTitle mr={2} fontSize='md'>Development notice</AlertTitle>

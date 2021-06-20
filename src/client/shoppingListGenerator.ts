@@ -1,4 +1,5 @@
 import { orderBy } from "lodash";
+import { SaleLocationsFetchException } from "../exceptions/SaleLocationsFetchException";
 import { KeyValue, ListKey, LocatedItem } from "../types/types";
 import client from "./client";
 
@@ -10,7 +11,13 @@ class ShoppingListGenerator {
     let price = 0;
 
     for (let gear of loadout){
-      let saleLocations = await client.GetSaleLocations(gear);
+      let result = await client.GetSaleLocations(gear);
+
+      if (!result.success){
+        throw new SaleLocationsFetchException(result.message);
+      }
+
+      let saleLocations = result.data;
 
       price += saleLocations[0].price;
 

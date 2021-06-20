@@ -25,8 +25,8 @@ export function LoadoutBuilder(props: LoadoutBuilderProps) {
   }
 
   return (
-    <Box id='loadout-builder' marginBottom='10pt'>
-      <Heading>Build your loadout:</Heading>
+    <Box backgroundColor='#282c34' color='whitesmoke' id='loadout-builder' marginBottom='10pt'>
+      <Heading size='lg'>Build your loadout:</Heading>
       <Box marginBottom='10pt' fontSize='md'>
         <LoadoutComponent type='Undersuit' updater={setUndersuit} />
         <LoadoutComponent type='Helmet' updater={setHelmet} />
@@ -38,7 +38,7 @@ export function LoadoutBuilder(props: LoadoutBuilderProps) {
         <SecondarySelectorComponent coreName={core} setSecondary={setSecondary}/>
         <OptionalLoadoutItems updater={setOptionals}/>
       </Box>
-      <Button width='30vw' colorScheme='teal' onClick={sendBuildToList}>Get shopping list</Button>
+      <Button width='30vw' maxWidth='300pt' minWidth='200pt' colorScheme='teal' onClick={sendBuildToList}>Get shopping list</Button>
     </Box>
   )
 }

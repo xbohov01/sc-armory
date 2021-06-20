@@ -1,5 +1,5 @@
 import axios, { AxiosInstance } from 'axios';
-import { SaleLocationVM } from '../types/types';
+import { ResultObject, SaleLocationVM } from '../types/types';
 import { RetailProductVM } from './RetailProductVM';
 
 const RetailProductsEndpoint = '/retailproducts'
@@ -77,34 +77,19 @@ class ApiClient {
   }
 
   async GetWeapons(filter: string = ''): Promise<RetailProductVM[]> {
-    let rifles = await this.instance.get(
-      this.url + RetailProductsEndpoint + `?$filter=contains(tolower(LocalizedName),'rifle') and contains(tolower(LocalizedName),'${filter.toLowerCase()}')`
+    let result = await this.instance.get(
+      this.url + RetailProductsEndpoint + `?$filter=RetailType eq 'Primary' and contains(tolower(LocalizedName),'${filter.toLowerCase()}')`
     );
-
-    let smg = await this.instance.get(
-      this.url + RetailProductsEndpoint + `?$filter=contains(tolower(LocalizedName),'smg') and contains(tolower(LocalizedName),'${filter.toLowerCase()}')`
-    );
-
-    let lmg = await this.instance.get(
-      this.url + RetailProductsEndpoint + `?$filter=contains(tolower(LocalizedName),'lmg') and contains(tolower(LocalizedName),'${filter.toLowerCase()}')`
-    );
-
-    let shotgun = await this.instance.get(
-      this.url + RetailProductsEndpoint + `?$filter=contains(tolower(LocalizedName),'shotgun') and contains(tolower(LocalizedName),'${filter.toLowerCase()}')`
-    );
-
-    let weapons = [...rifles.data.value,
-    ...smg.data.value,
-    ...lmg.data.value,
-    ...shotgun.data.value]
-      .filter((w: RetailProductVM) => !w.LocalizedName.includes('Magazine') && !w.LocalizedName.includes('Battery'));
-
-    return weapons;
+    return result.data.value;
   }
 
-  async GetSaleLocations(itemName: string):Promise<SaleLocationVM[]> {
+  async GetSaleLocations(itemName: string):Promise<ResultObject<SaleLocationVM>> {
     let result = await this.instance.get(this.url + saleLocations + `?item=${itemName}`);
-    return result.data
+    return {
+      success: result.status === 200,
+      message: result.statusText,
+      data: result.data
+    }
   }
 
   async GetRetailProduct(id:number):Promise<RetailProductVM> {

@@ -1,4 +1,5 @@
 import { Box, Heading, HStack, VStack } from '@chakra-ui/layout';
+import { useToast } from '@chakra-ui/toast';
 import { cloneDeep } from 'lodash';
 import React, { useEffect, useState } from 'react';
 import shoppingListGenerator from '../client/shoppingListGenerator';
@@ -12,12 +13,23 @@ type ShoppingListProps = {
 export function ShoppingList(props: ShoppingListProps) {
   const [list, setList] = useState<KeyValue<ListKey, LocatedItem[]>[]>([]);
   const [price, setPrice] = useState(0);
+  const toast = useToast();
 
   useEffect(() => {
-    shoppingListGenerator.GetShoppingList(props.gear).then((res) => {
-      setPrice(res[0]);
-      setList(res[1]);
-    })
+    try {
+      shoppingListGenerator.GetShoppingList(props.gear).then((res) => {
+        setPrice(res[0]);
+        setList(res[1]);
+      });
+    } catch (e) {
+      toast({
+        title: 'Error',
+        description: 'Unable to fetch shopping list, try again later',
+        status: 'error',
+        duration: 9000,
+        isClosable: true,
+      })
+    }
   }, [props.gear]);
 
   const formatter = new Intl.NumberFormat('en-US', {
@@ -27,8 +39,8 @@ export function ShoppingList(props: ShoppingListProps) {
 
   const setItemBought = (itemName: string, bought: boolean) => {
     var copy = cloneDeep(list);
-    for (let location of copy){
-      for (let item of location.value.filter(v => v.item === itemName)){
+    for (let location of copy) {
+      for (let item of location.value.filter(v => v.item === itemName)) {
         item.isBought = bought
       }
     }
@@ -36,13 +48,13 @@ export function ShoppingList(props: ShoppingListProps) {
   }
 
   return (
-    <Box marginTop='10pt' width='fit-content' marginBottom='50pt'>
+    <Box marginTop='10pt' width='fit-content' marginBottom='50pt' backgroundColor='#282c34' color='whitesmoke'>
       <Box marginBottom='10pt'>
         <HStack flex={1}>
-          {list.length > 0 ? 
+          {list.length > 0 ?
             <>
               <Heading fontSize='sm'>{`Estimated purchase price: `}</Heading>
-              <Heading paddingLeft='50pt' fontSize='sm'>{`${formatter.format(price)} aUEC`}</Heading> 
+              <Heading paddingLeft='50pt' fontSize='sm'>{`${formatter.format(price)} aUEC`}</Heading>
             </>
             : ''
           }

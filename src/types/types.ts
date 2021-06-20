@@ -44,3 +44,14 @@ export type SaleLocationVM = {
   saleLocationId: number,
   saleLocationName: string,
 }
+
+export type ResultObject<T> = {
+  data: T[],
+  success: boolean,
+  message: string
+}
+
+export type WeaponAttachmentSlot = {
+  size:number,
+  type:string
+}
