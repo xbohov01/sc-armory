@@ -1,4 +1,5 @@
 import axios, { AxiosInstance } from 'axios';
+import { orderBy } from 'lodash';
 import { ResultObject, SaleLocationVM } from '../types/types';
 import { RetailProductVM } from './RetailProductVM';
 
@@ -24,28 +25,28 @@ class ApiClient {
     let result = await this.instance.get(
       this.url + RetailProductsEndpoint + `?$filter=contains(tolower(LocalizedName),'arms') and contains(tolower(LocalizedName),'${filter.toLowerCase()}')`
     );
-    return result.data.value
+    return orderBy(result.data.value, (v:RetailProductVM) => v.LocalizedName);
   }
 
   async GetUndersuits(filter: string = ''): Promise<RetailProductVM[]> {
     let result = await this.instance.get(
       this.url + RetailProductsEndpoint + `?$filter=contains(tolower(LocalizedName),'undersuit') and contains(tolower(LocalizedName),'${filter.toLowerCase()}')`
     );
-    return result.data.value
+    return orderBy(result.data.value, (v:RetailProductVM) => v.LocalizedName);
   }
 
   async GetHelmets(filter: string = ''): Promise<RetailProductVM[]> {
     let result = await this.instance.get(
       this.url + RetailProductsEndpoint + `?$filter=contains(tolower(LocalizedName),'helmet') and contains(tolower(LocalizedName),'${filter.toLowerCase()}')`
     );
-    return result.data.value
+    return orderBy(result.data.value, (v:RetailProductVM) => v.LocalizedName);
   }
 
   async GetCores(filter: string = ''): Promise<RetailProductVM[]> {
     let result = await this.instance.get(
       this.url + RetailProductsEndpoint + `?$filter=contains(tolower(LocalizedName),'core') and contains(tolower(LocalizedName),'${filter.toLowerCase()}')`
     );
-    return result.data.value
+    return orderBy(result.data.value, (v:RetailProductVM) => v.LocalizedName);
   }
 
   async GetCoreByName(name:string){
@@ -59,28 +60,28 @@ class ApiClient {
     let result = await this.instance.get(
       this.url + RetailProductsEndpoint + `?$filter=contains(tolower(LocalizedName),'legs') and contains(tolower(LocalizedName),'${filter.toLowerCase()}')`
     );
-    return result.data.value
+    return orderBy(result.data.value, (v:RetailProductVM) => v.LocalizedName);
   }
 
   async GetPistols(filter: string = ''): Promise<RetailProductVM[]> {
     let result = await this.instance.get(
       this.url + RetailProductsEndpoint + `?$filter=RetailType eq 'Sidearm' and contains(tolower(LocalizedName),'${filter.toLowerCase()}')`
     );
-    return result.data.value
+    return orderBy(result.data.value, (v:RetailProductVM) => v.LocalizedName);
   }
 
   async GetUsable(filter: string = ''): Promise<RetailProductVM[]> {
     let result = await this.instance.get(
       this.url + RetailProductsEndpoint + `?$filter=RetailType eq 'Usable' and contains(tolower(LocalizedName),'${filter.toLowerCase()}')`
     );
-    return result.data.value
+    return orderBy(result.data.value, (v:RetailProductVM) => v.LocalizedName);
   }
 
   async GetWeapons(filter: string = ''): Promise<RetailProductVM[]> {
     let result = await this.instance.get(
       this.url + RetailProductsEndpoint + `?$filter=RetailType eq 'Primary' and contains(tolower(LocalizedName),'${filter.toLowerCase()}')`
     );
-    return result.data.value;
+    return orderBy(result.data.value, (v:RetailProductVM) => v.LocalizedName);
   }
 
   async GetSaleLocations(itemName: string):Promise<ResultObject<SaleLocationVM>> {
