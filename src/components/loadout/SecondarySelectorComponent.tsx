@@ -4,6 +4,7 @@ import { LoadoutComponent } from './LoadoutComponent';
 
 type SecondarySelectorComponentProps = {
   coreName: string;
+  undersuitName:string
   setSecondary: Dispatch<SetStateAction<string>>
 }
 
@@ -11,9 +12,12 @@ export function SecondarySelectorComponent(props: SecondarySelectorComponentProp
   const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
-    if (props.coreName === '') {
+    if (props.coreName === '' && props.undersuitName === '') {
       setIsVisible(true);
-    } else {
+    } else if (props.coreName === '' && props.undersuitName !== ''){
+      setIsVisible(false);
+    } 
+    else {
       gearProvider.GetCore(props.coreName).then((result) => {
         if (result.LocalizedDescription.includes("Light Armor")) {
           setIsVisible(false);

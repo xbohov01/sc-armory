@@ -39,9 +39,9 @@ export function LoadoutBuilder(props: LoadoutBuilderProps) {
         <LoadoutComponent type='Legs' updater={setLegs} />
         <LoadoutComponent type='Sidearm' updater={setPistol} />
         {pistol !== '' ? <WeaponAttachmentsList weapon={pistol} updater={setSideAttachments}/> : ''}
-        <LoadoutComponent type='Primary' updater={setPrimary} />
+        <LoadoutComponent type='Primary' updater={setPrimary}/>
         {primary !== '' ? <WeaponAttachmentsList weapon={primary} updater={setPrimAttachments}/> : ''}
-        <SecondarySelectorComponent coreName={core} setSecondary={setSecondary}/>
+        <SecondarySelectorComponent coreName={core} undersuitName={undersuit} setSecondary={setSecondary}/>
         {secondary !== '' ? <WeaponAttachmentsList weapon={secondary} updater={setSecAttachments}/> : ''}
         <OptionalLoadoutItems updater={setOptionals}/>
       </Box>
