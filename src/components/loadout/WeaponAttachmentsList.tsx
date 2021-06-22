@@ -27,7 +27,7 @@ export function WeaponAttachmentsList(props: WeaponAttachmentsListProps) {
   }
 
   return (
-    <HStack marginTop='5pt'>
+    <HStack marginTop='5pt' marginBottom='10pt' borderLeft='1pt solid whitesmoke' borderRight='1pt solid whitesmoke' paddingLeft='5pt' paddingRight='5pt'>
       {slots.map(s => <WeaponAttachmentSelector key={s.type} attachmentSlot={s} updater={update}/>)}
     </HStack>
   )

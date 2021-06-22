@@ -7,7 +7,8 @@ export const customStyles = {
     ...provided,
     // none of react-select's styles are passed to <Control />
     //width: 300,
-    minWidth: 300
+    minWidth: 300,
+    opacity: state.isDisabled ? 0.5 : 1
   }),
   singleValue: (provided:any, state:any) => {
     //const opacity = state.isDisabled ? 0.5 : 1;

@@ -7,6 +7,7 @@ import gearProvider from '../../gearProvider';
 type LoadoutComponentProps = {
   type: string;
   updater: Dispatch<SetStateAction<string>>;
+  isDisabled?: boolean
 }
 
 export function LoadoutComponent(props: LoadoutComponentProps) {
@@ -29,6 +30,7 @@ export function LoadoutComponent(props: LoadoutComponentProps) {
           onChange={handleGearChange}
           onInputChange={setFilter}
           isMulti={false}
+          isDisabled={props.isDisabled !== undefined ? props.isDisabled : false}
           defaultOptions
         />
       </Box>

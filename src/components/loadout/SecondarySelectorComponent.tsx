@@ -8,24 +8,25 @@ type SecondarySelectorComponentProps = {
 }
 
 export function SecondarySelectorComponent(props: SecondarySelectorComponentProps) {
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
     if (props.coreName === '') {
-      setIsVisible(false);
+      setIsVisible(true);
     } else {
       gearProvider.GetCore(props.coreName).then((result) => {
-        if (result.LocalizedDescription.includes("Heavy Armor") || result.LocalizedDescription.includes("Medium Armor")) {
-          setIsVisible(true);
+        if (result.LocalizedDescription.includes("Light Armor")) {
+          setIsVisible(false);
         }
       });
-      setIsVisible(false);
+      setIsVisible(true);
     }
   }, [props.coreName])
 
   return (
     <>
-      { isVisible ? <LoadoutComponent type='Secondary' updater={props.setSecondary} /> : ""}
+    <LoadoutComponent type='Secondary' updater={props.setSecondary} isDisabled={!isVisible} />
+      { /*isVisible ? <LoadoutComponent type='Secondary' updater={props.setSecondary} /> : ""*/}
     </>
   )
 }
