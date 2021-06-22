@@ -53,5 +53,12 @@ export type ResultObject<T> = {
 
 export type WeaponAttachmentSlot = {
   size:number,
-  type:string
+  type:string,
+  attachments: SelectOption[]
+}
+
+export type WeaponAttachment = {
+  name: string,
+  size: number,
+  type: string
 }

@@ -4,6 +4,7 @@ import React, { Dispatch, SetStateAction, useState } from 'react';
 import { LoadoutComponent } from './LoadoutComponent';
 import { OptionalLoadoutItems } from './OptionalLoadoutItems';
 import { SecondarySelectorComponent } from './SecondarySelectorComponent';
+import { WeaponAttachmentsList } from './WeaponAttachmentsList';
 
 type LoadoutBuilderProps = {
   updater: Dispatch<SetStateAction<string[]>>;
@@ -19,9 +20,12 @@ export function LoadoutBuilder(props: LoadoutBuilderProps) {
   const [primary, setPrimary] = useState<string>('');
   const [secondary, setSecondary] = useState<string>('');
   const [optionals, setOptionals] = useState<string[]>([]);
+  const [primAttachments, setPrimAttachments] = useState<string[]>([]);
+  const [secAttachments, setSecAttachments] = useState<string[]>([]);
+  const [sideAttachments, setSideAttachments] = useState<string[]>([]);
 
   const sendBuildToList = () => {
-    props.updater([helmet, arms, core, legs, pistol, primary, secondary, undersuit, ...optionals].filter(g => g !== ''));
+    props.updater([helmet, arms, core, legs, pistol, primary, secondary, undersuit, ...optionals, ...sideAttachments, ...primAttachments, ...secAttachments].filter(g => g !== ''));
   }
 
   return (
@@ -34,8 +38,11 @@ export function LoadoutBuilder(props: LoadoutBuilderProps) {
         <LoadoutComponent type='Core' updater={setCore} />
         <LoadoutComponent type='Legs' updater={setLegs} />
         <LoadoutComponent type='Sidearm' updater={setPistol} />
+        {pistol !== '' ? <WeaponAttachmentsList weapon={pistol} updater={setSideAttachments}/> : ''}
         <LoadoutComponent type='Primary' updater={setPrimary} />
+        {primary !== '' ? <WeaponAttachmentsList weapon={primary} updater={setPrimAttachments}/> : ''}
         <SecondarySelectorComponent coreName={core} setSecondary={setSecondary}/>
+        {secondary !== '' ? <WeaponAttachmentsList weapon={secondary} updater={setSecAttachments}/> : ''}
         <OptionalLoadoutItems updater={setOptionals}/>
       </Box>
       <Button width='30vw' maxWidth='300pt' minWidth='200pt' colorScheme='teal' onClick={sendBuildToList}>Get shopping list</Button>

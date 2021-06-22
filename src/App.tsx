@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import './App.css';
 import { AppNotice } from './components/AppNotice';
 import { Footer } from './components/page/Footer';
-import { LoadoutBuilder } from './components/LoadoutBuilder';
+import { LoadoutBuilder } from './components/loadout/LoadoutBuilder';
 import { ShoppingList } from './components/ShoppingList';
 import { Header } from './components/page/Header';
 
@@ -16,11 +16,11 @@ function App() {
         <Header />
         <AppNotice />
       </header>
-      <body className="App-body">
+      <div className="App-body">
         <LoadoutBuilder updater={setGear} />
         <Divider orientation='horizontal' width='40vw' />
         <ShoppingList gear={gear} />
-      </body>
+      </div>
       <footer className="App-footer">
         <Footer />
       </footer>

@@ -1,8 +1,8 @@
 import { Box, Heading, HStack } from "@chakra-ui/layout";
-import { KeyValue } from "../types/types";
+import { KeyValue } from "../../types/types";
 import AsyncSelect from "react-select/async"
-import { customStyles } from "../selectStyle";
-import gearProvider from "../gearProvider";
+import { customStyles } from "../../selectStyle";
+import gearProvider from "../../gearProvider";
 import { useState } from "react";
 import { Button } from "@chakra-ui/button";
 

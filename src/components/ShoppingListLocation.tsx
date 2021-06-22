@@ -15,7 +15,7 @@ export function ShoppingListLocation(props: ShoppingListLocationProps) {
         {`${props.items.value.filter(i => !i.isBought).length} of remaining items at ${props.items.key.name} - ${props.items.key.chain.split('-').reverse().join(' - ')}`}
       </Box>
       <VStack>
-        {props.items.value.map(i => <ShoppingListItem item={i} boughtSetter={props.boughtSetter} key={i.item} />)}
+        {props.items.value.map(i => <ShoppingListItem item={i} boughtSetter={props.boughtSetter} key={Math.random()} />)}
       </VStack>
     </Box>
   )

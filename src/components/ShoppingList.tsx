@@ -61,7 +61,7 @@ export function ShoppingList(props: ShoppingListProps) {
         </HStack>
       </Box>
       <VStack>
-        {list.map(l => <ShoppingListLocation items={l} boughtSetter={setItemBought} key={l.key.id} />)}
+        {list.map(l => <ShoppingListLocation items={l} boughtSetter={setItemBought} key={Math.random()} />)}
       </VStack>
     </Box>
   )

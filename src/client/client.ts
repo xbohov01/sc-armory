@@ -84,6 +84,14 @@ class ApiClient {
     return orderBy(result.data.value, (v:RetailProductVM) => v.LocalizedName);
   }
 
+  async GetAttachments(filter: string = ''): Promise<RetailProductVM[]> {
+    let result = await this.instance.get(
+      this.url + RetailProductsEndpoint + `?$filter=RetailType eq 'Attachment' and contains(tolower(LocalizedName),'${filter.toLowerCase()}')`
+    );
+    return orderBy(result.data.value, (v:RetailProductVM) => v.LocalizedName);
+  }
+
+
   async GetSaleLocations(itemName: string):Promise<ResultObject<SaleLocationVM>> {
     let result = await this.instance.get(this.url + saleLocations + `?item=${itemName}`);
     return {

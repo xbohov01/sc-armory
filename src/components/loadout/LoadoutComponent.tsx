@@ -1,8 +1,8 @@
 import React, { Dispatch, SetStateAction, useState } from 'react';
 import { Box, Heading } from '@chakra-ui/layout';
 import AsyncSelect from "react-select/async"
-import { customStyles } from '../selectStyle';
-import gearProvider from '../gearProvider';
+import { customStyles } from '../../selectStyle';
+import gearProvider from '../../gearProvider';
 
 type LoadoutComponentProps = {
   type: string;
