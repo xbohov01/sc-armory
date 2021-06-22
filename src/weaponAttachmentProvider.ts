@@ -75,17 +75,17 @@ class WeaponAttachmentProvider {
     },
     {
       name: "Gamma Duo (2x Holographic)",
-      size: 2,
+      size: 1,
       type: "Sight"
     },
     {
       name: "Gamma Plus (3x Holographic)",
-      size: 2,
+      size: 1,
       type: "Sight"
     },
     {
       name: "Tau Plus (4x Telescopic)",
-      size: 3,
+      size: 2,
       type: "Sight"
     },
     {
