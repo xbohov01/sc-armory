@@ -37,7 +37,7 @@ export function OptionalLoadoutItems(props: OptionalLoadoutItemsProps) {
 
   return (
     <Box marginTop='10pt' maxWidth='300pt' margin='auto'>
-      <Button marginBottom='10pt' marginTop='10pt' colorScheme='blue' onClick={addOptional}>Add optional gear</Button>
+      <Button marginBottom='10pt' marginTop='10pt' width='15vw' minWidth='150pt' colorScheme='blue' onClick={addOptional}>Add optional gear</Button>
       <VStack>
         {optionals.map(o => <OptionalLoadoutComponent
           id={o.key}
