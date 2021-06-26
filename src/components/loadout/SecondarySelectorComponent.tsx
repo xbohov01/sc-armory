@@ -25,7 +25,7 @@ export function SecondarySelectorComponent(props: SecondarySelectorComponentProp
       });
       setIsVisible(true);
     }
-  }, [props.coreName])
+  }, [props.coreName, props.undersuitName])
 
   return (
     <>
