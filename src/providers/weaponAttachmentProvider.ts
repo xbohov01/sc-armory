@@ -1,4 +1,4 @@
-import { WeaponAttachment, WeaponAttachmentSlot } from "./types/types";
+import { WeaponAttachment, WeaponAttachmentSlot } from "../types/types";
 
 class WeaponAttachmentProvider {
   specificSlots: { [id: string]: WeaponAttachmentSlot[] } = {

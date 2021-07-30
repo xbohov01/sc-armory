@@ -1,10 +1,14 @@
 import axios, { AxiosInstance } from 'axios';
 import { orderBy } from 'lodash';
-import { ResultObject, SaleLocationVM } from '../types/types';
-import { RetailProductVM } from './RetailProductVM';
+import { ResultObject, SaleLocationVM, SingleResultObject } from '../types/types';
+import { ArmorVM } from './viewModels/ArmorVM';
+import { RetailProductVM } from './viewModels/RetailProductVM';
+import { WeaponVM } from './viewModels/WeaponVM';
 
 const RetailProductsEndpoint = '/retailproducts'
 const saleLocations = '/salelocations'
+const ArmorsEndpoint = '/armors'
+const WeaponsEndpoint = '/weapons'
 
 class ApiClient {
   instance: AxiosInstance;
@@ -30,9 +34,9 @@ class ApiClient {
 
   async GetUndersuits(filter: string = ''): Promise<RetailProductVM[]> {
     let result = await this.instance.get(
-      this.url + RetailProductsEndpoint + `?$filter=contains(tolower(LocalizedName),'undersuit') and contains(tolower(LocalizedName),'${filter.toLowerCase()}') and RetailType eq 'Armor'`
+      this.url + RetailProductsEndpoint + `?$filter=(contains(tolower(LocalizedName),'undersuit') or contains(tolower(LocalizedName),'novikov') or contains(tolower(LocalizedName),'pembroke')) and contains(tolower(LocalizedName),'${filter.toLowerCase()}') and RetailType eq 'Armor'`
     );
-    return orderBy(result.data.value, (v:RetailProductVM) => v.LocalizedName);
+    return orderBy(result.data.value, (v:RetailProductVM) => v.LocalizedName).filter(u => !u.LocalizedName.includes('Helmet'));
   }
 
   async GetHelmets(filter: string = ''): Promise<RetailProductVM[]> {
@@ -91,7 +95,6 @@ class ApiClient {
     return orderBy(result.data.value, (v:RetailProductVM) => v.LocalizedName);
   }
 
-
   async GetSaleLocations(itemName: string):Promise<ResultObject<SaleLocationVM>> {
     let result = await this.instance.get(this.url + saleLocations + `?item=${itemName}`);
     return {
@@ -106,6 +109,28 @@ class ApiClient {
       this.url + RetailProductsEndpoint + `(${id})`
     );
     return result.data
+  }
+
+  async GetArmorInfo(name:string):Promise<SingleResultObject<ArmorVM>>{
+    let result = await this.instance.get(
+      this.url + ArmorsEndpoint + `?$filter=LocalizedName eq '${name}'`
+    );
+    return {
+      success: result.status === 200,
+      message: result.statusText,
+      data: result.data.value[0]
+    }
+  }
+
+  async GetWeaponInfo(name:string):Promise<SingleResultObject<WeaponVM>>{
+    let result = await this.instance.get(
+      this.url + WeaponsEndpoint + `?$filter=LocalizedName eq '${name}'`
+    );
+    return {
+      success: result.status === 200,
+      message: result.statusText,
+      data: result.data.value[0]
+    }
   }
 }
 

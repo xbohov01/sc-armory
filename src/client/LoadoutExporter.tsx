@@ -28,6 +28,7 @@ export function LoadoutExporter(props: LoadoutExporterProps) {
         colorScheme='blue'
         marginBottom='10pt'
         marginTop='10pt'
+        marginLeft='20pt'
         width='15vw'
         minWidth='150pt'
         maxWidth='300pt'

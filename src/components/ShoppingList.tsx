@@ -50,7 +50,7 @@ export function ShoppingList(props: ShoppingListProps) {
   }
 
   return (
-    <Box marginTop='10pt' width='fit-content' marginBottom='10pt' backgroundColor='#282c34' color='whitesmoke' id='shopping-list'>
+    <Box marginTop='10pt' width='400pt' marginBottom='10pt' marginLeft='20pt' backgroundColor='#282c34' color='whitesmoke' id='shopping-list'>
       <Box marginBottom='10pt'>
         <HStack flex={1}>
           {list.length > 0 ?

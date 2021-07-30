@@ -3,12 +3,23 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { ChakraProvider, extendTheme } from "@chakra-ui/react"
+import { ChakraProvider, extendTheme, Theme } from "@chakra-ui/react"
 import '@fontsource/exo'
 
-const theme = extendTheme({
+const theme:Theme = extendTheme({
   fonts: {
-    heading: 'Exo'
+    heading: 'Exo',
+    switch: 'Exo',
+    tab: 'Exo'
+  },
+  components: {
+    Tab: {
+      baseStyle: {    
+        _selected: {
+          backgroundColor: '#1a2130',
+        },
+      },
+    },
   },
 })
 
