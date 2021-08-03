@@ -11,8 +11,9 @@ type ShoppingListLocationProps = {
 export function ShoppingListLocation(props: ShoppingListLocationProps) {
   return (
     <Box flex="1" textAlign="left" borderLeft='solid 1pt whitesmoke' padding='5pt' width='full' backgroundColor='#1a2130'>
-      <Box flex="1" textAlign="left" fontSize='large'>
-        {`${props.items.value.filter(i => !i.isBought).length} of remaining items at ${props.items.key.name} - ${props.items.key.chain.split('-').reverse().join(' - ')}`}
+      <Box flex="1" textAlign="left" fontSize='large' paddingBottom='10pt'>
+        <p>{`${props.items.value.filter(i => !i.isBought).length} of remaining items`}</p>
+        <p>{`${props.items.key.name} - ${props.items.key.chain.split('-').reverse().join(' - ')}`}</p>
       </Box>
       <VStack>
         {props.items.value.map(i => <ShoppingListItem item={i} boughtSetter={props.boughtSetter} key={Math.random()} />)}
@@ -36,7 +37,7 @@ export function ShoppingListItem(props: ShoppingListItemProps) {
     <HStack key={Math.random()} spacing='20pt'>
       <Box minWidth='200pt' textAlign='left' fontSize='sm' textDecoration={props.item.isBought ? 'line-through' : 'none'} >{`${props.item.item} - ${props.item.price}aUEC`}</Box>
       <HStack>
-        <Heading size='xs' as='h5'>I bought this here: </Heading>
+        <Heading size='xs' as='h5'>Purchased: </Heading>
         <Checkbox isChecked={props.item.isBought} onChange={handleToggle}/>
       </HStack>
     </HStack>

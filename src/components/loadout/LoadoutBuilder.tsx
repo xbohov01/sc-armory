@@ -1,6 +1,6 @@
 import { Button } from '@chakra-ui/button';
 import { Box, Heading } from '@chakra-ui/layout';
-import React, { Dispatch, SetStateAction, useState } from 'react';
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { LoadoutComponent } from './LoadoutComponent';
 import { OptionalLoadoutItems } from './OptionalLoadoutItems';
 import { SecondarySelectorComponent } from './SecondarySelectorComponent';
@@ -8,6 +8,7 @@ import { WeaponAttachmentsList } from './WeaponAttachmentsList';
 
 type LoadoutBuilderProps = {
   updater: Dispatch<SetStateAction<string[]>>;
+  listRefresher: Dispatch<SetStateAction<boolean>>;
 }
 
 export function LoadoutBuilder(props: LoadoutBuilderProps) {
@@ -24,12 +25,16 @@ export function LoadoutBuilder(props: LoadoutBuilderProps) {
   const [secAttachments, setSecAttachments] = useState<string[]>([]);
   const [sideAttachments, setSideAttachments] = useState<string[]>([]);
 
-  const sendBuildToList = () => {
+  useEffect(() => {
     props.updater([helmet, arms, core, legs, pistol, primary, secondary, undersuit, ...optionals, ...sideAttachments, ...primAttachments, ...secAttachments].filter(g => g !== ''));
+  }, [helmet, arms, core, legs, pistol, primary, secondary, undersuit, optionals, sideAttachments, primAttachments, secAttachments])
+
+  const sendBuildToList = () => {
+    props.listRefresher(true);
   }
 
   return (
-    <Box backgroundColor='#282c34' color='whitesmoke' id='loadout-builder' marginBottom='10pt'>
+    <Box backgroundColor='#282c34' color='whitesmoke' id='loadout-builder' marginBottom='10pt' marginLeft='20pt'>
       <Heading size='lg'>Build your loadout:</Heading>
       <Box marginBottom='10pt' fontSize='md'>
         <LoadoutComponent type='Undersuit' updater={setUndersuit} />

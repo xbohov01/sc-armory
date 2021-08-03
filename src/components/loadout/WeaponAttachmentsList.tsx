@@ -3,7 +3,7 @@ import { Dispatch, SetStateAction, useEffect, useState } from "react"
 import Select from "react-select"
 import { compactStyles } from "../../selectStyle"
 import { KeyValue, WeaponAttachment, WeaponAttachmentSlot } from "../../types/types"
-import weaponAttachmentProvider from "../../weaponAttachmentProvider"
+import weaponAttachmentProvider from "../../providers/weaponAttachmentProvider"
 
 type WeaponAttachmentsListProps = {
   weapon: string,
