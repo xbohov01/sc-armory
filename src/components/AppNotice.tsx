@@ -11,7 +11,7 @@ export function AppNotice() {
         <AlertTitle mr={2} fontSize='md'>Development notice</AlertTitle>
         <AlertDescription fontSize='sm' margin='auto' width='fit-content'>
           <p>This application is still under development. Bugs happen.</p>
-          <p>You can report them to thespacecoder.bussiness@gmail.com</p>
+          <p>You can report them to thespacecoder.business@gmail.com</p>
           <p>Or join my <Link href='https://discord.com/invite/cY9gx4E'>Discord server</Link> and use the #tsc-bugs channel.</p>
         </AlertDescription>
         <CloseButton onClick={() => setHidden(true)}/>
