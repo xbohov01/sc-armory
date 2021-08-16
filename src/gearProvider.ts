@@ -1,5 +1,5 @@
 import client from "./client/client";
-import { RetailProductVM } from "./client/RetailProductVM";
+import { RetailProductVM } from "./client/viewModels/RetailProductVM";
 import { SelectOption } from "./types/types";
 
 class GearProvider {
