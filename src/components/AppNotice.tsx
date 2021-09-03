@@ -19,3 +19,21 @@ export function AppNotice() {
     </Box>
   )
 }
+
+export function ImageNotice() {
+  const [hidden, setHidden] = useState(false);
+
+  return (
+    <Box width='600pt' marginBottom='20pt' hidden={hidden}>
+      <Alert status="info" variant='solid' borderRadius='3pt'>
+        <AlertIcon />
+        <AlertTitle mr={2} fontSize='md'>Image submissions</AlertTitle>
+        <AlertDescription fontSize='sm' margin='auto' width='fit-content'>
+          <p>Not all images of armor and weapons are in yet.</p>
+          <p>You can help get it added by submitting it <Link href='https://forms.gle/P1TQnhtueK6wmmbn8'>here</Link></p>
+        </AlertDescription>
+        <CloseButton onClick={() => setHidden(true)}/>
+      </Alert>
+    </Box>
+  )
+}

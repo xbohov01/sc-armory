@@ -13,12 +13,14 @@ const WeaponsEndpoint = '/weapons'
 class ApiClient {
   instance: AxiosInstance;
   url: string;
+  cloudinary: string;
 
   constructor() {
     this.url = process.env.REACT_APP_API_URL || '';
     this.instance = axios.create({
       baseURL: process.env.REACT_APP_API_URL,
     })
+    this.cloudinary = process.env.REACT_APP_CLOUDINARY_URL || 'https://res.cloudinary.com/thespacecoder/image/upload/v1630349759/armory/';
   }
 
   /**
@@ -131,6 +133,11 @@ class ApiClient {
       message: result.statusText,
       data: result.data.value[0]
     }
+  }
+
+  async CheckIfImageExists(imageId:string):Promise<boolean>{
+    let result = await axios.head(this.cloudinary + imageId);
+    return result.status == 200 ? true : false;
   }
 }
 
