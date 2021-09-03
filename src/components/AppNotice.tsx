@@ -30,7 +30,7 @@ export function ImageNotice() {
         <AlertTitle mr={2} fontSize='md'>Image submissions</AlertTitle>
         <AlertDescription fontSize='sm' margin='auto' width='fit-content'>
           <p>Not all images of armor and weapons are in yet.</p>
-          <p>You can help get it added by submitting it <Link href='https://forms.gle/P1TQnhtueK6wmmbn8'>here</Link></p>
+          <p>You can help get them added by submitting them <Link href='https://forms.gle/P1TQnhtueK6wmmbn8'>here</Link></p>
         </AlertDescription>
         <CloseButton onClick={() => setHidden(true)}/>
       </Alert>
