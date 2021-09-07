@@ -68,3 +68,8 @@ export type WeaponAttachment = {
   size: number,
   type: string
 }
+
+export type NameReference = {
+  name:string;
+  reference:string;
+}
