@@ -2,6 +2,8 @@ import React from 'react'
 import { Box, Icon, HStack, VStack, Link, Divider, Image } from '@chakra-ui/react';
 import { AiFillYoutube, AiFillTwitterCircle, AiFillInstagram } from 'react-icons/ai'
 import { FaTwitch, FaDiscord, FaFlickr } from 'react-icons/fa';
+import { SiRedbubble } from 'react-icons/si';
+import { Support } from './Support';
 import cig from '../../cig.png';
 import "@fontsource/lato";
 
@@ -9,6 +11,7 @@ export function Footer() {
   return (
     <Box id='footer' marginTop='50pt' color='whitesmoke' marginBottom='10pt'>
       <VStack>
+        <Support/>
         <HStack>
           <Link href='https://www.youtube.com/c/thespacecoder'>
             <Icon boxSize='20pt' cursor='pointer' as={AiFillYoutube} />
@@ -27,6 +30,9 @@ export function Footer() {
           </Link>
           <Link href='https://www.flickr.com/photos/162203426@N06'>
             <Icon boxSize='20pt' cursor='pointer' as={FaFlickr} />
+          </Link>
+          <Link href='https://www.redbubble.com/people/TheSpaceCoder/shop'>
+            <Icon boxSize='20pt' cursor='pointer' as={SiRedbubble} />
           </Link>
         </HStack>
         <Divider width='60vw' />
