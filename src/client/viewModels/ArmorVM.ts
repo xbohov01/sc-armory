@@ -12,4 +12,5 @@ export class ArmorVM extends FPSGearBaseVM {
   MedicalPorts!: number;
   OxygenPorts!: number;
   GrenadePorts!: number;
+  BackpackMaxSize!: number;
 }
