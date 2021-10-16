@@ -11,6 +11,7 @@ import { KeyValue, ListKey, LocatedItem } from './types/types';
 import { Switch } from '@chakra-ui/react';
 import { AdvancedInfo } from './components/advanced/AdvancedInfo';
 import { ImageDisplay } from './components/images/ImageDisplay';
+import { VersionSwitch } from './components/page/VersionSwitch';
 
 function App() {
   const [gear, setGear] = useState<string[]>([])

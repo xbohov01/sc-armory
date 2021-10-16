@@ -1,10 +1,8 @@
-import { Box, Grid, GridItem, Heading, Accordion, AccordionItem, AccordionPanel, AccordionButton, AccordionIcon, Link } from "@chakra-ui/react"
+import { Box, Heading, Accordion, AccordionItem, AccordionPanel, AccordionButton, AccordionIcon, Link } from "@chakra-ui/react"
 import { Cloudinary } from "@cloudinary/base";
 import { AdvancedImage } from '@cloudinary/react';
-import { env } from "process";
 import React, { useEffect, useState } from "react"
 import client from "../../client/client";
-import { ArmorVM } from "../../client/viewModels/ArmorVM";
 import gearInfoProvider from "../../providers/gearInfoProvider";
 import { NameReference } from "../../types/types";
 

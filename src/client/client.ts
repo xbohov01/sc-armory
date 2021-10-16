@@ -16,34 +16,60 @@ class ApiClient {
   instance: AxiosInstance;
   url: string;
   cloudinary: string;
+  isPtu: boolean;
 
   constructor() {
-    this.url = process.env.REACT_APP_API_URL || '';
+    var url = '';
+    var value = localStorage.getItem('wasPtu');
+    if (value === undefined || value === 'false') {
+      url = process.env.REACT_APP_API_URL || '';
+    } else {
+      url = process.env.REACT_APP_API_PTU_URL || '';
+    }  
+
+    this.url = url;
     this.instance = axios.create({
-      baseURL: process.env.REACT_APP_API_URL,
+      baseURL: url,
     })
     this.cloudinary = process.env.REACT_APP_CLOUDINARY_URL || 'https://res.cloudinary.com/thespacecoder/image/upload/v1630349759/armory/';
+    this.isPtu = false;
   }
 
-  async GetArmor(filter:string = ''): Promise<ArmorVM[]> {
+  ChangeAPIs(isPtu: boolean) {
+    if (isPtu) {
+      this.url = process.env.REACT_APP_API_PTU_URL || '';
+      this.instance = axios.create({
+        baseURL: process.env.REACT_APP_API_PTU_URL,
+      });
+      this.isPtu = true;
+    } else {
+      this.url = process.env.REACT_APP_API_URL || '';
+      this.instance = axios.create({
+        baseURL: process.env.REACT_APP_API_URL,
+      });
+      this.isPtu = false;
+    }
+  }
+
+  async GetArmor(filter: string = ''): Promise<ArmorVM[]> {
     let result = await this.instance.get(
       this.url + ArmorsEndpoint + filter
     )
-    return orderBy(result.data.value, (v:ArmorVM) => v.LocalizedName);
+    return orderBy(result.data.value, (v: ArmorVM) => v.LocalizedName);
   }
 
-  async GetWeapon(filter:string = ''): Promise<WeaponVM[]> {
+  async GetWeapon(filter: string = ''): Promise<WeaponVM[]> {
     let result = await this.instance.get(
       this.url + WeaponsEndpoint + filter
     )
-    return orderBy(result.data.value, (v:WeaponVM) => v.LocalizedName);
+    return orderBy(result.data.value, (v: WeaponVM) => v.LocalizedName);
   }
 
-  async GetConsumable(filter:string = ''): Promise<FPSGearBaseVM[]> {
+  async GetConsumable(filter: string = ''): Promise<FPSGearBaseVM[]> {
     let result = await this.instance.get(
       this.url + ConsumablesEndpoint + filter
     )
-    return orderBy(result.data.value, (v:WeaponVM) => v.LocalizedName);
+    return orderBy(result.data.value, (v: WeaponVM) => v.LocalizedName);
   }
 
   /**
@@ -85,9 +111,9 @@ class ApiClient {
     return result;
   }
 
-  async GetCoreByName(name:string){
+  async GetCoreByName(name: string) {
     let result = await this.GetArmor(
-      `?$filter=ArmorPart eq 'Arms' and LocalizedName eq '${name}'')`
+      `?$filter=ArmorPart eq 'Core' and LocalizedName eq '${name}'`
     );
     return result;
   }
@@ -120,7 +146,7 @@ class ApiClient {
     return result;
   }
 
-  async GetTools(filter:string = ''): Promise<WeaponVM[]> {
+  async GetTools(filter: string = ''): Promise<WeaponVM[]> {
     let result = await this.GetWeapon(
       `?$filter=Type eq 'Utility' and contains(tolower(LocalizedName),'${filter.toLowerCase()}')`
     );
@@ -131,10 +157,10 @@ class ApiClient {
     let result = await this.instance.get(
       this.url + RetailProductsEndpoint + `?$filter=RetailType eq 'Attachment' and contains(tolower(LocalizedName),'${filter.toLowerCase()}')`
     );
-    return orderBy(result.data.value, (v:RetailProductVM) => v.LocalizedName);
+    return orderBy(result.data.value, (v: RetailProductVM) => v.LocalizedName);
   }
 
-  async GetSaleLocations(itemName: string):Promise<ResultObject<SaleLocationVM>> {
+  async GetSaleLocations(itemName: string): Promise<ResultObject<SaleLocationVM>> {
     let result = await this.instance.get(this.url + saleLocations + `?item=${itemName}`);
     return {
       success: result.status === 200,
@@ -143,14 +169,14 @@ class ApiClient {
     }
   }
 
-  async GetRetailProduct(id:number):Promise<RetailProductVM> {
+  async GetRetailProduct(id: number): Promise<RetailProductVM> {
     let result = await this.instance.get(
       this.url + RetailProductsEndpoint + `(${id})`
     );
     return result.data
   }
 
-  async GetArmorInfo(name:string):Promise<SingleResultObject<ArmorVM>>{
+  async GetArmorInfo(name: string): Promise<SingleResultObject<ArmorVM>> {
     let result = await this.instance.get(
       this.url + ArmorsEndpoint + `?$filter=LocalizedName eq '${name}'`
     );
@@ -161,7 +187,7 @@ class ApiClient {
     }
   }
 
-  async GetWeaponInfo(name:string):Promise<SingleResultObject<WeaponVM>>{
+  async GetWeaponInfo(name: string): Promise<SingleResultObject<WeaponVM>> {
     let result = await this.instance.get(
       this.url + WeaponsEndpoint + `?$filter=LocalizedName eq '${name}'`
     );
@@ -172,9 +198,9 @@ class ApiClient {
     }
   }
 
-  async CheckIfImageExists(imageId:string):Promise<boolean>{
+  async CheckIfImageExists(imageId: string): Promise<boolean> {
     let result = await axios.head(this.cloudinary + imageId);
-    return result.status == 200 ? true : false;
+    return result.status === 200 ? true : false;
   }
 }
 
