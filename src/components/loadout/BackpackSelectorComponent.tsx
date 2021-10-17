@@ -21,7 +21,7 @@ export function BackpackSelectorComponent(props: BackpackSelectorComponentProps)
                 setMaxBackpackSize(result.BackpackMaxSize);
             });
         }
-    })
+    }, [props.coreName])
 
     const loadOptions = async () => await gearProvider.GetBackpacksWithMaxSize(filter, maxBackpackSize);
 

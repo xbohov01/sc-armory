@@ -28,7 +28,7 @@ export function ImageDisplay(props: ImageDisplayProps) {
   });
 
   return (
-    <Box id='image-display' color='whitesmoke' width='30vw' maxWidth='300pt' minWidth='200pt' marginRight='20pt'>
+    <Box id='image-display' color='whitesmoke' width='30vw' maxWidth='300pt' minWidth='200pt'>
       <Heading size='lg' marginBottom='10pt'>Images</Heading>
       <Accordion width='30vw' maxWidth='300pt' minWidth='200pt' allowMultiple>
       {references.map(r => <ImageItem item={r} cloud={cloudinary} key={Math.random()} />)}
@@ -64,7 +64,7 @@ function ImageItem(props: ImageItemProps) {
       <AccordionPanel pb={4}>
         { imageExists ? <AdvancedImage cldImg={props.cloud.image('armory/' + props.item.reference)} /> : 
           <Box>
-            This image is not yet in the Armory. You can help get it added by submitting it <Link href='https://forms.gle/P1TQnhtueK6wmmbn8'>here</Link>.
+            This image is not yet in the Armory. You can help get it added by submitting it <Link textDecoration='underline' href='https://forms.gle/P1TQnhtueK6wmmbn8'>here</Link>.
           </Box>
         }
       </AccordionPanel>

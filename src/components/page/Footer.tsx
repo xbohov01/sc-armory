@@ -6,11 +6,13 @@ import { SiRedbubble } from 'react-icons/si';
 import { Support } from './Support';
 import cig from '../../cig.png';
 import "@fontsource/lato";
+import { JoinADI } from './JoinADI';
 
 export function Footer() {
   return (
     <Box id='footer' marginTop='50pt' color='whitesmoke' marginBottom='10pt'>
       <VStack>
+        <JoinADI/>
         <Support/>
         <HStack>
           <Link href='https://www.youtube.com/c/thespacecoder'>

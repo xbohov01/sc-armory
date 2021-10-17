@@ -37,7 +37,7 @@ export function LoadoutBuilder(props: LoadoutBuilderProps) {
   }
 
   return (
-    <Box backgroundColor='#282c34' color='whitesmoke' id='loadout-builder' marginBottom='10pt' marginLeft='20pt'>
+    <Box backgroundColor='#282c34' color='whitesmoke' id='loadout-builder' marginBottom='10pt'>
       <Heading size='lg'>Build your loadout:</Heading>
       <Box marginBottom='10pt' fontSize='md'>
         <LoadoutComponent type='Undersuit' updater={setUndersuit} />

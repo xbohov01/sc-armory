@@ -14,6 +14,7 @@ function IsArmor(name: string): boolean {
     name.includes(' Core') ||
     name.includes(' Helmet') ||
     name.includes(' Armor') ||
+    name.includes(' Backpack') ||
     name.includes(' Undersuit')
   ) {
     return true;
@@ -41,25 +42,29 @@ const tabSelectedStyle = {
 
 export function AdvancedInfo(props: AdvancedInfoProps) {
   return (
-    <Box id='advanced-info' color='whitesmoke' width='30vw' maxWidth='300pt' minWidth='200pt' marginRight='20pt'>
+    <Box id='advanced-info'
+      color='whitesmoke'
+      width='30vw'
+      maxWidth='300pt'
+      minWidth='200pt'>
       <Heading size='lg' marginBottom='10pt'>Loadout information</Heading>
       <VStack>
-        {props.gear.length === 0 ? <Heading size='sm' fontStyle='normal'>Information about selected gear will appear here</Heading> : 
+        {props.gear.length === 0 ? <Heading size='sm' fontStyle='normal'>Information about selected gear will appear here</Heading> :
 
-        <Tabs isFitted isLazy width='30vw' maxWidth='300pt' minWidth='200pt' variant='enclosed'>
-          <TabList fontFamily='Exo' fontWeight='bold'>
-            <Tab _selected={tabSelectedStyle}>Armor</Tab>
-            <Tab _selected={tabSelectedStyle}>Weapons</Tab>
-          </TabList>
-          <TabPanels>
-            <TabPanel>
-              {props.gear.length === 0 ? "No gear selected" : <ArmorInfo armors={props.gear.filter(a => IsArmor(a))} />}
-            </TabPanel>
-            <TabPanel>
-              {props.gear.length === 0 ? "No gear selected" : <WeaponInfo weapons={props.gear.filter(a => IsWeapon(a))} />}
-            </TabPanel>
-          </TabPanels>
-        </Tabs>}
+          <Tabs isFitted isLazy width='30vw' maxWidth='300pt' minWidth='200pt' variant='enclosed'>
+            <TabList fontFamily='Exo' fontWeight='bold'>
+              <Tab _selected={tabSelectedStyle}>Armor</Tab>
+              <Tab _selected={tabSelectedStyle}>Weapons</Tab>
+            </TabList>
+            <TabPanels>
+              <TabPanel>
+                {props.gear.length === 0 ? "No gear selected" : <ArmorInfo armors={props.gear.filter(a => IsArmor(a))} />}
+              </TabPanel>
+              <TabPanel>
+                {props.gear.length === 0 ? "No gear selected" : <WeaponInfo weapons={props.gear.filter(a => IsWeapon(a))} />}
+              </TabPanel>
+            </TabPanels>
+          </Tabs>}
       </VStack>
     </Box>
   )

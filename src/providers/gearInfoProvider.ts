@@ -56,6 +56,7 @@ class GearInfoProvider {
       name.includes(' Core') ||
       name.includes(' Helmet') ||
       name.includes(' Armor') ||
+      name.includes(' Backpack') ||
       name.includes(' Undersuit')
     ) {
       return true;

@@ -25,7 +25,7 @@ class ApiClient {
       url = process.env.REACT_APP_API_URL || '';
     } else {
       url = process.env.REACT_APP_API_PTU_URL || '';
-    }  
+    }
 
     this.url = url;
     this.instance = axios.create({
@@ -133,10 +133,10 @@ class ApiClient {
   }
 
   async GetUsable(filter: string = ''): Promise<FPSGearBaseVM[]> {
-    let result = await this.GetConsumable(
-      `?$filter=contains(tolower(LocalizedName),'${filter.toLowerCase()}')`
+    let result = await this.instance.get(
+      this.url + RetailProductsEndpoint + `?$filter=RetailType eq 'Usable' and contains(tolower(LocalizedName),'${filter.toLowerCase()}')`
     );
-    return result;
+    return orderBy(result.data.value, (v:RetailProductVM) => v.LocalizedName);
   }
 
   async GetWeapons(filter: string = ''): Promise<WeaponVM[]> {
@@ -148,7 +148,7 @@ class ApiClient {
 
   async GetTools(filter: string = ''): Promise<WeaponVM[]> {
     let result = await this.GetWeapon(
-      `?$filter=Type eq 'Utility' and contains(tolower(LocalizedName),'${filter.toLowerCase()}')`
+      `?$filter=(Type eq 'Utility' or Type eq 'Medical Device') and contains(tolower(LocalizedName),'${filter.toLowerCase()}')`
     );
     return result;
   }
@@ -161,11 +161,32 @@ class ApiClient {
   }
 
   async GetSaleLocations(itemName: string): Promise<ResultObject<SaleLocationVM>> {
-    let result = await this.instance.get(this.url + saleLocations + `?item=${itemName}`);
+    try {
+      let result = await this.instance.get(this.url + saleLocations + `?item=${itemName}`);
+      return {
+        success: result.status === 200,
+        message: result.statusText,
+        data: result.data
+      }
+    } catch (err) {
+      if (err.response.status === 404){
+        return {
+          success: false,
+          message: "Not sold",
+          data: [{
+            saleLocationId: 0,
+            saleLocationName: "Item not sold",
+            itemId: 0,
+            price: 0,
+            saleLocationChain: "Possible sub/exclusive item"
+          }]
+        }
+      }
+    }
     return {
-      success: result.status === 200,
-      message: result.statusText,
-      data: result.data
+      success: false,
+      message: "",
+      data: []
     }
   }
 

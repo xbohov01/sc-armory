@@ -28,9 +28,20 @@ export function ArmorInfo(props: ArmorInfoProps) {
           width='30vw' maxWidth='300pt' minWidth='200pt'>
           <GridItem colSpan={2}>
             <Stat borderLeft='1pt solid whitesmoke' padding='5pt' bgColor='#1a2130'>
-              <StatLabel fontSize='lg'>Inventory Capacity</StatLabel>
-              <StatNumber fontSize='md'>{`${sum(armorData.map(a => a.InventoryCapacity))} microSCU`}</StatNumber>
+              <StatLabel fontSize='lg'>Inventory Occupancy</StatLabel>
+              <StatNumber fontSize='md'>{`${sum(armorData.map(a => a.InventoryOccupancy))} microSCU`}</StatNumber>
             </Stat>
+          </GridItem>
+          <GridItem colSpan={2}>
+            <BreakDownInfo
+              reverse unit='microSCU'
+              breakdownText='Capacity by piece'
+              label="InventoryCapacity"
+              namedValues={armorData.map((a: ArmorVM) => {
+                return {
+                  name: a.LocalizedName, value: a.InventoryCapacity
+                }
+              })} />
           </GridItem>
           <GridItem colSpan={2}>
             <RangeInfo
@@ -126,6 +137,39 @@ function RangeInfo(props: RangeInfoProps) {
       <Stat borderLeft='1pt solid whitesmoke' padding='5pt' bgColor='#1a2130'>
         <StatLabel fontSize='lg'>{props.label}</StatLabel>
         <StatNumber fontSize='md'>{getRangeString()}</StatNumber>
+      </Stat>
+      <Accordion allowToggle width='inherit' borderLeft='1pt solid whitesmoke' padding='5pt' bgColor='#1a2130'>
+        <AccordionItem>
+          <h2>
+            <AccordionButton>
+              <Box flex="1" textAlign="left">
+                {props.breakdownText}
+              </Box>
+              <AccordionIcon />
+            </AccordionButton>
+          </h2>
+          <AccordionPanel pb={4}>
+            <List>
+              {props.namedValues.map(r => <ListItem key={Math.random()}>
+                <HStack justifyContent='space-between'>
+                  <p>{r.name}</p>
+                  <p>{`${r.value}${props.unit}`}</p>
+                </HStack>
+              </ListItem>)}
+            </List>
+          </AccordionPanel>
+        </AccordionItem>
+      </Accordion>
+    </>
+  )
+}
+
+function BreakDownInfo(props: RangeInfoProps) {
+  return (
+    <>
+      <Stat borderLeft='1pt solid whitesmoke' padding='5pt' bgColor='#1a2130'>
+        <StatLabel fontSize='lg'>{props.label}</StatLabel>
+        <StatNumber fontSize='md'>{`${sum(props.namedValues.map(v => v.value))} ${props.unit}`}</StatNumber>
       </Stat>
       <Accordion allowToggle width='inherit' borderLeft='1pt solid whitesmoke' padding='5pt' bgColor='#1a2130'>
         <AccordionItem>
