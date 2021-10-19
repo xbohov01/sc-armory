@@ -1,5 +1,5 @@
 import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel } from "@chakra-ui/accordion";
-import { VStack, Grid, Heading, GridItem, Box } from "@chakra-ui/layout";
+import { VStack, Grid, Heading, GridItem } from "@chakra-ui/layout";
 import { Stat, StatLabel, StatNumber } from "@chakra-ui/stat";
 import { Tooltip } from "@chakra-ui/tooltip";
 import { useEffect, useState } from "react"

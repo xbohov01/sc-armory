@@ -12,7 +12,7 @@ export function AppNotice() {
         <AlertDescription fontSize='sm' margin='auto' width='fit-content'>
           <p>This application is still under development. Bugs happen.</p>
           <p>You can report them to thespacecoder.business@gmail.com</p>
-          <p>Or join my <Link href='https://discord.com/invite/cY9gx4E'>Discord server</Link> and use the #tsc-bugs channel.</p>
+          <p>Or join my <Link textDecoration='underline' href='https://discord.com/invite/cY9gx4E'>Discord server</Link> and use the #tsc-bugs channel.</p>
         </AlertDescription>
         <CloseButton onClick={() => setHidden(true)}/>
       </Alert>
@@ -30,7 +30,7 @@ export function ImageNotice() {
         <AlertTitle mr={2} fontSize='md'>Image submissions</AlertTitle>
         <AlertDescription fontSize='sm' margin='auto' width='fit-content'>
           <p>Not all images of armor and weapons are in yet.</p>
-          <p>You can help get them added by submitting them <Link href='https://forms.gle/P1TQnhtueK6wmmbn8'>here</Link></p>
+          <p>You can help get them added by submitting them <Link textDecoration='underline' href='https://forms.gle/P1TQnhtueK6wmmbn8'>here</Link></p>
         </AlertDescription>
         <CloseButton onClick={() => setHidden(true)}/>
       </Alert>

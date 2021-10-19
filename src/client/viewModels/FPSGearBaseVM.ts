@@ -7,4 +7,5 @@ export class FPSGearBaseVM {
   ManufacturerName!: string;
   Type!: string;
   Size!: number;
+  InventoryOccupancy!: number;
 }

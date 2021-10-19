@@ -13,13 +13,13 @@ class ShoppingListGenerator {
     for (let gear of loadout){
       let result = await client.GetSaleLocations(gear);
 
-      if (!result.success){
+      if (!result.success && result.message !== "Not sold"){
         throw new SaleLocationsFetchException(result.message);
       }
 
       let saleLocations = result.data;
 
-      price += saleLocations[0].price;
+      price += saleLocations.length > 0 ? saleLocations[0].price : 0;
 
       for (let saleLocation of saleLocations){
         let lItem:LocatedItem = {

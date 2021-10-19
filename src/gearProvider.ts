@@ -1,10 +1,11 @@
 import client from "./client/client";
-import { RetailProductVM } from "./client/viewModels/RetailProductVM";
+import { ArmorVM } from "./client/viewModels/ArmorVM";
+import { FPSGearBaseVM } from "./client/viewModels/FPSGearBaseVM";
 import { SelectOption } from "./types/types";
 
 class GearProvider {
   public async GetGearOptions(type: string, filter: string): Promise<SelectOption[]> {
-    let result: RetailProductVM[] = [];
+    let result: FPSGearBaseVM[] = [];
 
     switch (type) {
       case 'Helmet':
@@ -21,6 +22,10 @@ class GearProvider {
 
       case 'Legs':
         result = await client.GetLegs(filter);
+        break;
+
+      case 'Backpack':
+        result = await client.GetBackpacks(filter);
         break;
 
       case 'Sidearm':
@@ -40,6 +45,10 @@ class GearProvider {
         result = await client.GetWeapons(filter);
         break;
 
+      case 'Tool':
+        result = await client.GetTools(filter);
+        break;
+
       default:
         result = [];
         break;
@@ -53,9 +62,20 @@ class GearProvider {
     });
   }
 
-  public async GetCore(name: string): Promise<RetailProductVM> {
+  public async GetBackpacksWithMaxSize(filter:string, size:number): Promise<SelectOption[]> {
+    let result = await client.GetBackpacks(filter);
+    return result.filter(b => b.BackpackMaxSize <= size)
+    .map((g) => {
+      return {
+        value: g.Id.toString(),
+        label: g.LocalizedName
+      }
+    });
+  }
+
+  public async GetCore(name: string): Promise<ArmorVM> {
     let result = await client.GetCoreByName(name);
-    return result.value[0];
+    return result[0];
   }
 
 }
