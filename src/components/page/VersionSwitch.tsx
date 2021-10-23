@@ -26,6 +26,7 @@ export function VersionSwitch(props:VersionSwitchProps){
     localStorage.setItem('wasPtu', isPtu ? 'false' : 'true');
     client.ChangeAPIs(!isPtu)
     setIsPtu(!isPtu);
+    window.location.reload();
   }
 
   useEffect(() => {
