@@ -1,7 +1,7 @@
 import React from 'react'
 import { Box, Icon, HStack, VStack, Link, Divider, Image } from '@chakra-ui/react';
 import { AiFillYoutube, AiFillTwitterCircle, AiFillInstagram } from 'react-icons/ai'
-import { FaTwitch, FaDiscord, FaFlickr } from 'react-icons/fa';
+import { FaTwitch, FaDiscord, FaFlickr, FaPatreon } from 'react-icons/fa';
 import { SiRedbubble } from 'react-icons/si';
 import { Support } from './Support';
 import cig from '../../cig.png';
@@ -35,6 +35,9 @@ export function Footer() {
           </Link>
           <Link href='https://www.redbubble.com/people/TheSpaceCoder/shop'>
             <Icon boxSize='20pt' cursor='pointer' as={SiRedbubble} />
+          </Link>
+          <Link href='https://www.patreon.com/scarmory'>
+            <Icon boxSize='20pt' cursor='pointer' as={FaPatreon} />
           </Link>
         </HStack>
         <Divider width='60vw' />

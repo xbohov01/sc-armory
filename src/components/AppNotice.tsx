@@ -37,3 +37,20 @@ export function ImageNotice() {
     </Box>
   )
 }
+
+export function PatreonNotice(){
+  const [hidden, setHidden] = useState(false);
+
+  return (
+    <Box width='600pt' marginBottom='20pt' hidden={hidden}>
+      <Alert status="info" variant='solid' borderRadius='3pt'>
+        <AlertIcon />
+        <AlertTitle mr={2} fontSize='md'>Armory Patreon</AlertTitle>
+        <AlertDescription fontSize='sm' margin='auto' width='fit-content'>
+          <p>You can now support the Armory on <Link textDecoration='underline' href='https://www.patreon.com/scarmory'> Patreon</Link>!</p>
+        </AlertDescription>
+        <CloseButton onClick={() => setHidden(true)}/>
+      </Alert>
+    </Box>
+  )
+}
