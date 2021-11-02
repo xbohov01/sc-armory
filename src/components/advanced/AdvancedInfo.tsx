@@ -15,6 +15,8 @@ function IsArmor(name: string): boolean {
     name.includes(' Helmet') ||
     name.includes(' Armor') ||
     name.includes(' Backpack') ||
+    name.includes(' Worksuit') ||
+    name === 'Beacon' ||
     name.includes(' Undersuit')
   ) {
     return true;
