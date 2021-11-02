@@ -14,6 +14,8 @@ export function SecondarySelectorComponent(props: SecondarySelectorComponentProp
   useEffect(() => {
     if (props.coreName === '' && props.undersuitName === '') {
       setIsVisible(true);
+    } else if (props.coreName === '' && (props.undersuitName.includes("Pembroke") || props.undersuitName.includes("Novikov"))){
+      setIsVisible(true);
     } else if (props.coreName === '' && props.undersuitName !== ''){
       setIsVisible(false);
     } 
