@@ -220,8 +220,12 @@ class ApiClient {
   }
 
   async CheckIfImageExists(imageId: string): Promise<boolean> {
-    let result = await axios.head(this.cloudinary + imageId);
-    return result.status === 200 ? true : false;
+    try {
+      let result = await axios.head(this.cloudinary + imageId);
+      return result.status === 200 ? true : false;
+    } catch (e){
+      return false;
+    }
   }
 }
 

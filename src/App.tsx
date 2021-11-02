@@ -1,7 +1,7 @@
 import { Divider, HStack, VStack } from '@chakra-ui/layout';
 import React, { useEffect, useState } from 'react';
 import './App.css';
-import { AppNotice, ImageNotice, PatreonNotice } from './components/AppNotice';
+import { AppNotice, PatreonNotice } from './components/AppNotice';
 import { Footer } from './components/page/Footer';
 import { LoadoutBuilder } from './components/loadout/LoadoutBuilder';
 import { ShoppingList } from './components/ShoppingList';

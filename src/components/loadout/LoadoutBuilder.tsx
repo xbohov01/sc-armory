@@ -36,16 +36,20 @@ export function LoadoutBuilder(props: LoadoutBuilderProps) {
     props.listRefresher(true);
   }
 
+  const isUndersuitArmored = () => {
+    return undersuit !== '' ? undersuit.includes("Pembroke") || undersuit.includes("Novikov") : false
+  }
+
   return (
     <Box backgroundColor='#282c34' color='whitesmoke' id='loadout-builder' marginBottom='10pt'>
       <Heading size='lg'>Build your loadout:</Heading>
       <Box marginBottom='10pt' fontSize='md'>
         <LoadoutComponent type='Undersuit' updater={setUndersuit} />
         <LoadoutComponent type='Helmet' updater={setHelmet} />
-        <LoadoutComponent type='Arms' updater={setArms} />
-        <LoadoutComponent type='Core' updater={setCore} />
-        <BackpackSelectorComponent coreName={core} setBackpack={setBackpack}/>
-        <LoadoutComponent type='Legs' updater={setLegs} />
+        <LoadoutComponent type='Arms' updater={setArms} isDisabled={isUndersuitArmored()}/>
+        <LoadoutComponent type='Core' updater={setCore} isDisabled={isUndersuitArmored()}/>
+        <BackpackSelectorComponent coreName={core} undersuitName={undersuit} setBackpack={setBackpack}/>
+        <LoadoutComponent type='Legs' updater={setLegs} isDisabled={isUndersuitArmored()}/>
         <LoadoutComponent type='Sidearm' updater={setPistol} />
         {pistol !== '' ? <WeaponAttachmentsList weapon={pistol} updater={setSideAttachments}/> : ''}
         <LoadoutComponent type='Primary' updater={setPrimary}/>

@@ -6,6 +6,7 @@ import gearProvider from '../../gearProvider';
 
 type BackpackSelectorComponentProps = {
     coreName: string;
+    undersuitName: string;
     setBackpack: Dispatch<SetStateAction<string>>;
 }
 
@@ -14,6 +15,10 @@ export function BackpackSelectorComponent(props: BackpackSelectorComponentProps)
     const [filter, setFilter] = useState('');
 
     useEffect(() => {
+        if (props.undersuitName.includes("Pembroke") || props.undersuitName.includes("Novikov")){
+            setMaxBackpackSize(3);
+            return;
+        }
         if (props.coreName === '') {
             setMaxBackpackSize(0);
         } else {
@@ -21,7 +26,7 @@ export function BackpackSelectorComponent(props: BackpackSelectorComponentProps)
                 setMaxBackpackSize(result.BackpackMaxSize);
             });
         }
-    }, [props.coreName])
+    }, [props.coreName, props.undersuitName])
 
     const loadOptions = async () => await gearProvider.GetBackpacksWithMaxSize(filter, maxBackpackSize);
 
