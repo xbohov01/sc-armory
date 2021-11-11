@@ -55,8 +55,8 @@ export function LoadoutBuilder(props: LoadoutBuilderProps) {
         <LoadoutComponent type='Primary' updater={setPrimary}/>
         {primary !== '' ? <WeaponAttachmentsList weapon={primary} updater={setPrimAttachments}/> : ''}
         <SecondarySelectorComponent coreName={core} undersuitName={undersuit} setSecondary={setSecondary}/>
-        <LoadoutComponent type='Tool' updater={setTool}/>
         {secondary !== '' ? <WeaponAttachmentsList weapon={secondary} updater={setSecAttachments}/> : ''}
+        <LoadoutComponent type='Tool' updater={setTool}/>
         <OptionalLoadoutItems updater={setOptionals}/>
       </Box>
       <Button width='30vw' maxWidth='300pt' minWidth='200pt' colorScheme='teal' onClick={sendBuildToList}>Get shopping list</Button>
