@@ -58,15 +58,16 @@ export type SingleResultObject<T> = {
 }
 
 export type WeaponAttachmentSlot = {
-  size:number,
-  type:string,
-  attachments: SelectOption[]
+  MaxSize:number,
+  MinSize:number
+  Type:string,
+  Attachments: SelectOption[]
 }
 
 export type WeaponAttachment = {
-  name: string,
-  size: number,
-  type: string
+  Name: string;
+  Size: number;
+  Type: string;
 }
 
 export type NameReference = {

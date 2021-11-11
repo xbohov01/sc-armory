@@ -1,204 +1,217 @@
+import client from "../client/client";
+import { AttachmentVM } from "../client/viewModels/AttachmentVM";
 import { WeaponAttachment, WeaponAttachmentSlot } from "../types/types";
 
 class WeaponAttachmentProvider {
   specificSlots: { [id: string]: WeaponAttachmentSlot[] } = {
     "Salvo Frag Pistol": [
-      { size: 1, type: 'Sight', attachments: [] }
+      { MaxSize: 1, MinSize: 1, Type: 'Sight', Attachments: [] }
     ],
     "Yubarev Pistol": [
-      { size: 1, type: 'Sight', attachments: [] }
+      { MaxSize: 1, MinSize: 1, Type: 'Sight', Attachments: [] }
     ],
     "Ravager-212 Twin Shotgun": [
-      { size: 1, type: 'Sight', attachments: [] },
-      { size: 2, type: 'Underbarrel', attachments: [] }
+      { MaxSize: 1, MinSize: 1, Type: 'Sight', Attachments: [] },
+      { MaxSize: 2, MinSize: 1, Type: 'Underbarrel', Attachments: [] }
     ],
     "R97Shotgun": [
-      { size: 1, type: 'Sight', attachments: [] },
-      { size: 2, type: 'Underbarrel', attachments: [] }
+      { MaxSize: 1, MinSize: 1, Type: 'Sight', Attachments: [] },
+      { MaxSize: 2, MinSize: 1, Type: 'Underbarrel', Attachments: [] }
     ],
     "Atzkav Sniper Rifle": [
-      { size: 3, type: 'Sight', attachments: [] },
-      { size: 2, type: 'Underbarrel', attachments: [] }
+      { MaxSize: 3, MinSize: 1, Type: 'Sight', Attachments: [] },
+      { MaxSize: 2, MinSize: 1, Type: 'Underbarrel', Attachments: [] }
     ],
     "Scalpel Sniper Rifle": [
-      { size: 3, type: 'Sight', attachments: [] },
-      { size: 2, type: 'Underbarrel', attachments: [] }
+      { MaxSize: 3, MinSize: 1, Type: 'Sight', Attachments: [] },
+      { MaxSize: 2, MinSize: 1, Type: 'Underbarrel', Attachments: [] }
     ],
     "F55 LMG": [
-      { size: 2, type: 'Sight', attachments: [] },
-      { size: 3, type: 'Underbarrel', attachments: [] }
+      { MaxSize: 2, MinSize: 1, Type: 'Sight', Attachments: [] },
+      { MaxSize: 3, MinSize: 1, Type: 'Underbarrel', Attachments: [] }
     ],
     "GP-33 MOD Grenade Launcher": [
-      { size: 2, type: 'Sight', attachments: [] }
+      { MaxSize: 2, MinSize: 1, Type: 'Sight', Attachments: [] }
     ],
   };
 
   generalSlots: { [id: string]: WeaponAttachmentSlot[] } = {
     "Pistol": [
-      { size: 1, type: 'Barrel', attachments: [] },
-      { size: 1, type: 'Underbarrel', attachments: [] },
-      { size: 1, type: 'Sight', attachments: [] },
+      { MaxSize: 1, MinSize: 1, Type: 'Barrel', Attachments: [] },
+      { MaxSize: 1, MinSize: 1, Type: 'Underbarrel', Attachments: [] },
+      { MaxSize: 1, MinSize: 1, Type: 'Sight', Attachments: [] },
     ],
     "Rifle": [
-      { size: 2, type: 'Barrel', attachments: [] },
-      { size: 2, type: 'Underbarrel', attachments: [] },
-      { size: 2, type: 'Sight', attachments: [] },
+      { MaxSize: 2, MinSize: 1, Type: 'Barrel', Attachments: [] },
+      { MaxSize: 2, MinSize: 1, Type: 'Underbarrel', Attachments: [] },
+      { MaxSize: 2, MinSize: 1, Type: 'Sight', Attachments: [] },
     ],
     "Sniper Rifle": [
-      { size: 2, type: 'Barrel', attachments: [] },
-      { size: 2, type: 'Underbarrel', attachments: [] },
-      { size: 3, type: 'Sight', attachments: [] },
+      { MaxSize: 2, MinSize: 1, Type: 'Barrel', Attachments: [] },
+      { MaxSize: 2, MinSize: 1, Type: 'Underbarrel', Attachments: [] },
+      { MaxSize: 3, MinSize: 1, Type: 'Sight', Attachments: [] },
     ],
     "LMG": [
-      { size: 2, type: 'Barrel', attachments: [] },
-      { size: 2, type: 'Underbarrel', attachments: [] },
-      { size: 2, type: 'Sight', attachments: [] },
+      { MaxSize: 2, MinSize: 1, Type: 'Barrel', Attachments: [] },
+      { MaxSize: 2, MinSize: 1, Type: 'Underbarrel', Attachments: [] },
+      { MaxSize: 2, MinSize: 1, Type: 'Sight', Attachments: [] },
     ],
     "SMG": [
-      { size: 1, type: 'Barrel', attachments: [] },
-      { size: 1, type: 'Underbarrel', attachments: [] },
-      { size: 1, type: 'Sight', attachments: [] },
+      { MaxSize: 1, MinSize: 1, Type: 'Barrel', Attachments: [] },
+      { MaxSize: 1, MinSize: 1, Type: 'Underbarrel', Attachments: [] },
+      { MaxSize: 1, MinSize: 1, Type: 'Sight', Attachments: [] },
     ],
     "Shotgun": [
-      { size: 3, type: 'Barrel', attachments: [] },
-      { size: 2, type: 'Underbarrel', attachments: [] },
-      { size: 1, type: 'Sight', attachments: [] },
+      { MaxSize: 3, MinSize: 1, Type: 'Barrel', Attachments: [] },
+      { MaxSize: 2, MinSize: 1, Type: 'Underbarrel', Attachments: [] },
+      { MaxSize: 1, MinSize: 1, Type: 'Sight', Attachments: [] },
     ],
     "default": [],
   };
 
   attachments: WeaponAttachment[] = [
     {
-      name: "Gamma (1x Holographic)",
-      size: 1,
-      type: "Sight"
+      Name: "Gamma (1x Holographic)",
+      Size: 1,
+      Type: "Sight"
     },
     {
-      name: "Gamma Duo (2x Holographic)",
-      size: 1,
-      type: "Sight"
+      Name: "Gamma Duo (2x Holographic)",
+      Size: 1,
+      Type: "Sight"
     },
     {
-      name: "Gamma Plus (3x Holographic)",
-      size: 1,
-      type: "Sight"
+      Name: "Gamma Plus (3x Holographic)",
+      Size: 1,
+      Type: "Sight"
     },
     {
-      name: "Tau Plus (4x Telescopic)",
-      size: 2,
-      type: "Sight"
+      Name: "Tau Plus (4x Telescopic)",
+      Size: 2,
+      Type: "Sight"
     },
     {
-      name: "Theta Pro (8x Telescopic)",
-      size: 3,
-      type: "Sight"
+      Name: "Theta Pro (8x Telescopic)",
+      Size: 3,
+      Type: "Sight"
     },
     {
-      name: "FieldLite",
-      size: 1,
-      type: "Underbarrel"
+      Name: "FieldLite",
+      Size: 1,
+      Type: "Underbarrel"
     },
     {
-      name: "250-E Laser Pointer",
-      size: 1,
-      type: "Underbarrel"
+      Name: "250-E Laser Pointer",
+      Size: 1,
+      Type: "Underbarrel"
     },
     {
-      name: "Delta (1x Reflex)",
-      size: 1,
-      type: "Sight"
+      Name: "Delta (1x Reflex)",
+      Size: 1,
+      Type: "Sight"
     },
     {
-      name: "Veil Flash Hider2",
-      size: 2,
-      type: "Barrel"
+      Name: "Veil Flash Hider2",
+      Size: 2,
+      Type: "Barrel"
     },
     {
-      name: "Veil Flash Hider3",
-      size: 3,
-      type: "Barrel"
+      Name: "Veil Flash Hider3",
+      Size: 3,
+      Type: "Barrel"
     },
     {
-      name: "Emod Stabilizer1",
-      size: 1,
-      type: "Barrel"
+      Name: "Emod Stabilizer1",
+      Size: 1,
+      Type: "Barrel"
     },
     {
-      name: "Emod Stabilizer2",
-      size: 2,
-      type: "Barrel"
+      Name: "Emod Stabilizer2",
+      Size: 2,
+      Type: "Barrel"
     },
     {
-      name: "Emod Stabilizer3",
-      size: 3,
-      type: "Barrel"
+      Name: "Emod Stabilizer3",
+      Size: 3,
+      Type: "Barrel"
     },
     {
-      name: "Sion Compensator3",
-      size: 3,
-      type: "Barrel"
+      Name: "Sion Compensator3",
+      Size: 3,
+      Type: "Barrel"
     },
     {
-      name: "Sion Compensator2",
-      size: 2,
-      type: "Barrel"
+      Name: "Sion Compensator2",
+      Size: 2,
+      Type: "Barrel"
     },
     {
-      name: "Sion Compensator1  ",
-      size: 1,
-      type: "Barrel"
+      Name: "Sion Compensator1  ",
+      Size: 1,
+      Type: "Barrel"
     },
     {
-      name: "Veil Flash Hider1",
-      size: 1,
-      type: "Barrel"
+      Name: "Veil Flash Hider1",
+      Size: 1,
+      Type: "Barrel"
     },
     {
-      name: "Tacit Suppressor3",
-      size: 3,
-      type: "Barrel"
+      Name: "Tacit Suppressor3",
+      Size: 3,
+      Type: "Barrel"
     },
     {
-      name: "Tacit Suppressor2",
-      size: 2,
-      type: "Barrel"
+      Name: "Tacit Suppressor2",
+      Size: 2,
+      Type: "Barrel"
     },
     {
-      name: "Tacit Suppressor1",
-      size: 1,
-      type: "Barrel"
+      Name: "Tacit Suppressor1",
+      Size: 1,
+      Type: "Barrel"
     },
   ]
 
-  GetAttachmentSlots(name: string): WeaponAttachmentSlot[] {
-    var slots = this.specificSlots[name];
-
-    if (slots === undefined) {
-      if (name.includes('Pistol')) {
-        slots = this.generalSlots['Pistol']
-      } else if (name.includes('Sniper Rifle')) {
-        slots = this.generalSlots['Sniper Rifle']
-      } else if (name.includes('Rifle')) {
-        slots = this.generalSlots['Rifle']
-      } else if (name.includes('LMG')) {
-        slots = this.generalSlots['LMG']
-      } else if (name.includes('SMG')) {
-        slots = this.generalSlots['SMG']
-      } else if (name.includes('Shotgun')) {
-        slots = this.generalSlots['Shotgun']
-      } else {
-        slots = this.generalSlots['default']
+  async GetAttachmentSlots(name: string): Promise<WeaponAttachmentSlot[]> {
+    var weaponModel = await client.GetWeaponByName(name);
+    var slots: WeaponAttachmentSlot[] = [    
+      {
+        MaxSize: weaponModel.BarrelSlot.MaxSize,
+        MinSize: weaponModel.BarrelSlot.MinSize,
+        Type: 'Barrel',
+        Attachments: []
+      },
+      {
+        MaxSize: weaponModel.UnderbarrelSlot.MaxSize,
+        MinSize: weaponModel.UnderbarrelSlot.MinSize,
+        Type: 'Underbarrel',
+        Attachments: []
+      },
+      {
+        MaxSize: weaponModel.OpticSlot.MaxSize,
+        MinSize: weaponModel.OpticSlot.MinSize,
+        Type: 'Sight',
+        Attachments: []
       }
-
-    }
+    ]
 
     return slots;
   }
 
-  GetAttachments(type: string, size: number): WeaponAttachment[] {
-
-    return type === 'Barrel' ? this.attachments.filter(a => a.type === type && a.size === size) : this.attachments.filter(a => a.type === type && a.size <= size);
+  attachmentTypes: { [id: string]: string } = {
+    "Underbarrel": "BottomAttachment",
+    "Sight": "IronSight",
+    "Barrel": "Barrel"
   }
+
+  async GetAttachments(type: string, maxSize: number, minSize: number): Promise<AttachmentVM[]> {
+    var attachments = await client.GetAttachments("");
+
+    return attachments.filter(a => a.Type === this.attachmentTypes[type] 
+      && a.Size <= maxSize 
+      && a.Size >= minSize);
+  }
+
 }
 
 export default new WeaponAttachmentProvider();

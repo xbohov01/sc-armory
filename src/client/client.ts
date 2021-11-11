@@ -2,6 +2,7 @@ import axios, { AxiosInstance } from 'axios';
 import { orderBy } from 'lodash';
 import { ResultObject, SaleLocationVM, SingleResultObject } from '../types/types';
 import { ArmorVM } from './viewModels/ArmorVM';
+import { AttachmentVM } from './viewModels/AttachmentVM';
 import { FPSGearBaseVM } from './viewModels/FPSGearBaseVM';
 import { RetailProductVM } from './viewModels/RetailProductVM';
 import { WeaponVM } from './viewModels/WeaponVM';
@@ -10,6 +11,7 @@ const RetailProductsEndpoint = '/retailproducts'
 const saleLocations = '/salelocations'
 const ArmorsEndpoint = '/armors'
 const WeaponsEndpoint = '/weapons'
+const AttachmentsEndpoint = '/attachments'
 const ConsumablesEndpoint = '/consumables'
 
 class ApiClient {
@@ -140,7 +142,7 @@ class ApiClient {
     let result = await this.instance.get(
       this.url + RetailProductsEndpoint + `?$filter=RetailType eq 'Usable' and contains(tolower(LocalizedName),'${filter.toLowerCase()}')`
     );
-    return orderBy(result.data.value, (v:RetailProductVM) => v.LocalizedName);
+    return orderBy(result.data.value, (v: RetailProductVM) => v.LocalizedName);
   }
 
   async GetWeapons(filter: string = ''): Promise<WeaponVM[]> {
@@ -150,6 +152,13 @@ class ApiClient {
     return result;
   }
 
+  async GetWeaponByName(name:string): Promise<WeaponVM>{
+    let result = await this.GetWeapon(
+      `?$filter=LocalizedName eq '${name}'`
+    );
+    return result[0];
+  }
+
   async GetTools(filter: string = ''): Promise<WeaponVM[]> {
     let result = await this.GetWeapon(
       `?$filter=(Type eq 'Utility' or Type eq 'Medical Device') and contains(tolower(LocalizedName),'${filter.toLowerCase()}')`
@@ -157,9 +166,9 @@ class ApiClient {
     return result;
   }
 
-  async GetAttachments(filter: string = ''): Promise<RetailProductVM[]> {
+  async GetAttachments(filter: string = ''): Promise<AttachmentVM[]> {
     let result = await this.instance.get(
-      this.url + RetailProductsEndpoint + `?$filter=RetailType eq 'Attachment' and contains(tolower(LocalizedName),'${filter.toLowerCase()}')`
+      this.url + AttachmentsEndpoint + `?$filter=contains(tolower(LocalizedName),'${filter.toLowerCase()}')`
     );
     return orderBy(result.data.value, (v: RetailProductVM) => v.LocalizedName);
   }
@@ -173,7 +182,7 @@ class ApiClient {
         data: result.data
       }
     } catch (err) {
-      if (err.response.status === 404){
+      if (err.response.status === 404) {
         return {
           success: false,
           message: "Not sold",
@@ -227,7 +236,7 @@ class ApiClient {
     try {
       let result = await axios.head(this.cloudinary + imageId);
       return result.status === 200 ? true : false;
-    } catch (e){
+    } catch (e) {
       return false;
     }
   }
