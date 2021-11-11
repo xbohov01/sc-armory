@@ -19,7 +19,7 @@ export function Header() {
           </VStack>
           <Box width='100pt'></Box>
         </HStack>
-        <VersionSwitch isEnabled={true}/>
+        <VersionSwitch isEnabled={false}/>
       </VStack>
     </Box>
   )
