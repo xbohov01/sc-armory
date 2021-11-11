@@ -35,6 +35,10 @@ class ApiClient {
     this.isPtu = false;
   }
 
+  /**
+   * 
+   * @param isPtu set to true if PTU is enabled
+   */
   ChangeAPIs(isPtu: boolean) {
     if (isPtu) {
       this.url = process.env.REACT_APP_API_PTU_URL || '';

@@ -13,6 +13,7 @@ export function VersionSwitch(props:VersionSwitchProps){
   const wasPtuToggled = () => {
     if(!props.isEnabled){
       setIsPtu(false);
+      client.ChangeAPIs(false);
       return false;
     }
     var value = localStorage.getItem('wasPtu');
