@@ -1,8 +1,9 @@
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { Box, Heading } from '@chakra-ui/layout';
-import AsyncSelect from "react-select/async"
 import { customStyles } from '../../selectStyle';
 import gearProvider from '../../gearProvider';
+import { SelectOption } from "../../types/types";
+import Select from "react-select"
 
 type BackpackSelectorComponentProps = {
     coreName: string;
@@ -12,10 +13,9 @@ type BackpackSelectorComponentProps = {
 
 export function BackpackSelectorComponent(props: BackpackSelectorComponentProps) {
     const [maxBackpackSize, setMaxBackpackSize] = useState(0);
-    const [filter, setFilter] = useState('');
 
     useEffect(() => {
-        if (props.undersuitName.includes("Pembroke") || props.undersuitName.includes("Novikov")){
+        if (props.undersuitName.includes("Pembroke") || props.undersuitName.includes("Novikov")) {
             setMaxBackpackSize(3);
             return;
         }
@@ -26,9 +26,30 @@ export function BackpackSelectorComponent(props: BackpackSelectorComponentProps)
                 setMaxBackpackSize(result.BackpackMaxSize);
             });
         }
+
     }, [props.coreName, props.undersuitName])
 
-    const loadOptions = async () => await gearProvider.GetBackpacksWithMaxSize(filter, maxBackpackSize);
+    return (
+        <BackpackSelectorDropdown setBackpack={props.setBackpack} maxBackpackSize={maxBackpackSize} />
+    )
+}
+
+type BackpackSelectorDropdownProps = {
+    setBackpack: Dispatch<SetStateAction<string>>;
+    maxBackpackSize: number;
+}
+
+function BackpackSelectorDropdown(props: BackpackSelectorDropdownProps) {
+    const [filter, setFilter] = useState('');
+    const [backpacks, setBackpacks] = useState<SelectOption[]>([]);
+
+    useEffect(() => {
+        gearProvider.GetBackpacksWithMaxSize('', props.maxBackpackSize).then(res => {
+            setBackpacks(res);
+        })
+    }, [props.maxBackpackSize])
+
+    const loadOptions = () => backpacks.filter(b => b.label.toLowerCase().includes(filter));
 
     const handleGearChange = (selected: any) => {
         props.setBackpack(selected.label);
@@ -38,14 +59,14 @@ export function BackpackSelectorComponent(props: BackpackSelectorComponentProps)
         <Box maxWidth='300pt' id='component-backpack' padding='2pt' margin='auto'>
             <Heading fontSize='md'>Backpack</Heading>
             <Box paddingTop='2pt'>
-                <AsyncSelect
+                <Select
                     id='backpack'
                     styles={customStyles}
-                    loadOptions={loadOptions}
+                    options={loadOptions()}
                     onChange={handleGearChange}
                     onInputChange={setFilter}
                     isMulti={false}
-                    isDisabled={maxBackpackSize === 0}
+                    isDisabled={props.maxBackpackSize === 0}
                     defaultOptions
                 />
             </Box>

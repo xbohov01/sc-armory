@@ -64,7 +64,8 @@ class GearProvider {
 
   public async GetBackpacksWithMaxSize(filter:string, size:number): Promise<SelectOption[]> {
     let result = await client.GetBackpacks(filter);
-    return result.filter(b => b.BackpackMaxSize <= size)
+
+    return result.filter(b => b.Size <= size)
     .map((g) => {
       return {
         value: g.Id.toString(),
