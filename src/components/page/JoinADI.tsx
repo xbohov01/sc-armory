@@ -6,8 +6,8 @@ export function JoinADI(){
   return(
     <Box id='adi'>
       <VStack>       
-        <Link href='https://atlasdefenseindustries.com/join-adi'><Image src={adi}/></Link>
-        <Link href='https://atlasdefenseindustries.com/join-adi'>Join ADI!</Link>
+        <Link id='adi-join-link' href='https://atlasdefenseindustries.com/join-adi'><Image src={adi}/></Link>
+        <Link id='adi-join-link' href='https://atlasdefenseindustries.com/join-adi'>Join ADI!</Link>
       </VStack>
     </Box>
   )
