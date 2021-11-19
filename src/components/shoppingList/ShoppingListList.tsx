@@ -1,17 +1,17 @@
 import { Box, Heading, HStack, VStack } from '@chakra-ui/layout';
 import { useToast } from '@chakra-ui/toast';
 import { cloneDeep } from 'lodash';
-import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
-import shoppingListGenerator from '../client/shoppingListGenerator';
-import { KeyValue, ListKey, LocatedItem } from '../types/types';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import shoppingListGenerator from '../../client/shoppingListGenerator';
+import { KeyValue, ListKey, LocatedItem } from '../../types/types';
 import { ShoppingListLocation } from './ShoppingListLocation';
 
-type ShoppingListProps = {
+type ShoppingListListProps = {
   gear: string[];
   listUpstream: Dispatch<SetStateAction<KeyValue<ListKey, LocatedItem[]>[]>>
 }
 
-export function ShoppingList(props: ShoppingListProps) {
+export function ShoppingListList(props: ShoppingListListProps){
   const [list, setList] = useState<KeyValue<ListKey, LocatedItem[]>[]>([]);
   const [price, setPrice] = useState(0);
   const toast = useToast();
@@ -34,11 +34,6 @@ export function ShoppingList(props: ShoppingListProps) {
     }
   }, [props.gear]);
 
-  const formatter = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-  })
-
   const setItemBought = (itemName: string, bought: boolean) => {
     var copy = cloneDeep(list);
     for (let location of copy) {
@@ -48,6 +43,11 @@ export function ShoppingList(props: ShoppingListProps) {
     }
     setList(copy);
   }
+
+  const formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+  })
 
   return (
     <Box marginTop='10pt' width='400pt' marginBottom='10pt' marginLeft='20pt' backgroundColor='#282c34' color='whitesmoke' id='shopping-list'>
@@ -66,5 +66,5 @@ export function ShoppingList(props: ShoppingListProps) {
         {list.map(l => <ShoppingListLocation items={l} boughtSetter={setItemBought} key={Math.random()} />)}
       </VStack>
     </Box>
-  )
+  );
 }

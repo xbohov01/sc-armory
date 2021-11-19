@@ -4,13 +4,13 @@ import './App.css';
 import { AppNotice, PatreonNotice } from './components/AppNotice';
 import { Footer } from './components/page/Footer';
 import { LoadoutBuilder } from './components/loadout/LoadoutBuilder';
-import { ShoppingList } from './components/ShoppingList';
 import { Header } from './components/page/Header';
 import { LoadoutExporter } from './client/LoadoutExporter';
 import { KeyValue, ListKey, LocatedItem } from './types/types';
 import { Switch } from '@chakra-ui/react';
 import { AdvancedInfo } from './components/advanced/AdvancedInfo';
 import { ImageDisplay } from './components/images/ImageDisplay';
+import { ShoppingList } from './components/shoppingList/ShoppingList';
 
 function App() {
   const [gear, setGear] = useState<string[]>([])
