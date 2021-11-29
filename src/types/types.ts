@@ -3,6 +3,7 @@ import { RetailProductVM } from "../client/viewModels/RetailProductVM"
 export type SelectOption = {
   value: string;
   label: string;
+  type:string;
 }
 
 export type Loadout = {
@@ -73,4 +74,10 @@ export type WeaponAttachment = {
 export type NameReference = {
   name:string;
   reference:string;
+}
+
+export type FormatProps = {
+  value:string;
+  label:string;
+  type:string;
 }

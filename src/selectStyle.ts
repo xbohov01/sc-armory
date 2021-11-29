@@ -21,7 +21,7 @@ export const customStyles = {
 export const compactStyles = {
   option: (provided:any, state:any) => ({
     ...provided,
-    color: 'black'
+    color: 'black',
   }),
   control: (provided:any, state:any) => ({
     ...provided,

@@ -1,8 +1,8 @@
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { Box, Heading } from '@chakra-ui/layout';
 import { customStyles } from '../../selectStyle';
-import gearProvider from '../../gearProvider';
-import { SelectOption } from "../../types/types";
+import gearProvider from '../../providers/gearProvider';
+import { FormatProps, SelectOption } from "../../types/types";
 import Select from "react-select"
 
 type BackpackSelectorComponentProps = {
@@ -55,6 +55,15 @@ function BackpackSelectorDropdown(props: BackpackSelectorDropdownProps) {
         props.setBackpack(selected.label);
     }
 
+    const formatOptionLabel = (props: FormatProps) => (
+        <div style={{ display: "flex" }}>
+            <div>{props.label}</div>
+            <div style={{ marginLeft: "10px", color: "#ccc" }}>
+                {props.type}
+            </div>
+        </div>
+    );
+
     return (
         <Box maxWidth='300pt' id='component-backpack' padding='2pt' margin='auto'>
             <Heading fontSize='md'>Backpack</Heading>
@@ -68,6 +77,8 @@ function BackpackSelectorDropdown(props: BackpackSelectorDropdownProps) {
                     isMulti={false}
                     isDisabled={props.maxBackpackSize === 0}
                     defaultOptions
+                    formatOptionLabel={formatOptionLabel}
+                    placeholder='Start typing...'
                 />
             </Box>
         </Box>

@@ -191,7 +191,7 @@ class ApiClient {
             saleLocationName: "Item not sold",
             itemId: 0,
             price: 0,
-            saleLocationChain: "Possible sub/exclusive item"
+            saleLocationChain: "Possible sub/exclusive/lootable item"
           }]
         }
       }

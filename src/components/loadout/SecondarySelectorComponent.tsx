@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
-import gearProvider from '../../gearProvider';
+import gearProvider from '../../providers/gearProvider';
 import { LoadoutComponent } from './LoadoutComponent';
 
 type SecondarySelectorComponentProps = {
