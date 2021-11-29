@@ -1,7 +1,7 @@
 import { Checkbox } from "@chakra-ui/checkbox"
 import { Box, Heading, HStack, VStack } from "@chakra-ui/layout"
 import { SyntheticEvent } from "react"
-import { KeyValue, ListKey, LocatedItem } from "../types/types"
+import { KeyValue, ListKey, LocatedItem } from "../../types/types"
 
 type ShoppingListLocationProps = {
   items: KeyValue<ListKey, LocatedItem[]>
