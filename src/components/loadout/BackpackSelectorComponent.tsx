@@ -1,9 +1,10 @@
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { Box, Heading } from '@chakra-ui/layout';
 import { customStyles } from '../../selectStyle';
 import gearProvider from '../../providers/gearProvider';
 import { FormatProps, SelectOption } from "../../types/types";
 import Select from "react-select"
+import { Alert, AlertIcon, AlertTitle } from "@chakra-ui/react";
 
 type BackpackSelectorComponentProps = {
     coreName: string;
@@ -42,17 +43,30 @@ type BackpackSelectorDropdownProps = {
 function BackpackSelectorDropdown(props: BackpackSelectorDropdownProps) {
     const [filter, setFilter] = useState('');
     const [backpacks, setBackpacks] = useState<SelectOption[]>([]);
+    const [currentPack, setCurrentPack] = useState('');
+    const [sizeWarning, setSizeWarning] = useState(false);
 
     useEffect(() => {
         gearProvider.GetBackpacksWithMaxSize('', props.maxBackpackSize).then(res => {
             setBackpacks(res);
+            checkSize(currentPack, res);
         })
     }, [props.maxBackpackSize])
 
     const loadOptions = () => backpacks.filter(b => b.label.toLowerCase().includes(filter));
 
+    const checkSize = (selected: string, options: SelectOption[]) => {
+        if (selected !== '' && !options.some(r => r.label === selected)) {
+            setSizeWarning(true);
+        } else {
+            setSizeWarning(false);
+        }
+    }
+
     const handleGearChange = (selected: any) => {
         props.setBackpack(selected.label);
+        setCurrentPack(selected.label);
+        checkSize(selected.label, backpacks);
     }
 
     const formatOptionLabel = (props: FormatProps) => (
@@ -67,6 +81,7 @@ function BackpackSelectorDropdown(props: BackpackSelectorDropdownProps) {
     return (
         <Box maxWidth='300pt' id='component-backpack' padding='2pt' margin='auto'>
             <Heading fontSize='md'>Backpack</Heading>
+            {sizeWarning ? <WrongSizeWarning /> : ''}
             <Box paddingTop='2pt'>
                 <Select
                     id='backpack'
@@ -82,5 +97,14 @@ function BackpackSelectorDropdown(props: BackpackSelectorDropdownProps) {
                 />
             </Box>
         </Box>
+    )
+}
+
+function WrongSizeWarning() {
+    return (
+        <Alert status='warning' variant='solid' borderRadius='5px' width='inherit'>
+            <AlertIcon />
+            This backpack is too large for the selected core. Select a different core or a backpack.
+        </Alert>
     )
 }

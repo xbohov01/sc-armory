@@ -67,7 +67,7 @@ export function WeaponAttachmentSelector(props: WeaponAttachmentSelectorProps) {
 
   const determineZeroing = ():string => {
     let vm = attachments.find(a => a.LocalizedName === selected);
-    if (vm === undefined || vm.Type != 'IronSight'){
+    if (vm === undefined || vm.Type !== 'IronSight'){
       return '';
     }
     if (vm.AutoZeroingTime > 0){
