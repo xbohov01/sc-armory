@@ -161,7 +161,7 @@ class ApiClient {
 
   async GetTools(filter: string = ''): Promise<WeaponVM[]> {
     let result = await this.GetWeapon(
-      `?$filter=(Type eq 'Utility' or Type eq 'Medical Device') and contains(tolower(LocalizedName),'${filter.toLowerCase()}')`
+      `?$filter=(Type eq 'Utility' or Type eq 'Medical Device' or Type eq 'Knife') and contains(tolower(LocalizedName),'${filter.toLowerCase()}')`
     );
     return result;
   }
