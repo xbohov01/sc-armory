@@ -19,7 +19,7 @@ export function LoadoutComponent(props: LoadoutComponentProps) {
     gearProvider.GetGearOptions(props.type, '').then(res => {
       setOptions(res);
     })
-  }, [props.isDisabled]);
+  }, [props.isDisabled, props.type]);
 
   const loadOptions = () => options.filter(o => o.label.toLowerCase().includes(filter.toLowerCase()));
 

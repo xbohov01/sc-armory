@@ -1,5 +1,5 @@
 import axios, { AxiosInstance } from 'axios';
-import { orderBy, result } from 'lodash';
+import { orderBy } from 'lodash';
 import { ResultObject, SaleLocationVM, SingleResultObject } from '../types/types';
 import { ArmorVM } from './viewModels/ArmorVM';
 import { AttachmentVM } from './viewModels/AttachmentVM';
