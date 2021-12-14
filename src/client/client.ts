@@ -1,11 +1,12 @@
 import axios, { AxiosInstance } from 'axios';
-import { orderBy } from 'lodash';
+import { orderBy, result } from 'lodash';
 import { ResultObject, SaleLocationVM, SingleResultObject } from '../types/types';
 import { ArmorVM } from './viewModels/ArmorVM';
 import { AttachmentVM } from './viewModels/AttachmentVM';
 import { FPSGearBaseVM } from './viewModels/FPSGearBaseVM';
 import { RetailProductVM } from './viewModels/RetailProductVM';
 import { WeaponVM } from './viewModels/WeaponVM';
+import { sha3_512 } from 'js-sha3';
 
 const RetailProductsEndpoint = '/retailproducts'
 const saleLocations = '/salelocations'
@@ -13,20 +14,25 @@ const ArmorsEndpoint = '/armors'
 const WeaponsEndpoint = '/weapons'
 const AttachmentsEndpoint = '/attachments'
 const ConsumablesEndpoint = '/consumables'
+const AuthenticationEndpoint = '/serviceaccounts'
 
 class ApiClient {
   instance: AxiosInstance;
   url: string;
   cloudinary: string;
   isPtu: boolean;
+  token: string;
+  authenticationPromise: Promise<string>;
 
   constructor() {
     var url = '';
     var value = localStorage.getItem('wasPtu');
     if (value === undefined || value === 'false') {
+      this.isPtu = false;
       url = process.env.REACT_APP_API_URL || '';
     } else {
       url = process.env.REACT_APP_API_PTU_URL || '';
+      this.isPtu = true;
     }
 
     this.url = url;
@@ -34,14 +40,46 @@ class ApiClient {
       baseURL: url,
     })
     this.cloudinary = process.env.REACT_APP_CLOUDINARY_URL || 'https://res.cloudinary.com/thespacecoder/image/upload/v1630349759/armory/';
-    this.isPtu = false;
+    this.token = '';
+
+    this.authenticationPromise = this.Authorize();
+  }
+
+  async Authorize():Promise<string>{
+    let code = (Math.random() + 1).toString(36).substring(2);
+    let username = this.isPtu ? process.env.REACT_APP_PTU_LOGIN : process.env.REACT_APP_LOGIN;
+    let password = this.isPtu ? process.env.REACT_APP_PTU_PASSWORD : process.env.REACT_APP_PASSWORD;
+
+    try {
+      let result = await this.instance.post(this.url + AuthenticationEndpoint + '/login', {
+        username: username,
+        sequence: sha3_512(password + code),
+        code: code
+      })
+   
+      this.SetToken(result.data.token);
+      return result.data.token;
+    } catch (e){
+      console.log(`Authentication failed ${e.message}`);
+      return '';
+    }
+  }
+
+  SetToken(token: string) {
+    this.token = token;
+
+    this.instance.interceptors.request.use(function (config) {
+      config.headers['Authorization'] = token ? `Bearer ${token}` : '';
+      config.headers['Content-Type'] = 'application/json';
+      return config;
+    });
   }
 
   /**
    * 
    * @param isPtu set to true if PTU is enabled
    */
-  ChangeAPIs(isPtu: boolean) {
+  async ChangeAPIs(isPtu: boolean) {
     if (isPtu) {
       this.url = process.env.REACT_APP_API_PTU_URL || '';
       this.instance = axios.create({
@@ -58,6 +96,8 @@ class ApiClient {
   }
 
   async GetArmor(filter: string = ''): Promise<ArmorVM[]> {
+    await this.authenticationPromise;
+
     let result = await this.instance.get(
       this.url + ArmorsEndpoint + filter
     )
@@ -65,6 +105,8 @@ class ApiClient {
   }
 
   async GetWeapon(filter: string = ''): Promise<WeaponVM[]> {
+    await this.authenticationPromise;
+
     let result = await this.instance.get(
       this.url + WeaponsEndpoint + filter
     )

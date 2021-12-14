@@ -1,9 +1,9 @@
-import React, { Dispatch, SetStateAction, useState } from 'react';
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { Box, Heading } from '@chakra-ui/layout';
-import AsyncSelect from "react-select/async"
+import Select from "react-select"
 import { customStyles } from '../../selectStyle';
 import gearProvider from '../../providers/gearProvider';
-import { FormatProps } from '../../types/types';
+import { FormatProps, SelectOption } from '../../types/types';
 
 type LoadoutComponentProps = {
   type: string;
@@ -13,8 +13,15 @@ type LoadoutComponentProps = {
 
 export function LoadoutComponent(props: LoadoutComponentProps) {
   const [filter, setFilter] = useState('');
+  const [options, setOptions] = useState<SelectOption[]>([]);
 
-  const loadOptions = async () => await gearProvider.GetGearOptions(props.type, filter);
+  useEffect(() => {
+    gearProvider.GetGearOptions(props.type, '').then(res => {
+      setOptions(res);
+    })
+  }, [props.isDisabled]);
+
+  const loadOptions = () => options.filter(o => o.label.toLowerCase().includes(filter.toLowerCase()));
 
   const handleGearChange = (selected: any) => {
     props.updater(selected.label);
@@ -33,10 +40,10 @@ export function LoadoutComponent(props: LoadoutComponentProps) {
     <Box maxWidth='300pt' id={'component-' + props.type} padding='2pt' margin='auto'>
       <Heading fontSize='md'>{props.type}</Heading>
       <Box paddingTop='2pt'>
-        <AsyncSelect
+        <Select
           id={props.type}
           styles={customStyles}
-          loadOptions={loadOptions}
+          options={loadOptions()}
           onChange={handleGearChange}
           onInputChange={setFilter}
           isMulti={false}
