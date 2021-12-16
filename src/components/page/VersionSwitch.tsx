@@ -28,9 +28,9 @@ export function VersionSwitch(props:VersionSwitchProps){
     return true;
   }
 
-  const toggleVersion = () => {
+  const toggleVersion = async () => {
     localStorage.setItem('wasPtu', isPtu ? 'false' : 'true');
-    client.ChangeAPIs(!isPtu)
+    await client.ChangeAPIs(!isPtu)
     setIsPtu(!isPtu);
     window.location.reload();
   }

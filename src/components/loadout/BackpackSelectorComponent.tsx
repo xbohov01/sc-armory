@@ -4,7 +4,7 @@ import { customStyles } from '../../selectStyle';
 import gearProvider from '../../providers/gearProvider';
 import { FormatProps, SelectOption } from "../../types/types";
 import Select from "react-select"
-import { Alert, AlertIcon, AlertTitle } from "@chakra-ui/react";
+import { Alert, AlertIcon } from "@chakra-ui/react";
 
 type BackpackSelectorComponentProps = {
     coreName: string;
@@ -51,7 +51,7 @@ function BackpackSelectorDropdown(props: BackpackSelectorDropdownProps) {
             setBackpacks(res);
             checkSize(currentPack, res);
         })
-    }, [props.maxBackpackSize])
+    }, [props.maxBackpackSize, currentPack])
 
     const loadOptions = () => backpacks.filter(b => b.label.toLowerCase().includes(filter));
 
