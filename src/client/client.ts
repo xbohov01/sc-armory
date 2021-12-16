@@ -59,7 +59,7 @@ class ApiClient {
    
       this.SetToken(result.data.token);
       return result.data.token;
-    } catch (e){
+    } catch (e:any){
       console.log(`Authentication failed ${e.message}`);
       return '';
     }
@@ -223,7 +223,7 @@ class ApiClient {
         message: result.statusText,
         data: result.data
       }
-    } catch (err) {
+    } catch (err:any) {
       if (err.response.status === 404) {
         return {
           success: false,
