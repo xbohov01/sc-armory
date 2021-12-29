@@ -104,7 +104,6 @@ function WeaponDemoDisplay(props: WeaponDemoDisplayProps) {
           title="Weapon Demo"
           width="400px"
           height="195px"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
         >
         </iframe>

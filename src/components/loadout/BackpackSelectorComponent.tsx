@@ -65,7 +65,11 @@ function BackpackSelectorDropdown(props: BackpackSelectorDropdownProps) {
 
     const handleGearChange = (selected: any) => {
         // Check for selection clearing
-        if (selected === null) return;
+        if (selected === null) {
+            props.setBackpack('');
+            setCurrentPack('');
+            return;
+        }
         props.setBackpack(selected.label);
         setCurrentPack(selected.label);
         checkSize(selected.label, backpacks);
