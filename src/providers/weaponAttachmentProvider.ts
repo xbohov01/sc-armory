@@ -3,7 +3,7 @@ import { AttachmentVM } from "../client/viewModels/AttachmentVM";
 import { WeaponAttachment, WeaponAttachmentSlot } from "../types/types";
 
 class WeaponAttachmentProvider {
-  specificSlots: { [id: string]: WeaponAttachmentSlot[] } = {
+  private _specificSlots: { [id: string]: WeaponAttachmentSlot[] } = {
     "Salvo Frag Pistol": [
       { MaxSize: 1, MinSize: 1, Type: 'Sight', Attachments: [] }
     ],
@@ -35,7 +35,7 @@ class WeaponAttachmentProvider {
     ],
   };
 
-  generalSlots: { [id: string]: WeaponAttachmentSlot[] } = {
+  private _generalSlots: { [id: string]: WeaponAttachmentSlot[] } = {
     "Pistol": [
       { MaxSize: 1, MinSize: 1, Type: 'Barrel', Attachments: [] },
       { MaxSize: 1, MinSize: 1, Type: 'Underbarrel', Attachments: [] },
@@ -69,7 +69,7 @@ class WeaponAttachmentProvider {
     "default": [],
   };
 
-  attachments: WeaponAttachment[] = [
+  private _attachments: WeaponAttachment[] = [
     {
       Name: "Gamma (1x Holographic)",
       Size: 1,
@@ -198,7 +198,7 @@ class WeaponAttachmentProvider {
     return slots;
   }
 
-  attachmentTypes: { [id: string]: string } = {
+  private _attachmentTypes: { [id: string]: string } = {
     "Underbarrel": "BottomAttachment",
     "Sight": "IronSight",
     "Barrel": "Barrel"
@@ -207,7 +207,7 @@ class WeaponAttachmentProvider {
   async GetAttachments(type: string, maxSize: number, minSize: number): Promise<AttachmentVM[]> {
     var attachments = await client.GetAttachments("");
 
-    return attachments.filter(a => a.Type === this.attachmentTypes[type] 
+    return attachments.filter(a => a.Type === this._attachmentTypes[type] 
       && a.Size <= maxSize 
       && a.Size >= minSize);
   }

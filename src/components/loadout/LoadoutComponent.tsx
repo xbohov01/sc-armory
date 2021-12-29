@@ -24,6 +24,8 @@ export function LoadoutComponent(props: LoadoutComponentProps) {
   const loadOptions = () => options.filter(o => o.label.toLowerCase().includes(filter.toLowerCase()));
 
   const handleGearChange = (selected: any) => {
+    // Check for selection clearing
+    if (selected === null) return; 
     props.updater(selected.label);
   }
 
@@ -51,6 +53,7 @@ export function LoadoutComponent(props: LoadoutComponentProps) {
           defaultOptions
           formatOptionLabel={formatOptionLabel}
           placeholder='Start typing...'
+          isClearable
         />
       </Box>
     </Box>
