@@ -56,6 +56,8 @@ export function WeaponAttachmentSelector(props: WeaponAttachmentSelectorProps) {
   }, [props.attachmentSlot.Type, props.attachmentSlot.MaxSize, props.attachmentSlot.MinSize]);
   
   const handleGearChange = (selected: any) => {
+    // Check for selection clearing
+    if (selected === null) return; 
     props.updater(props.attachmentSlot.Type, selected.label);
     setSelected(selected.label);
   }
@@ -88,6 +90,7 @@ export function WeaponAttachmentSelector(props: WeaponAttachmentSelectorProps) {
         onInputChange={setFilter}
         isMulti={false}
         defaultOptions
+        isClearable
       />
       <Heading fontSize='xs'>{determineZeroing()}</Heading>
     </VStack>

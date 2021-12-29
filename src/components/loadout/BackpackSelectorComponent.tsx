@@ -64,6 +64,8 @@ function BackpackSelectorDropdown(props: BackpackSelectorDropdownProps) {
     }
 
     const handleGearChange = (selected: any) => {
+        // Check for selection clearing
+        if (selected === null) return;
         props.setBackpack(selected.label);
         setCurrentPack(selected.label);
         checkSize(selected.label, backpacks);
@@ -94,6 +96,7 @@ function BackpackSelectorDropdown(props: BackpackSelectorDropdownProps) {
                     defaultOptions
                     formatOptionLabel={formatOptionLabel}
                     placeholder='Start typing...'
+                    isClearable
                 />
             </Box>
         </Box>
