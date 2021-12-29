@@ -25,7 +25,10 @@ export function LoadoutComponent(props: LoadoutComponentProps) {
 
   const handleGearChange = (selected: any) => {
     // Check for selection clearing
-    if (selected === null) return; 
+    if (selected === null) {
+      props.updater('');
+      return;
+    } 
     props.updater(selected.label);
   }
 

@@ -57,7 +57,11 @@ export function WeaponAttachmentSelector(props: WeaponAttachmentSelectorProps) {
   
   const handleGearChange = (selected: any) => {
     // Check for selection clearing
-    if (selected === null) return; 
+    if (selected === null) {
+      props.updater(props.attachmentSlot.Type, '');
+      setSelected('');
+      return;
+    }; 
     props.updater(props.attachmentSlot.Type, selected.label);
     setSelected(selected.label);
   }
