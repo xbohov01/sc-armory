@@ -2,6 +2,7 @@ import { Heading, HStack } from '@chakra-ui/layout';
 import { Switch } from '@chakra-ui/switch';
 import React, { useEffect, useState } from 'react'
 import client from '../../client/client';
+import gearServiceClient from '../../client/gearServiceClient';
 
 type VersionSwitchProps = {
   isEnabled:boolean;
@@ -13,7 +14,10 @@ export function VersionSwitch(props:VersionSwitchProps){
   const wasPtuToggled = () => {
     if(!props.isEnabled && getStoredValue()){
       setIsPtu(false);
+
       client.ChangeAPIs(false);
+      gearServiceClient.ChangeAPIs(false);
+
       localStorage.setItem('wasPtu', 'false');
       return false;
     }
@@ -30,7 +34,10 @@ export function VersionSwitch(props:VersionSwitchProps){
 
   const toggleVersion = async () => {
     localStorage.setItem('wasPtu', isPtu ? 'false' : 'true');
+    
     await client.ChangeAPIs(!isPtu)
+    await gearServiceClient.ChangeAPIs(!isPtu);
+
     setIsPtu(!isPtu);
     window.location.reload();
   }
