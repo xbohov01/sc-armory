@@ -33,5 +33,5 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
-serviceWorkerRegistration.register();
+serviceWorkerRegistration.unregister(); // Flip this to .register() to enable PWA
 reportWebVitals();
