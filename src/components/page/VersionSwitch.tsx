@@ -14,7 +14,6 @@ export function VersionSwitch(props: VersionSwitchProps) {
   const wasPtuToggled = () => {
     if (!props.isEnabled && getStoredValue()) {
       setIsPtu(false);
-
       client.ChangeAPIs(false);
       gearServiceClient.ChangeAPIs(false);
 

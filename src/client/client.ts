@@ -267,6 +267,17 @@ export class ApiClient {
     return result.data;
   }
 
+  async GetArmorInfo(name: string): Promise<SingleResultObject<ArmorVM>> {
+    let result = await this.instance.get(
+      this.url + ArmorsEndpoint + `?$filter=LocalizedName eq '${name}'`
+    );
+    return {
+      success: result.status === 200,
+      message: result.statusText,
+      data: result.data.value[0],
+    };
+  }
+
   async GetWeaponInfo(name: string): Promise<SingleResultObject<WeaponVM>> {
     let result = await this.instance.get(
       this.url + WeaponsEndpoint + `?$filter=LocalizedName eq '${name}'`
