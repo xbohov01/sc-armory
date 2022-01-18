@@ -16,7 +16,7 @@ const AttachmentsEndpoint = '/attachments'
 const ConsumablesEndpoint = '/consumables'
 const AuthenticationEndpoint = '/serviceaccounts'
 
-export class ApiClient {
+class ApiClient {
   instance: AxiosInstance;
   url: string;
   cloudinary: string;
@@ -250,6 +250,17 @@ export class ApiClient {
       this.url + RetailProductsEndpoint + `(${id})`
     );
     return result.data
+  }
+
+  async GetArmorInfo(name: string): Promise<SingleResultObject<ArmorVM>> {
+    let result = await this.instance.get(
+      this.url + ArmorsEndpoint + `?$filter=LocalizedName eq '${name}'`
+    );
+    return {
+      success: result.status === 200,
+      message: result.statusText,
+      data: result.data.value[0]
+    }
   }
 
   async GetWeaponInfo(name: string): Promise<SingleResultObject<WeaponVM>> {
