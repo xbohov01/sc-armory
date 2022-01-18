@@ -1,4 +1,5 @@
 import client from "../client/client";
+import gearServiceClient from "../client/gearServiceClient";
 import { ArmorVM } from "../client/viewModels/ArmorVM";
 import { WeaponVM } from "../client/viewModels/WeaponVM";
 import { GearInfoFetchException } from "../exceptions/GearInfoFetchException";
@@ -19,7 +20,7 @@ class GearInfoProvider {
   }
 
   async GetArmorInfo(name: string): Promise<ArmorVM> {
-    let result = await client.GetArmorInfo(name);
+    let result = await gearServiceClient.GetArmorInfo(name);
 
     if (!result.success) {
       throw new GearInfoFetchException(result.message);
