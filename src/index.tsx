@@ -1,27 +1,27 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import { ChakraProvider, extendTheme } from "@chakra-ui/react"
-import '@fontsource/exo'
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import { ChakraProvider, extendTheme } from "@chakra-ui/react";
+import "@fontsource/exo";
 
-const theme:any = extendTheme({
+const theme: any = extendTheme({
   fonts: {
-    heading: 'Exo',
-    switch: 'Exo',
-    tab: 'Exo'
+    heading: "Exo",
+    switch: "Exo",
+    tab: "Exo",
   },
   components: {
     Tab: {
-      baseStyle: {    
+      baseStyle: {
         _selected: {
-          backgroundColor: '#1a2130',
+          backgroundColor: "#1a2130",
         },
       },
     },
   },
-})
+});
 
 ReactDOM.render(
   <ChakraProvider theme={theme}>
@@ -29,7 +29,7 @@ ReactDOM.render(
       <App />
     </React.StrictMode>
   </ChakraProvider>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function

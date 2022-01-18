@@ -1,7 +1,7 @@
 import { FPSGearBaseVM } from "./FPSGearBaseVM";
 
 export class WeaponAttachmentPortVM {
-  Grade!:number;
-  MinSize!:number;
-  MaxSize!:number;
+  Grade!: number;
+  MinSize!: number;
+  MaxSize!: number;
 }

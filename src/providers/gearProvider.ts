@@ -4,48 +4,51 @@ import { FPSGearBaseVM } from "../client/viewModels/FPSGearBaseVM";
 import { SelectOption } from "../types/types";
 
 class GearProvider {
-  public async GetGearOptions(type: string, filter: string): Promise<SelectOption[]> {
+  public async GetGearOptions(
+    type: string,
+    filter: string
+  ): Promise<SelectOption[]> {
     let result: FPSGearBaseVM[] = [];
 
     switch (type) {
-      case 'Helmet':
+      case "Helmet":
         result = await client.GetHelmets(filter);
         break;
 
-      case 'Arms':
+      case "Arms":
         result = await client.GetArms(filter);
         break;
 
-      case 'Core':
+      case "Core":
         result = await client.GetCores(filter);
         break;
 
-      case 'Legs':
+      case "Legs":
         result = await client.GetLegs(filter);
         break;
 
-      case 'Backpack':
+      case "Backpack":
         result = await client.GetBackpacks(filter);
         break;
 
-      case 'Sidearm':
+      case "Sidearm":
         result = await client.GetPistols(filter);
         break;
 
-      case 'Undersuit':
+      case "Undersuit":
         result = await client.GetUndersuits(filter);
         break;
 
-      case 'Usable':
+      case "Usable":
         result = await client.GetUsable(filter);
         break;
 
-      case 'Primary':
-      case 'Secondary':
+      case "Primary":
+      case "Secondary":
         result = await client.GetWeapons(filter);
         break;
 
-      case 'Tool':
+      case "Tool":
         result = await client.GetTools(filter);
         break;
 
@@ -58,21 +61,25 @@ class GearProvider {
       return {
         value: g.Id.toString(),
         label: g.LocalizedName,
-        type: this.GetArmorTypeFromDesc(g.LocalizedDescription)
-      }
+        type: this.GetArmorTypeFromDesc(g.LocalizedDescription),
+      };
     });
   }
 
-  public async GetBackpacksWithMaxSize(filter: string, size: number): Promise<SelectOption[]> {
+  public async GetBackpacksWithMaxSize(
+    filter: string,
+    size: number
+  ): Promise<SelectOption[]> {
     let result = await client.GetBackpacks(filter);
 
-    return result.filter(b => b.Size <= size)
+    return result
+      .filter((b) => b.Size <= size)
       .map((g) => {
         return {
           value: g.Id.toString(),
           label: g.LocalizedName,
-          type: this.GetArmorTypeFromDesc(g.LocalizedDescription)
-        }
+          type: this.GetArmorTypeFromDesc(g.LocalizedDescription),
+        };
       });
   }
 
@@ -81,21 +88,19 @@ class GearProvider {
     return result[0];
   }
 
-
   // Change this to retrieve from API
   private GetArmorTypeFromDesc(description: string): string {
-    if (description.includes('Item Type: Heavy Armor')){
-      return 'Heavy'
+    if (description.includes("Item Type: Heavy Armor")) {
+      return "Heavy";
     }
-    if (description.includes('Item Type: Medium Armor')){
-      return 'Medium'
+    if (description.includes("Item Type: Medium Armor")) {
+      return "Medium";
     }
-    if (description.includes('Item Type: Light Armor')){
-      return 'Light'
+    if (description.includes("Item Type: Light Armor")) {
+      return "Light";
     }
-    return '';
+    return "";
   }
-
 }
 
 export default new GearProvider();

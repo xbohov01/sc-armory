@@ -3,9 +3,10 @@ import { SaleLocationsFetchException } from "../exceptions/SaleLocationsFetchExc
 import { KeyValue, ListKey, LocatedItem } from "../types/types";
 import client from "./client";
 
-
 class ShoppingListGenerator {
-  async GetShoppingList(loadout: string[]): Promise<[number, KeyValue<ListKey, LocatedItem[]>[]]> {
+  async GetShoppingList(
+    loadout: string[]
+  ): Promise<[number, KeyValue<ListKey, LocatedItem[]>[]]> {
     let list: KeyValue<ListKey, LocatedItem[]>[] = [];
     let locatedItems: LocatedItem[] = [];
     let price = 0;
@@ -29,35 +30,36 @@ class ShoppingListGenerator {
           storeLocation: `${saleLocation.saleLocationName} - ${saleLocation.saleLocationChain}`,
           storeChain: saleLocation.saleLocationChain,
           price: saleLocation.price.toString(),
-          isBought: false
-        }
+          isBought: false,
+        };
         locatedItems.push(lItem);
       }
     }
 
     for (let entry of locatedItems) {
-
-      if (!list.some(e => e.key.id === entry.storeId)) {
+      if (!list.some((e) => e.key.id === entry.storeId)) {
         list.push({
           key: {
             id: entry.storeId,
             name: entry.storeName,
-            chain: entry.storeChain
+            chain: entry.storeChain,
           },
-          value: [entry]
+          value: [entry],
         });
       } else {
-        list.find(e => e.key.id === entry.storeId)?.value.push(entry);
+        list.find((e) => e.key.id === entry.storeId)?.value.push(entry);
       }
     }
 
-    return [price, orderBy(list, i => i.value.length).reverse()];
+    return [price, orderBy(list, (i) => i.value.length).reverse()];
   }
 
-  async GetLocationsPerItem(loadout: string[]): Promise<{ locations: string[]; list: KeyValue<string, LocatedItem[]>[]; }> {
+  async GetLocationsPerItem(
+    loadout: string[]
+  ): Promise<{ locations: string[]; list: KeyValue<string, LocatedItem[]>[] }> {
     let list: KeyValue<string, LocatedItem[]>[] = [];
     let locations: string[] = [];
-    
+
     for (let gear of loadout) {
       let result = await client.GetSaleLocations(gear);
       let locatedItems: LocatedItem[] = [];
@@ -67,7 +69,11 @@ class ShoppingListGenerator {
       }
 
       let saleLocations = result.data;
-      locations.push(...saleLocations.map(l => l.saleLocationChain.split(' - ').reverse()[0]))
+      locations.push(
+        ...saleLocations.map(
+          (l) => l.saleLocationChain.split(" - ").reverse()[0]
+        )
+      );
 
       for (let saleLocation of saleLocations) {
         let lItem: LocatedItem = {
@@ -77,21 +83,19 @@ class ShoppingListGenerator {
           storeLocation: `${saleLocation.saleLocationName} - ${saleLocation.saleLocationChain}`,
           storeChain: saleLocation.saleLocationChain,
           price: saleLocation.price.toString(),
-          isBought: false
-        }
+          isBought: false,
+        };
         locatedItems.push(lItem);
       }
-      list.push(
-        {
-          key: gear,
-          value: locatedItems
-        }
-      )
+      list.push({
+        key: gear,
+        value: locatedItems,
+      });
     }
-  
-    locations = uniq(locations)
 
-    return {locations, list}
+    locations = uniq(locations);
+
+    return { locations, list };
   }
 }
 
