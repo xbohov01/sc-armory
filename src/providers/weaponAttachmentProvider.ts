@@ -1,4 +1,3 @@
-import client from "../client/client";
 import gearServiceClient from "../client/gearServiceClient";
 import { AttachmentVM } from "../client/viewModels/AttachmentVM";
 import { WeaponAttachment, WeaponAttachmentSlot } from "../types/types";

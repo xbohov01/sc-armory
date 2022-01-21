@@ -5,7 +5,7 @@ import BackpackSelectorComponent from "./BackpackSelectorComponent";
 import LoadoutComponent from "./LoadoutComponent";
 import OptionalLoadoutItems from "./OptionalLoadoutItems";
 import SecondarySelectorComponent from "./SecondarySelectorComponent";
-import { WeaponAttachmentsList } from "./WeaponAttachmentsList";
+import WeaponAttachmentsList from "./WeaponAttachmentsList";
 
 type LoadoutBuilderProps = {
   updater: Dispatch<SetStateAction<string[]>>;

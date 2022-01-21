@@ -4,7 +4,7 @@ import { cloneDeep } from "lodash";
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import shoppingListGenerator from "../shoppingListGenerator";
 import { KeyValue, ListKey, LocatedItem } from "../../types/types";
-import { ShoppingLocation } from "./ShoppingLocation";
+import ShoppingLocation from "./ShoppingLocation";
 
 type ShoppingListProps = {
   gear: string[];

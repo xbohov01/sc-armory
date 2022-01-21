@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 export const customStyles = {
   option: (provided: any, state: any) => ({
     ...provided,

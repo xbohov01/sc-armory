@@ -13,32 +13,32 @@ class ShoppingListGenerator {
     const locatedItems: LocatedItem[] = [];
     let price = 0;
 
-    for (const gear of loadout) {
-      const result = await client.GetSaleLocations(gear);
+    const promises = loadout.map((gear) => client.GetSaleLocations(gear));
+    const results = await Promise.all(promises);
 
+    results.forEach((result) => {
       if (!result.success && result.message !== "Not sold") {
         throw new SaleLocationsFetchException(result.message);
       }
 
-      const saleLocations = result.data;
+      price += result.data.length > 0 ? result.data[0].price : 0;
 
-      price += saleLocations.length > 0 ? saleLocations[0].price : 0;
+      locatedItems.push(
+        ...result.data.map(
+          (saleLocation): LocatedItem => ({
+            item: saleLocation.itemName,
+            storeId: saleLocation.saleLocationId,
+            storeName: saleLocation.saleLocationName,
+            storeLocation: `${saleLocation.saleLocationName} - ${saleLocation.saleLocationChain}`,
+            storeChain: saleLocation.saleLocationChain,
+            price: saleLocation.price.toString(),
+            isBought: false,
+          })
+        )
+      );
+    });
 
-      for (const saleLocation of saleLocations) {
-        const lItem: LocatedItem = {
-          item: gear,
-          storeId: saleLocation.saleLocationId,
-          storeName: saleLocation.saleLocationName,
-          storeLocation: `${saleLocation.saleLocationName} - ${saleLocation.saleLocationChain}`,
-          storeChain: saleLocation.saleLocationChain,
-          price: saleLocation.price.toString(),
-          isBought: false,
-        };
-        locatedItems.push(lItem);
-      }
-    }
-
-    for (const entry of locatedItems) {
+    locatedItems.forEach((entry) => {
       if (!list.some((e) => e.key.id === entry.storeId)) {
         list.push({
           key: {
@@ -51,7 +51,7 @@ class ShoppingListGenerator {
       } else {
         list.find((e) => e.key.id === entry.storeId)?.value.push(entry);
       }
-    }
+    });
 
     return [price, orderBy(list, (i) => i.value.length).reverse()];
   }
@@ -71,14 +71,12 @@ class ShoppingListGenerator {
       }
 
       const saleLocations = result.data;
-      locations.push(
-        ...saleLocations.map(
-          (l) => l.saleLocationChain.split(" - ").reverse()[0]
-        )
+      locations = saleLocations.map(
+        (l) => l.saleLocationChain.split(" - ").reverse()[0]
       );
 
-      for (const saleLocation of saleLocations) {
-        const lItem: LocatedItem = {
+      locatedItems.push(
+        ...saleLocations.map((saleLocation) => ({
           item: gear,
           storeId: saleLocation.saleLocationId,
           storeName: saleLocation.saleLocationName,
@@ -86,9 +84,9 @@ class ShoppingListGenerator {
           storeChain: saleLocation.saleLocationChain,
           price: saleLocation.price.toString(),
           isBought: false,
-        };
-        locatedItems.push(lItem);
-      }
+        }))
+      );
+
       list.push({
         key: gear,
         value: locatedItems,

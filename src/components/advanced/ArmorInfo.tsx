@@ -1,24 +1,11 @@
-import {
-  Box,
-  Grid,
-  GridItem,
-  HStack,
-  List,
-  ListItem,
-  VStack,
-} from "@chakra-ui/layout";
-import {
-  Accordion,
-  AccordionItem,
-  AccordionButton,
-  AccordionIcon,
-  AccordionPanel,
-} from "@chakra-ui/react";
+import { Grid, GridItem, VStack } from "@chakra-ui/layout";
 import { Stat, StatLabel, StatNumber } from "@chakra-ui/stat";
-import { first, last, orderBy, sum } from "lodash";
+import { sum } from "lodash";
 import React, { useEffect, useState } from "react";
 import { ArmorVM } from "../../client/viewModels/ArmorVM";
 import gearInfoProvider from "../../providers/gearInfoProvider";
+import RangeInfo from "./armorInfo/RangeInfo";
+import BreakDownInfo from "./armorInfo/BreakDownInfo";
 
 type ArmorInfoProps = {
   armors: string[];
@@ -164,108 +151,5 @@ export default function ArmorInfo(props: ArmorInfoProps) {
         </GridItem>
       </Grid>
     </VStack>
-  );
-}
-
-type RangeInfoProps = {
-  namedValues: { name: string; value: number }[];
-  unit: string;
-  breakdownText: string;
-  label: string;
-};
-
-function RangeInfo(props: RangeInfoProps) {
-  const getRangeString = (): string => {
-    if (props.namedValues.length === 0) return `0${props.unit}`;
-
-    const ordered = orderBy(props.namedValues, (a) => a.value);
-    if (first(ordered) === last(ordered)) {
-      return `${ordered[0].value}${props.unit}`;
-    }
-    return `${ordered[0]?.value}${props.unit} - ${last(ordered)?.value}${
-      props.unit
-    }`;
-  };
-
-  return (
-    <>
-      <Stat borderLeft="1pt solid whitesmoke" padding="5pt" bgColor="#1a2130">
-        <StatLabel fontSize="lg">{props.label}</StatLabel>
-        <StatNumber fontSize="md">{getRangeString()}</StatNumber>
-      </Stat>
-      <Accordion
-        allowToggle
-        width="inherit"
-        borderLeft="1pt solid whitesmoke"
-        padding="5pt"
-        bgColor="#1a2130"
-      >
-        <AccordionItem>
-          <h2>
-            <AccordionButton>
-              <Box flex="1" textAlign="left">
-                {props.breakdownText}
-              </Box>
-              <AccordionIcon />
-            </AccordionButton>
-          </h2>
-          <AccordionPanel pb={4}>
-            <List>
-              {props.namedValues.map((r) => (
-                <ListItem key={Math.random()}>
-                  <HStack justifyContent="space-between">
-                    <p>{r.name}</p>
-                    <p>{`${r.value}${props.unit}`}</p>
-                  </HStack>
-                </ListItem>
-              ))}
-            </List>
-          </AccordionPanel>
-        </AccordionItem>
-      </Accordion>
-    </>
-  );
-}
-
-function BreakDownInfo(props: RangeInfoProps) {
-  return (
-    <>
-      <Stat borderLeft="1pt solid whitesmoke" padding="5pt" bgColor="#1a2130">
-        <StatLabel fontSize="lg">{props.label}</StatLabel>
-        <StatNumber fontSize="md">{`${sum(
-          props.namedValues.map((v) => v.value)
-        )} ${props.unit}`}</StatNumber>
-      </Stat>
-      <Accordion
-        allowToggle
-        width="inherit"
-        borderLeft="1pt solid whitesmoke"
-        padding="5pt"
-        bgColor="#1a2130"
-      >
-        <AccordionItem>
-          <h2>
-            <AccordionButton>
-              <Box flex="1" textAlign="left">
-                {props.breakdownText}
-              </Box>
-              <AccordionIcon />
-            </AccordionButton>
-          </h2>
-          <AccordionPanel pb={4}>
-            <List>
-              {props.namedValues.map((r) => (
-                <ListItem key={Math.random()}>
-                  <HStack justifyContent="space-between">
-                    <p>{r.name}</p>
-                    <p>{`${r.value}${props.unit}`}</p>
-                  </HStack>
-                </ListItem>
-              ))}
-            </List>
-          </AccordionPanel>
-        </AccordionItem>
-      </Accordion>
-    </>
   );
 }

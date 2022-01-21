@@ -1,21 +1,10 @@
 import axios, { AxiosInstance } from "axios";
-import { orderBy } from "lodash";
 import { sha3_512 } from "js-sha3";
-import {
-  ResultObject,
-  SaleLocationVM,
-  SingleResultObject,
-} from "../types/types";
-import { AttachmentVM } from "./viewModels/AttachmentVM";
-import { FPSGearBaseVM } from "./viewModels/FPSGearBaseVM";
+import { ResultObject, SaleLocationVM } from "../types/types";
 import { RetailProductVM } from "./viewModels/RetailProductVM";
-import { WeaponVM } from "./viewModels/WeaponVM";
 
 const RetailProductsEndpoint = "/retailproducts";
 const saleLocations = "/salelocations";
-const WeaponsEndpoint = "/weapons";
-const AttachmentsEndpoint = "/attachments";
-const ConsumablesEndpoint = "/consumables";
 const AuthenticationEndpoint = "/serviceaccounts";
 
 export class ApiClient {
@@ -68,7 +57,7 @@ export class ApiClient {
       this.SetToken(result.data.token);
       return result.data.token;
     } catch (e: any) {
-      console.log(`Authentication failed ${e.message}`);
+      console.warn(`Authentication failed ${e.message}`);
       return "";
     }
   }
@@ -95,26 +84,19 @@ export class ApiClient {
     });
   }
 
-  async GetUsable(filter: string = ""): Promise<FPSGearBaseVM[]> {
-    const result = await this.instance.get(
-      `${
-        this.url + RetailProductsEndpoint
-      }?$filter=RetailType eq 'Usable' and contains(tolower(LocalizedName),'${filter.toLowerCase()}')`
-    );
-    return orderBy(result.data.value, (v: RetailProductVM) => v.LocalizedName);
-  }
-
   async GetSaleLocations(
     itemName: string
   ): Promise<ResultObject<SaleLocationVM>> {
     try {
-      const { status, statusText, data } = await this.instance.get(
-        `${this.url + saleLocations}?item=${itemName}`
-      );
+      const { status, statusText, data } = await this.instance.get<
+        SaleLocationVM[]
+      >(`${this.url + saleLocations}?item=${itemName}`);
+      // Remove after shop service is up with itemName in VM
+      const hackedData = data.map((d) => ({ ...d, itemName }));
       return {
         success: status === 200,
         message: statusText,
-        data,
+        data: hackedData,
       };
     } catch (err: any) {
       if (err.response.status === 404) {
@@ -128,6 +110,7 @@ export class ApiClient {
               itemId: 0,
               price: 0,
               saleLocationChain: "Possible sub/exclusive/lootable item",
+              itemName,
             },
           ],
         };

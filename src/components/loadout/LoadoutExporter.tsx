@@ -1,6 +1,7 @@
-import { Button, Textarea, VStack } from "@chakra-ui/react";
+import { Button, VStack } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { KeyValue, ListKey, LocatedItem } from "../../types/types";
+import LoadoutExportText from "./LoadoutExportText";
 
 type LoadoutExporterProps = {
   gear: KeyValue<ListKey, LocatedItem[]>[];
@@ -44,27 +45,5 @@ export default function LoadoutExporter(props: LoadoutExporterProps) {
       </Button>
       {showExport ? <LoadoutExportText text={textExport} /> : ""}
     </VStack>
-  );
-}
-
-function LoadoutExportText(props: { text: string }) {
-  const [status, setStatus] = useState("Copy");
-
-  const copyToClipboard = () => {
-    navigator.clipboard.writeText(props.text);
-    setStatus("Copied!");
-  };
-
-  return (
-    <>
-      <Textarea
-        textColor="whitesmoke"
-        width="350pt"
-        minWidth="350pt"
-        value={props.text}
-        isReadOnly
-      />
-      <Button onClick={copyToClipboard}>{status}</Button>
-    </>
   );
 }

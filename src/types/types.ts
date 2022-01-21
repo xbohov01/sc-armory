@@ -1,4 +1,5 @@
 import { RetailProductVM } from "../client/viewModels/RetailProductVM";
+import { WeaponVM } from "../client/viewModels/WeaponVM";
 
 export type SelectOption = {
   value: string;
@@ -40,6 +41,7 @@ export type LocatedItem = {
 
 export type SaleLocationVM = {
   itemId: number;
+  itemName: string;
   price: number;
   saleLocationChain: string;
   saleLocationId: number;
@@ -80,4 +82,15 @@ export type FormatProps = {
   value: string;
   label: string;
   type: string;
+};
+
+export type RangeInfoProps = {
+  namedValues: { name: string; value: number }[];
+  unit: string;
+  breakdownText: string;
+  label: string;
+};
+
+export type WeaponInfoDisplayProps = {
+  weapon: WeaponVM;
 };

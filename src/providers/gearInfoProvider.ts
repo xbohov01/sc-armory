@@ -1,7 +1,5 @@
-import client from "../client/client";
 import gearServiceClient from "../client/gearServiceClient";
 import { ArmorVM } from "../client/viewModels/ArmorVM";
-import { FPSGearBaseVM } from "../client/viewModels/FPSGearBaseVM";
 import { WeaponVM } from "../client/viewModels/WeaponVM";
 import GearInfoFetchException from "../exceptions/GearInfoFetchException";
 import { NameReference } from "../types/types";
@@ -34,11 +32,10 @@ class GearInfoProvider {
       name
     );
 
-    if (!success) {
-      throw new GearInfoFetchException(message);
+    if (success) {
+      return data;
     }
-
-    return data;
+    throw new GearInfoFetchException(message);
   }
 
   IsArmor(name: string): boolean {

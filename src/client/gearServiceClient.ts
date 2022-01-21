@@ -46,20 +46,15 @@ class GearServiceClient extends ApiClient {
    *
    * @param isPtu set to true if PTU is enabled
    */
-  override async ChangeAPIs(isPtu: boolean) {
-    if (isPtu) {
-      this.url = process.env.REACT_APP_GEAR_PTU_URL || "";
-      this.instance = axios.create({
-        baseURL: process.env.REACT_APP_GEAR_PTU_URL,
-      });
-      this.isPtu = true;
-    } else {
-      this.url = process.env.REACT_APP_GEAR_LIVE_URL || "";
-      this.instance = axios.create({
-        baseURL: process.env.REACT_APP_GEAR_LIVE_URL,
-      });
-      this.isPtu = false;
-    }
+  override ChangeAPIs(isPtu: boolean) {
+    this.isPtu = isPtu;
+    this.url = isPtu
+      ? process.env.REACT_APP_GEAR_PTU_URL!
+      : process.env.REACT_APP_GEAR_LIVE_URL!;
+
+    this.instance = axios.create({
+      baseURL: this.url,
+    });
   }
 
   async GetArmorInfo(name: string): Promise<SingleResultObject<ArmorVM>> {
@@ -148,6 +143,13 @@ class GearServiceClient extends ApiClient {
     return this.GetWeapons(
       `?$filter=(type eq 'Utility' or type eq 'Medical Device' or type eq 'Knife') and contains(tolower(localizedName),'${name.toLowerCase()}')`
     );
+  }
+
+  async GetUsable(filter: string = ""): Promise<FPSGearBaseVM[]> {
+    return [
+      ...(await this.GetTools(filter)),
+      ...(await this.GetConsumable(filter)),
+    ];
   }
 }
 

@@ -1,14 +1,14 @@
-import { Checkbox } from "@chakra-ui/checkbox";
-import { Box, Heading, HStack, VStack } from "@chakra-ui/layout";
-import React, { SyntheticEvent } from "react";
+import { Box, VStack } from "@chakra-ui/layout";
+import React from "react";
 import { KeyValue, ListKey, LocatedItem } from "../../types/types";
+import { ShoppingListItem } from "./ShoppingListItem";
 
 type ShoppingLocationProps = {
   items: KeyValue<ListKey, LocatedItem[]>;
   boughtSetter: (item: string, bought: boolean) => void;
 };
 
-export function ShoppingLocation(props: ShoppingLocationProps) {
+export default function ShoppingLocation(props: ShoppingLocationProps) {
   return (
     <Box
       flex="1"
@@ -37,34 +37,5 @@ export function ShoppingLocation(props: ShoppingLocationProps) {
         ))}
       </VStack>
     </Box>
-  );
-}
-
-type ShoppingListItemProps = {
-  item: LocatedItem;
-  boughtSetter: (item: string, bought: boolean) => void;
-};
-
-export function ShoppingListItem(props: ShoppingListItemProps) {
-  const handleToggle = (e: SyntheticEvent) => {
-    //e.preventDefault();
-    props.boughtSetter(props.item.item, !props.item.isBought);
-  };
-
-  return (
-    <HStack key={Math.random()} spacing="20pt">
-      <Box
-        minWidth="200pt"
-        textAlign="left"
-        fontSize="sm"
-        textDecoration={props.item.isBought ? "line-through" : "none"}
-      >{`${props.item.item} - ${props.item.price}aUEC`}</Box>
-      <HStack>
-        <Heading size="xs" as="h5">
-          Purchased:{" "}
-        </Heading>
-        <Checkbox isChecked={props.item.isBought} onChange={handleToggle} />
-      </HStack>
-    </HStack>
   );
 }

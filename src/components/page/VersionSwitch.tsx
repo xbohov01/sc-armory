@@ -11,6 +11,14 @@ type VersionSwitchProps = {
 export default function VersionSwitch(props: VersionSwitchProps) {
   const [isPtu, setIsPtu] = useState(false);
 
+  const getStoredValue = () => {
+    const value = localStorage.getItem("wasPtu");
+    if (value === undefined || value === "false") {
+      return false;
+    }
+    return true;
+  };
+
   const wasPtuToggled = () => {
     if (!props.isEnabled && getStoredValue()) {
       setIsPtu(false);
@@ -23,19 +31,11 @@ export default function VersionSwitch(props: VersionSwitchProps) {
     return getStoredValue();
   };
 
-  const getStoredValue = () => {
-    const value = localStorage.getItem("wasPtu");
-    if (value === undefined || value === "false") {
-      return false;
-    }
-    return true;
-  };
-
   const toggleVersion = async () => {
     localStorage.setItem("wasPtu", isPtu ? "false" : "true");
 
-    await client.ChangeAPIs(!isPtu);
-    await gearServiceClient.ChangeAPIs(!isPtu);
+    client.ChangeAPIs(!isPtu);
+    gearServiceClient.ChangeAPIs(!isPtu);
 
     setIsPtu(!isPtu);
     window.location.reload();
