@@ -1,16 +1,16 @@
 import { FPSGearBaseVM } from "./FPSGearBaseVM";
 import { WeaponAttachmentPortVM } from "./WeaponAttachmentPortVM";
 
-export class WeaponVM extends FPSGearBaseVM {
-  BarrelSlot!: WeaponAttachmentPortVM;
-  OpticSlot!: WeaponAttachmentPortVM;
-  UnderbarrelSlot!: WeaponAttachmentPortVM;
-  RapidFireRate!: number;
-  BurstFireRate!: number;
-  BurstSize!: number;
-  SingleFireRate!: number;
-  Range!: string;
-  AmmoType!: string;
-  MagazineSize!: string;
-  AlphaDamage!: number;
+export type WeaponVM = FPSGearBaseVM & {
+  barrelSlot: WeaponAttachmentPortVM;
+  opticSlot: WeaponAttachmentPortVM;
+  underbarrelSlot: WeaponAttachmentPortVM;
+  rapidFireRate: number;
+  burstFireRate: number;
+  burstSize: number;
+  singleFireRate: number;
+  range: string;
+  ammoType: string;
+  magazineSize: string;
+  alphaDamage: number;
 }

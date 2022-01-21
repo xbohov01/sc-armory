@@ -2,13 +2,13 @@ import React, { Dispatch, SyntheticEvent, useEffect, useState } from "react";
 import { Button } from "@chakra-ui/button";
 import { Box, VStack } from "@chakra-ui/layout";
 import { KeyValue } from "../../types/types";
-import { OptionalLoadoutComponent } from "./OptionalLoadoutComponent";
+import OptionalLoadoutComponent from "./OptionalLoadoutComponent";
 
 type OptionalLoadoutItemsProps = {
   updater: Dispatch<React.SetStateAction<string[]>>;
 };
 
-export function OptionalLoadoutItems(props: OptionalLoadoutItemsProps) {
+export default function OptionalLoadoutItems(props: OptionalLoadoutItemsProps) {
   const [optionals, setOptionals] = useState<KeyValue<number, string>[]>([]);
 
   useEffect(() => {
@@ -21,14 +21,14 @@ export function OptionalLoadoutItems(props: OptionalLoadoutItemsProps) {
   };
 
   const removeOptional = (key: number) => {
-    let removed = optionals.filter((o) => o.key !== key);
+    const removed = optionals.filter((o) => o.key !== key);
     setOptionals(removed);
 
     props.updater(optionals.map((o) => o.value));
   };
 
   const updateOptional = (item: KeyValue<number, string>) => {
-    let opts = optionals;
+    const opts = optionals;
     opts.filter((o) => o.key === item.key)[0].value = item.value;
 
     setOptionals(opts);

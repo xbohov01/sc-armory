@@ -1,27 +1,28 @@
 import { Button, Textarea, VStack } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
-import { KeyValue, ListKey, LocatedItem } from "../types/types";
+import { KeyValue, ListKey, LocatedItem } from "../../types/types";
 
 type LoadoutExporterProps = {
   gear: KeyValue<ListKey, LocatedItem[]>[];
 };
 
-export function LoadoutExporter(props: LoadoutExporterProps) {
+export default function LoadoutExporter(props: LoadoutExporterProps) {
   const [textExport, setTextExport] = useState("");
   const [showExport, setShowExport] = useState(false);
 
   useEffect(() => {
     let text = "";
-    for (let location of props.gear) {
+
+    props.gear.forEach((location) => {
       text += `${location.key.name} - ${location.key.chain
         .split(" - ")
         .reverse()
         .join(" - ")}\n`;
-      for (let item of location.value) {
+      location.value.forEach((item) => {
         text += `\t${item.item} - ${item.price} aUEC\n`;
-      }
+      });
       text += "\n";
-    }
+    });
     setTextExport(text);
   }, [props.gear]);
 
@@ -61,7 +62,7 @@ function LoadoutExportText(props: { text: string }) {
         width="350pt"
         minWidth="350pt"
         value={props.text}
-        isReadOnly={true}
+        isReadOnly
       />
       <Button onClick={copyToClipboard}>{status}</Button>
     </>

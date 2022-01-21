@@ -3,15 +3,16 @@ import { Box, Heading } from "@chakra-ui/layout";
 import Select from "react-select";
 import { customStyles } from "../../selectStyle";
 import gearProvider from "../../providers/gearProvider";
-import { FormatProps, SelectOption } from "../../types/types";
+import { SelectOption } from "../../types/types";
+import CustomSelectOption from "./CustomSelectOption";
 
 type LoadoutComponentProps = {
   type: string;
   updater: Dispatch<SetStateAction<string>>;
-  isDisabled?: boolean;
+  isDisabled: boolean;
 };
 
-export function LoadoutComponent(props: LoadoutComponentProps) {
+export default function LoadoutComponent(props: LoadoutComponentProps) {
   const [filter, setFilter] = useState("");
   const [options, setOptions] = useState<SelectOption[]>([]);
 
@@ -33,17 +34,10 @@ export function LoadoutComponent(props: LoadoutComponentProps) {
     props.updater(selected.label);
   };
 
-  const formatOptionLabel = (props: FormatProps) => (
-    <div style={{ display: "flex" }}>
-      <div>{props.label}</div>
-      <div style={{ marginLeft: "10px", color: "#ccc" }}>{props.type}</div>
-    </div>
-  );
-
   return (
     <Box
       maxWidth="300pt"
-      id={"component-" + props.type}
+      id={`component-${props.type}`}
       padding="2pt"
       margin="auto"
     >
@@ -58,7 +52,7 @@ export function LoadoutComponent(props: LoadoutComponentProps) {
           isMulti={false}
           isDisabled={props.isDisabled !== undefined ? props.isDisabled : false}
           defaultOptions
-          formatOptionLabel={formatOptionLabel}
+          formatOptionLabel={CustomSelectOption}
           placeholder="Start typing..."
           isClearable
         />

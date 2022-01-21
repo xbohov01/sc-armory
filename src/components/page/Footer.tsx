@@ -15,12 +15,12 @@ import {
 } from "react-icons/ai";
 import { FaTwitch, FaDiscord, FaFlickr, FaPatreon } from "react-icons/fa";
 import { SiRedbubble } from "react-icons/si";
-import { Support } from "./Support";
+import Support from "./Support";
 import cig from "../../cig.png";
 import "@fontsource/lato";
-import { JoinADI } from "./JoinADI";
+import JoinADI from "./JoinADI";
 
-export function Footer() {
+export default function Footer() {
   return (
     <Box id="footer" marginTop="50pt" color="whitesmoke" marginBottom="10pt">
       <VStack>

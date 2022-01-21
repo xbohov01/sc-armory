@@ -24,7 +24,7 @@ type ArmorInfoProps = {
   armors: string[];
 };
 
-export function ArmorInfo(props: ArmorInfoProps) {
+export default function ArmorInfo(props: ArmorInfoProps) {
   const [armorData, setArmorData] = useState<ArmorVM[]>([]);
 
   useEffect(() => {
@@ -53,64 +53,52 @@ export function ArmorInfo(props: ArmorInfoProps) {
           >
             <StatLabel fontSize="lg">Inventory Occupancy</StatLabel>
             <StatNumber fontSize="md">{`${sum(
-              armorData.map((a) => a.InventoryOccupancy)
+              armorData.map((a) => a.inventoryOccupancy)
             )} microSCU`}</StatNumber>
           </Stat>
         </GridItem>
         <GridItem colSpan={2}>
           <BreakDownInfo
-            reverse
             unit="microSCU"
             breakdownText="Capacity by piece"
             label="InventoryCapacity"
-            namedValues={armorData.map((a: ArmorVM) => {
-              return {
-                name: a.LocalizedName,
-                value: a.InventoryCapacity,
-              };
-            })}
+            namedValues={armorData.map((a: ArmorVM) => ({
+              name: a.localizedName,
+              value: a.inventoryCapacity,
+            }))}
           />
         </GridItem>
         <GridItem colSpan={2}>
           <RangeInfo
-            reverse
             unit="%"
             breakdownText="Reduction by piece"
             label="Damage reduction"
-            namedValues={armorData.map((a: ArmorVM) => {
-              return {
-                name: a.LocalizedName,
-                value: a.DamageReduction,
-              };
-            })}
+            namedValues={armorData.map((a: ArmorVM) => ({
+              name: a.localizedName,
+              value: a.damageReduction,
+            }))}
           />
         </GridItem>
         <GridItem colSpan={2}>
           <RangeInfo
-            reverse
             unit="°C"
             breakdownText="Resistance by piece"
             label="MAX Temperature"
-            namedValues={armorData.map((a: ArmorVM) => {
-              return {
-                name: a.LocalizedName,
-                value: a.MaxResistance,
-              };
-            })}
+            namedValues={armorData.map((a: ArmorVM) => ({
+              name: a.localizedName,
+              value: a.maxResistance,
+            }))}
           />
         </GridItem>
         <GridItem colSpan={2}>
           <RangeInfo
-            reverse={false}
             unit="°C"
             breakdownText="Resistance by piece"
             label="MIN Temperature"
-            namedValues={armorData.map((a: ArmorVM) => {
-              return {
-                name: a.LocalizedName,
-                value: a.MinResistance,
-              };
-            })}
+            namedValues={armorData.map((a: ArmorVM) => ({
+              name: a.localizedName,
+              value: a.minResistance,
+            }))}
           />
         </GridItem>
         <GridItem>
@@ -121,7 +109,7 @@ export function ArmorInfo(props: ArmorInfoProps) {
           >
             <StatLabel fontSize="lg">Weapon ports</StatLabel>
             <StatNumber fontSize="md">
-              {sum(armorData.map((a) => a.WeaponPorts))}
+              {sum(armorData.map((a) => a.weaponPorts))}
             </StatNumber>
           </Stat>
         </GridItem>
@@ -133,7 +121,7 @@ export function ArmorInfo(props: ArmorInfoProps) {
           >
             <StatLabel fontSize="lg">Ammo ports</StatLabel>
             <StatNumber fontSize="md">
-              {sum(armorData.map((a) => a.AmmoPorts))}
+              {sum(armorData.map((a) => a.ammoPorts))}
             </StatNumber>
           </Stat>
         </GridItem>
@@ -145,7 +133,7 @@ export function ArmorInfo(props: ArmorInfoProps) {
           >
             <StatLabel fontSize="lg">Utility ports</StatLabel>
             <StatNumber fontSize="md">
-              {sum(armorData.map((a) => a.UtilityPorts))}
+              {sum(armorData.map((a) => a.utilityPorts))}
             </StatNumber>
           </Stat>
         </GridItem>
@@ -157,7 +145,7 @@ export function ArmorInfo(props: ArmorInfoProps) {
           >
             <StatLabel fontSize="lg">Throwable ports</StatLabel>
             <StatNumber fontSize="md">
-              {sum(armorData.map((a) => a.GrenadePorts))}
+              {sum(armorData.map((a) => a.grenadePorts))}
             </StatNumber>
           </Stat>
         </GridItem>
@@ -169,8 +157,8 @@ export function ArmorInfo(props: ArmorInfoProps) {
           >
             <StatLabel fontSize="lg">Consumable ports</StatLabel>
             <StatNumber fontSize="md">
-              {sum(armorData.map((a) => a.OxygenPorts)) +
-                sum(armorData.map((a) => a.MedicalPorts))}
+              {sum(armorData.map((a) => a.oxygenPorts)) +
+                sum(armorData.map((a) => a.medicalPorts))}
             </StatNumber>
           </Stat>
         </GridItem>
@@ -180,7 +168,6 @@ export function ArmorInfo(props: ArmorInfoProps) {
 }
 
 type RangeInfoProps = {
-  reverse: boolean;
   namedValues: { name: string; value: number }[];
   unit: string;
   breakdownText: string;
@@ -191,7 +178,7 @@ function RangeInfo(props: RangeInfoProps) {
   const getRangeString = (): string => {
     if (props.namedValues.length === 0) return `0${props.unit}`;
 
-    let ordered = orderBy(props.namedValues, (a) => a.value);
+    const ordered = orderBy(props.namedValues, (a) => a.value);
     if (first(ordered) === last(ordered)) {
       return `${ordered[0].value}${props.unit}`;
     }

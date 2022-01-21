@@ -1,5 +1,5 @@
 import { Heading, HStack, VStack } from "@chakra-ui/layout";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import Select from "react-select";
 import { compactStyles } from "../../selectStyle";
 import { KeyValue, WeaponAttachmentSlot } from "../../types/types";
@@ -22,7 +22,7 @@ export function WeaponAttachmentsList(props: WeaponAttachmentsListProps) {
   }, [props.weapon]);
 
   const update = (type: string, name: string) => {
-    let newSelected = selected.filter((s) => s.key !== type);
+    const newSelected = selected.filter((s) => s.key !== type);
     newSelected.push({ key: type, value: name });
 
     setSelected(newSelected);
@@ -75,32 +75,33 @@ export function WeaponAttachmentSelector(props: WeaponAttachmentSelectorProps) {
     props.attachmentSlot.MinSize,
   ]);
 
-  const handleGearChange = (selected: any) => {
+  const handleGearChange = (selectedOption: any) => {
     // Check for selection clearing
-    if (selected === null) {
+    if (selectedOption === null) {
       props.updater(props.attachmentSlot.Type, "");
       setSelected("");
       return;
     }
-    props.updater(props.attachmentSlot.Type, selected.label);
-    setSelected(selected.label);
+    props.updater(props.attachmentSlot.Type, selectedOption.label);
+    setSelected(selectedOption.label);
   };
 
   const loadOptions = () =>
     attachments
       .filter((a) =>
-        a.LocalizedName.toLowerCase().includes(filter.toLowerCase())
+        a.localizedName.toLowerCase().includes(filter.toLowerCase())
       )
-      .map((a) => ({ value: a.LocalizedName, label: a.LocalizedName }));
+      .map((a) => ({ value: a.localizedName, label: a.localizedName }));
 
   const determineZeroing = (): string => {
-    let vm = attachments.find((a) => a.LocalizedName === selected);
-    if (vm === undefined || vm.Type !== "IronSight") {
+    const vm = attachments.find((a) => a.localizedName === selected);
+    if (vm === undefined || vm.type !== "IronSight") {
       return "";
     }
-    if (vm.AutoZeroingTime > 0) {
+    if (vm.autoZeroingTime > 0) {
       return "Automatic ranging";
-    } else if (vm.RangeIncrement > 0 && vm.AutoZeroingTime === 0) {
+    }
+    if (vm.rangeIncrement > 0 && vm.autoZeroingTime === 0) {
       return "Manual ranging";
     }
     return "No ranging";

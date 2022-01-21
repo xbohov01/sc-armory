@@ -1,10 +1,10 @@
 import { Button } from "@chakra-ui/button";
 import { Box, Heading } from "@chakra-ui/layout";
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { BackpackSelectorComponent } from "./BackpackSelectorComponent";
-import { LoadoutComponent } from "./LoadoutComponent";
-import { OptionalLoadoutItems } from "./OptionalLoadoutItems";
-import { SecondarySelectorComponent } from "./SecondarySelectorComponent";
+import BackpackSelectorComponent from "./BackpackSelectorComponent";
+import LoadoutComponent from "./LoadoutComponent";
+import OptionalLoadoutItems from "./OptionalLoadoutItems";
+import SecondarySelectorComponent from "./SecondarySelectorComponent";
 import { WeaponAttachmentsList } from "./WeaponAttachmentsList";
 
 type LoadoutBuilderProps = {
@@ -12,7 +12,7 @@ type LoadoutBuilderProps = {
   listRefresher: Dispatch<SetStateAction<boolean>>;
 };
 
-export function LoadoutBuilder(props: LoadoutBuilderProps) {
+export default function LoadoutBuilder(props: LoadoutBuilderProps) {
   const [helmet, setHelmet] = useState<string>("");
   const [undersuit, setUndersuit] = useState<string>("");
   const [arms, setArms] = useState<string>("");
@@ -68,11 +68,10 @@ export function LoadoutBuilder(props: LoadoutBuilderProps) {
     props.listRefresher(true);
   };
 
-  const isUndersuitArmored = () => {
-    return undersuit !== ""
+  const isUndersuitArmored = () =>
+    undersuit !== ""
       ? undersuit.includes("Pembroke") || undersuit.includes("Novikov")
       : false;
-  };
 
   return (
     <Box
@@ -83,8 +82,16 @@ export function LoadoutBuilder(props: LoadoutBuilderProps) {
     >
       <Heading size="lg">Build your loadout:</Heading>
       <Box marginBottom="10pt" fontSize="md">
-        <LoadoutComponent type="Undersuit" updater={setUndersuit} />
-        <LoadoutComponent type="Helmet" updater={setHelmet} />
+        <LoadoutComponent
+          isDisabled={false}
+          type="Undersuit"
+          updater={setUndersuit}
+        />
+        <LoadoutComponent
+          isDisabled={false}
+          type="Helmet"
+          updater={setHelmet}
+        />
         <LoadoutComponent
           type="Arms"
           updater={setArms}
@@ -105,13 +112,21 @@ export function LoadoutBuilder(props: LoadoutBuilderProps) {
           updater={setLegs}
           isDisabled={isUndersuitArmored()}
         />
-        <LoadoutComponent type="Sidearm" updater={setPistol} />
+        <LoadoutComponent
+          isDisabled={false}
+          type="Sidearm"
+          updater={setPistol}
+        />
         {pistol !== "" ? (
           <WeaponAttachmentsList weapon={pistol} updater={setSideAttachments} />
         ) : (
           ""
         )}
-        <LoadoutComponent type="Primary" updater={setPrimary} />
+        <LoadoutComponent
+          type="Primary"
+          updater={setPrimary}
+          isDisabled={false}
+        />
         {primary !== "" ? (
           <WeaponAttachmentsList
             weapon={primary}
@@ -133,7 +148,7 @@ export function LoadoutBuilder(props: LoadoutBuilderProps) {
         ) : (
           ""
         )}
-        <LoadoutComponent type="Tool" updater={setTool} />
+        <LoadoutComponent type="Tool" updater={setTool} isDisabled={false} />
         <OptionalLoadoutItems updater={setOptionals} />
       </Box>
       <Button

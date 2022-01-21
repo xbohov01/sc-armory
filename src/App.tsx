@@ -1,16 +1,16 @@
 import { Divider, HStack, VStack } from "@chakra-ui/layout";
 import React, { useEffect, useState } from "react";
+import { Switch } from "@chakra-ui/react";
 import "./App.css";
 import { AppNotice, PatreonNotice } from "./components/AppNotice";
-import { Footer } from "./components/page/Footer";
-import { LoadoutBuilder } from "./components/loadout/LoadoutBuilder";
-import { Header } from "./components/page/Header";
-import { LoadoutExporter } from "./client/LoadoutExporter";
+import Footer from "./components/page/Footer";
+import LoadoutBuilder from "./components/loadout/LoadoutBuilder";
+import Header from "./components/page/Header";
+import LoadoutExporter from "./components/loadout/LoadoutExporter";
 import { KeyValue, ListKey, LocatedItem } from "./types/types";
-import { Switch } from "@chakra-ui/react";
-import { AdvancedInfo } from "./components/advanced/AdvancedInfo";
-import { ImageDisplay } from "./components/images/ImageDisplay";
-import { ShoppingList } from "./components/shoppingList/ShoppingList";
+import AdvancedInfo from "./components/advanced/AdvancedInfo";
+import ImageDisplay from "./components/images/ImageDisplay";
+import ShoppingWrapper from "./components/shoppingList/ShoppingWrapper";
 
 function App() {
   const [gear, setGear] = useState<string[]>([]);
@@ -30,7 +30,7 @@ function App() {
   };
 
   const wasAdvancedShown = () => {
-    let value = localStorage.getItem("advancedInfo");
+    const value = localStorage.getItem("advancedInfo");
     if (value === undefined || value === "false") {
       return false;
     }
@@ -38,7 +38,7 @@ function App() {
   };
 
   const wasImageShown = () => {
-    let value = localStorage.getItem("armoryImages");
+    const value = localStorage.getItem("armoryImages");
     if (value === undefined || value === "false") {
       return false;
     }
@@ -90,7 +90,7 @@ function App() {
               margin="auto"
             />
             {gear.length > 0 && showList ? (
-              <ShoppingList gear={gear} listUpstream={setList} />
+              <ShoppingWrapper gear={gear} listUpstream={setList} />
             ) : (
               ""
             )}

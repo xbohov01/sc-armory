@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Box } from "@chakra-ui/layout";
-import { KeyValue, LocatedItem } from "../../types/types";
 import { Table, Tbody, Td, Th, Thead, Tr, useToast } from "@chakra-ui/react";
-import shoppingListGenerator from "../../client/shoppingListGenerator";
+import { KeyValue, LocatedItem } from "../../types/types";
+import shoppingListGenerator from "../shoppingListGenerator";
 
-type ShoppingListTableProps = {
+type ShoppingTableProps = {
   gear: string[];
 };
 
-export function ShoppingListTable(props: ShoppingListTableProps) {
+export default function ShoppingTable(props: ShoppingTableProps) {
   const toast = useToast();
   const [locations, setLocations] = useState<string[]>([]);
   const [list, setList] = useState<KeyValue<string, LocatedItem[]>[]>([]);
@@ -85,7 +85,7 @@ type DataRowProps = {
 // Items per location as rows
 function DataRow(props: DataRowProps) {
   const renderCell = (location: string) => {
-    let locatedItem = props.locatedItem.value.filter((l) =>
+    const locatedItem = props.locatedItem.value.filter((l) =>
       l.storeChain.includes(location)
     );
     if (locatedItem.length > 0) {
@@ -94,9 +94,8 @@ function DataRow(props: DataRowProps) {
           {locatedItem[0].price}
         </Td>
       );
-    } else {
-      return <Td key={Math.random()}></Td>;
     }
+    return <Td key={Math.random()} />;
   };
 
   return (

@@ -1,8 +1,9 @@
+import React from "react";
 import { Box, VStack, Link } from "@chakra-ui/layout";
 import { Image } from "@chakra-ui/image";
 import adi from "../../adi.png";
 
-export function JoinADI() {
+export default function JoinADI() {
   return (
     <Box id="adi">
       <VStack>

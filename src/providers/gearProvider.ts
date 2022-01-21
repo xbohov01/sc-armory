@@ -1,4 +1,4 @@
-import client from "../client/client";
+import gearServiceClient from "../client/gearServiceClient";
 import { ArmorVM } from "../client/viewModels/ArmorVM";
 import { FPSGearBaseVM } from "../client/viewModels/FPSGearBaseVM";
 import { SelectOption } from "../types/types";
@@ -12,44 +12,31 @@ class GearProvider {
 
     switch (type) {
       case "Helmet":
-        result = await client.GetHelmets(filter);
-        break;
-
       case "Arms":
-        result = await client.GetArms(filter);
-        break;
-
       case "Core":
-        result = await client.GetCores(filter);
-        break;
-
       case "Legs":
-        result = await client.GetLegs(filter);
-        break;
-
-      case "Backpack":
-        result = await client.GetBackpacks(filter);
+      case "Undersuit":
+        result = await gearServiceClient.GetArmorPartByLocalizedName(
+          type,
+          filter
+        );
         break;
 
       case "Sidearm":
-        result = await client.GetPistols(filter);
-        break;
-
-      case "Undersuit":
-        result = await client.GetUndersuits(filter);
+        result = await gearServiceClient.GetWeaponsByType(filter, "Pistol");
         break;
 
       case "Usable":
-        result = await client.GetUsable(filter);
+        result = await gearServiceClient.GetUsable(filter);
         break;
 
       case "Primary":
       case "Secondary":
-        result = await client.GetWeapons(filter);
+        result = await gearServiceClient.GetPrimaryWeapons(filter);
         break;
 
       case "Tool":
-        result = await client.GetTools(filter);
+        result = await gearServiceClient.GetTools(filter);
         break;
 
       default:
@@ -57,35 +44,26 @@ class GearProvider {
         break;
     }
 
-    return result.map((g) => {
-      return {
-        value: g.Id.toString(),
-        label: g.LocalizedName,
-        type: this.GetArmorTypeFromDesc(g.LocalizedDescription),
-      };
-    });
+    return result.map((gear) => this.GearToSelectOption(gear));
   }
 
   public async GetBackpacksWithMaxSize(
-    filter: string,
+    name: string,
     size: number
   ): Promise<SelectOption[]> {
-    let result = await client.GetBackpacks(filter);
-
-    return result
-      .filter((b) => b.Size <= size)
-      .map((g) => {
-        return {
-          value: g.Id.toString(),
-          label: g.LocalizedName,
-          type: this.GetArmorTypeFromDesc(g.LocalizedDescription),
-        };
-      });
+    return (
+      await gearServiceClient.GetArmorPartByLocalizedName("Backpack", name)
+    )
+      .filter((backpack) => backpack.size <= size)
+      .map((backpack) => this.GearToSelectOption(backpack));
   }
 
   public async GetCore(name: string): Promise<ArmorVM> {
-    let result = await client.GetCoreByName(name);
-    return result[0];
+    const [first] = await gearServiceClient.GetArmorPartByLocalizedName(
+      "Core",
+      name
+    );
+    return first;
   }
 
   // Change this to retrieve from API
@@ -100,6 +78,14 @@ class GearProvider {
       return "Light";
     }
     return "";
+  }
+
+  private GearToSelectOption(gear: FPSGearBaseVM): SelectOption {
+    return {
+      value: gear.id.toString(),
+      label: gear.localizedName,
+      type: this.GetArmorTypeFromDesc(gear.localizedDescription),
+    };
   }
 }
 

@@ -1,14 +1,14 @@
 import { Checkbox } from "@chakra-ui/checkbox";
 import { Box, Heading, HStack, VStack } from "@chakra-ui/layout";
-import { SyntheticEvent } from "react";
+import React, { SyntheticEvent } from "react";
 import { KeyValue, ListKey, LocatedItem } from "../../types/types";
 
-type ShoppingListLocationProps = {
+type ShoppingLocationProps = {
   items: KeyValue<ListKey, LocatedItem[]>;
   boughtSetter: (item: string, bought: boolean) => void;
 };
 
-export function ShoppingListLocation(props: ShoppingListLocationProps) {
+export function ShoppingLocation(props: ShoppingLocationProps) {
   return (
     <Box
       flex="1"

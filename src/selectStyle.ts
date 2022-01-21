@@ -10,12 +10,7 @@ export const customStyles = {
     minWidth: 300,
     opacity: state.isDisabled ? 0.5 : 1,
   }),
-  singleValue: (provided: any, state: any) => {
-    //const opacity = state.isDisabled ? 0.5 : 1;
-    //const transition = 'opacity 300ms';
-
-    return { ...provided };
-  },
+  singleValue: (provided: any, state: any) => ({ ...provided }),
 };
 
 export const compactStyles = {
@@ -30,10 +25,5 @@ export const compactStyles = {
     width: "auto",
     minWidth: 150,
   }),
-  singleValue: (provided: any, state: any) => {
-    //const opacity = state.isDisabled ? 0.5 : 1;
-    //const transition = 'opacity 300ms';
-
-    return { ...provided };
-  },
+  singleValue: (provided: any, state: any) => ({ ...provided }),
 };

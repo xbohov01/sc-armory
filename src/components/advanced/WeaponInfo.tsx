@@ -8,7 +8,7 @@ import {
 import { VStack, Grid, Heading, GridItem } from "@chakra-ui/layout";
 import { Stat, StatLabel, StatNumber } from "@chakra-ui/stat";
 import { Tooltip } from "@chakra-ui/tooltip";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { WeaponVM } from "../../client/viewModels/WeaponVM";
 import gearInfoProvider from "../../providers/gearInfoProvider";
 
@@ -16,7 +16,7 @@ type WeaponInfoProps = {
   weapons: string[];
 };
 
-export function WeaponInfo(props: WeaponInfoProps) {
+export default function WeaponInfo(props: WeaponInfoProps) {
   const [weaponData, setWeaponData] = useState<WeaponVM[]>([]);
 
   useEffect(() => {
@@ -55,7 +55,7 @@ function WeaponInfoDisplay(props: WeaponInfoDisplayProps) {
         padding="5pt"
         bgColor="#1a2130"
       >
-        {props.weapon.LocalizedName}
+        {props.weapon.localizedName}
       </Heading>
       <Grid
         templateColumns="repeat(2, 1fr)"
@@ -71,7 +71,7 @@ function WeaponInfoDisplay(props: WeaponInfoDisplayProps) {
             bgColor="#1a2130"
           >
             <StatLabel fontSize="lg">Range</StatLabel>
-            <StatNumber fontSize="md">{props.weapon.Range + " m"}</StatNumber>
+            <StatNumber fontSize="md">{`${props.weapon.range} m`}</StatNumber>
           </Stat>
         </GridItem>
         <GridItem>
@@ -81,7 +81,7 @@ function WeaponInfoDisplay(props: WeaponInfoDisplayProps) {
             bgColor="#1a2130"
           >
             <StatLabel fontSize="lg">Type</StatLabel>
-            <StatNumber fontSize="md">{props.weapon.AmmoType}</StatNumber>
+            <StatNumber fontSize="md">{props.weapon.ammoType}</StatNumber>
           </Stat>
         </GridItem>
         <GridItem>
@@ -91,7 +91,7 @@ function WeaponInfoDisplay(props: WeaponInfoDisplayProps) {
             bgColor="#1a2130"
           >
             <StatLabel fontSize="lg">Magazine capacity</StatLabel>
-            <StatNumber fontSize="md">{props.weapon.MagazineSize}</StatNumber>
+            <StatNumber fontSize="md">{props.weapon.magazineSize}</StatNumber>
           </Stat>
         </GridItem>
         <GridItem>
@@ -101,10 +101,10 @@ function WeaponInfoDisplay(props: WeaponInfoDisplayProps) {
             bgColor="#1a2130"
           >
             <StatLabel fontSize="lg">Alpha damage</StatLabel>
-            <StatNumber fontSize="md">{props.weapon.AlphaDamage}</StatNumber>
+            <StatNumber fontSize="md">{props.weapon.alphaDamage}</StatNumber>
           </Stat>
         </GridItem>
-        {props.weapon.SingleFireRate === 0 ? (
+        {props.weapon.singleFireRate === 0 ? (
           ""
         ) : (
           <GridItem>
@@ -115,12 +115,12 @@ function WeaponInfoDisplay(props: WeaponInfoDisplayProps) {
             >
               <StatLabel fontSize="lg">Semi RoF</StatLabel>
               <StatNumber fontSize="md">
-                {props.weapon.SingleFireRate + " RPM"}
+                {`${props.weapon.singleFireRate} RPM`}
               </StatNumber>
             </Stat>
           </GridItem>
         )}
-        {props.weapon.RapidFireRate === 0 ? (
+        {props.weapon.rapidFireRate === 0 ? (
           ""
         ) : (
           <GridItem>
@@ -131,12 +131,12 @@ function WeaponInfoDisplay(props: WeaponInfoDisplayProps) {
             >
               <StatLabel fontSize="lg">Auto RoF</StatLabel>
               <StatNumber fontSize="md">
-                {props.weapon.RapidFireRate + " RPM"}
+                {`${props.weapon.rapidFireRate} RPM`}
               </StatNumber>
             </Stat>
           </GridItem>
         )}
-        {props.weapon.BurstFireRate === 0 ? (
+        {props.weapon.burstFireRate === 0 ? (
           ""
         ) : (
           <GridItem>
@@ -147,12 +147,12 @@ function WeaponInfoDisplay(props: WeaponInfoDisplayProps) {
             >
               <StatLabel fontSize="lg">Burst RoF</StatLabel>
               <StatNumber fontSize="md">
-                {props.weapon.BurstFireRate + " RPM"}
+                {`${props.weapon.burstFireRate} RPM`}
               </StatNumber>
             </Stat>
           </GridItem>
         )}
-        {props.weapon.BurstFireRate === 0 ? (
+        {props.weapon.burstFireRate === 0 ? (
           ""
         ) : (
           <GridItem>
@@ -162,7 +162,7 @@ function WeaponInfoDisplay(props: WeaponInfoDisplayProps) {
               bgColor="#1a2130"
             >
               <StatLabel fontSize="lg">Burst size</StatLabel>
-              <StatNumber fontSize="md">{props.weapon.BurstSize}</StatNumber>
+              <StatNumber fontSize="md">{props.weapon.burstSize}</StatNumber>
             </Stat>
           </GridItem>
         )}
@@ -187,7 +187,7 @@ function WeaponInfoDisplay(props: WeaponInfoDisplayProps) {
                 </AccordionButton>
               </h2>
               <AccordionPanel pb={4} textAlign="left" whiteSpace="pre-line">
-                {props.weapon.LocalizedDescription.replaceAll("\\n", "\n")}
+                {props.weapon.localizedDescription.replaceAll("\\n", "\n")}
               </AccordionPanel>
             </AccordionItem>
           </Accordion>

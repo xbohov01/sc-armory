@@ -20,7 +20,7 @@ type ImageDisplayProps = {
   gear: string[];
 };
 
-export function ImageDisplay(props: ImageDisplayProps) {
+export default function ImageDisplay(props: ImageDisplayProps) {
   const [references, setReferences] = useState<NameReference[]>([]);
 
   useEffect(() => {
@@ -69,13 +69,10 @@ function ImageItem(props: ImageItemProps) {
     });
   });
 
-  const isWeapon = (): boolean => {
-    return (
-      props.item.name.includes("Pistol") ||
-      props.item.name.includes("Rifle") ||
-      props.item.name.includes("Shotgun")
-    );
-  };
+  const isWeapon = (): boolean =>
+    props.item.name.includes("Pistol") ||
+    props.item.name.includes("Rifle") ||
+    props.item.name.includes("Shotgun");
 
   return (
     <AccordionItem>
@@ -90,7 +87,7 @@ function ImageItem(props: ImageItemProps) {
       <AccordionPanel pb={4}>
         {imageExists ? (
           <AdvancedImage
-            cldImg={props.cloud.image("armory/" + props.item.reference)}
+            cldImg={props.cloud.image(`armory/${props.item.reference}`)}
           />
         ) : (
           <Box>
@@ -120,7 +117,7 @@ function WeaponDemoDisplay(props: WeaponDemoDisplayProps) {
   const [end, setEnd] = useState("");
 
   useEffect(() => {
-    let times = weaponDemoProvider.GetTimes(props.name);
+    const times = weaponDemoProvider.GetTimes(props.name);
     setStart(times[0]);
     setEnd(times[1]);
   }, [props.name]);
@@ -133,9 +130,9 @@ function WeaponDemoDisplay(props: WeaponDemoDisplayProps) {
         width="400px"
         height="195px"
         allowFullScreen
-      ></iframe>
+      />
     </Box>
   ) : (
-    <></>
+    <Box />
   );
 }

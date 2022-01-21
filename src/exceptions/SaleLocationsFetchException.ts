@@ -1,4 +1,4 @@
-export class SaleLocationsFetchException {
+export default class SaleLocationsFetchException {
   message: string;
 
   constructor(message: string) {

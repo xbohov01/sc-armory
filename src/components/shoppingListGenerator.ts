@@ -1,29 +1,31 @@
+/* eslint-disable no-await-in-loop */
+/* eslint-disable no-restricted-syntax */
 import { orderBy, uniq } from "lodash";
-import { SaleLocationsFetchException } from "../exceptions/SaleLocationsFetchException";
+import SaleLocationsFetchException from "../exceptions/SaleLocationsFetchException";
 import { KeyValue, ListKey, LocatedItem } from "../types/types";
-import client from "./client";
+import client from "../client/client";
 
 class ShoppingListGenerator {
   async GetShoppingList(
     loadout: string[]
   ): Promise<[number, KeyValue<ListKey, LocatedItem[]>[]]> {
-    let list: KeyValue<ListKey, LocatedItem[]>[] = [];
-    let locatedItems: LocatedItem[] = [];
+    const list: KeyValue<ListKey, LocatedItem[]>[] = [];
+    const locatedItems: LocatedItem[] = [];
     let price = 0;
 
-    for (let gear of loadout) {
-      let result = await client.GetSaleLocations(gear);
+    for (const gear of loadout) {
+      const result = await client.GetSaleLocations(gear);
 
       if (!result.success && result.message !== "Not sold") {
         throw new SaleLocationsFetchException(result.message);
       }
 
-      let saleLocations = result.data;
+      const saleLocations = result.data;
 
       price += saleLocations.length > 0 ? saleLocations[0].price : 0;
 
-      for (let saleLocation of saleLocations) {
-        let lItem: LocatedItem = {
+      for (const saleLocation of saleLocations) {
+        const lItem: LocatedItem = {
           item: gear,
           storeId: saleLocation.saleLocationId,
           storeName: saleLocation.saleLocationName,
@@ -36,7 +38,7 @@ class ShoppingListGenerator {
       }
     }
 
-    for (let entry of locatedItems) {
+    for (const entry of locatedItems) {
       if (!list.some((e) => e.key.id === entry.storeId)) {
         list.push({
           key: {
@@ -57,26 +59,26 @@ class ShoppingListGenerator {
   async GetLocationsPerItem(
     loadout: string[]
   ): Promise<{ locations: string[]; list: KeyValue<string, LocatedItem[]>[] }> {
-    let list: KeyValue<string, LocatedItem[]>[] = [];
+    const list: KeyValue<string, LocatedItem[]>[] = [];
     let locations: string[] = [];
 
-    for (let gear of loadout) {
-      let result = await client.GetSaleLocations(gear);
-      let locatedItems: LocatedItem[] = [];
+    for (const gear of loadout) {
+      const result = await client.GetSaleLocations(gear);
+      const locatedItems: LocatedItem[] = [];
 
       if (!result.success && result.message !== "Not sold") {
         throw new SaleLocationsFetchException(result.message);
       }
 
-      let saleLocations = result.data;
+      const saleLocations = result.data;
       locations.push(
         ...saleLocations.map(
           (l) => l.saleLocationChain.split(" - ").reverse()[0]
         )
       );
 
-      for (let saleLocation of saleLocations) {
-        let lItem: LocatedItem = {
+      for (const saleLocation of saleLocations) {
+        const lItem: LocatedItem = {
           item: gear,
           storeId: saleLocation.saleLocationId,
           storeName: saleLocation.saleLocationName,

@@ -1,8 +1,8 @@
 import { Box, Heading, VStack } from "@chakra-ui/layout";
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/tabs";
 import React from "react";
-import { ArmorInfo } from "./ArmorInfo";
-import { WeaponInfo } from "./WeaponInfo";
+import ArmorInfo from "./ArmorInfo";
+import WeaponInfo from "./WeaponInfo";
 
 type AdvancedInfoProps = {
   gear: string[];
@@ -44,7 +44,7 @@ const tabSelectedStyle = {
   border: "solid 1pt whitesmoke",
 };
 
-export function AdvancedInfo(props: AdvancedInfoProps) {
+export default function AdvancedInfo(props: AdvancedInfoProps) {
   return (
     <Box
       id="advanced-info"

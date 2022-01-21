@@ -1,5 +1,5 @@
 class WeaponDemoProvider {
-  private _times: { [id: string]: { start: string; end: string } } = {
+  private times: { [id: string]: { start: string; end: string } } = {
     Arclight: { start: "0", end: "20" },
     LH86: { start: "20", end: "35" },
     "S-38": { start: "35", end: "52" },
@@ -30,8 +30,8 @@ class WeaponDemoProvider {
   };
 
   GetTimes(name: string): string[] {
-    let base = name.split(" ")[0];
-    let times = this._times[base];
+    const base = name.split(" ")[0];
+    const times = this.times[base];
 
     if (times === undefined) {
       return ["", ""];

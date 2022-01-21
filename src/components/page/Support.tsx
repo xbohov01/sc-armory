@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 
-export function Support() {
+export default function Support() {
   return (
     <Box id="support">
       <Accordion allowToggle width="300pt">

@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import gearProvider from "../../providers/gearProvider";
-import { LoadoutComponent } from "./LoadoutComponent";
+import LoadoutComponent from "./LoadoutComponent";
 
 type SecondarySelectorComponentProps = {
   coreName: string;
@@ -8,7 +8,7 @@ type SecondarySelectorComponentProps = {
   setSecondary: Dispatch<SetStateAction<string>>;
 };
 
-export function SecondarySelectorComponent(
+export default function SecondarySelectorComponent(
   props: SecondarySelectorComponentProps
 ) {
   const [isVisible, setIsVisible] = useState(true);
@@ -26,7 +26,7 @@ export function SecondarySelectorComponent(
       setIsVisible(false);
     } else {
       gearProvider.GetCore(props.coreName).then((result) => {
-        if (result.LocalizedDescription.includes("Light Armor")) {
+        if (result.localizedDescription.includes("Light Armor")) {
           setIsVisible(false);
         }
       });

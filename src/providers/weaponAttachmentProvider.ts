@@ -1,4 +1,5 @@
 import client from "../client/client";
+import gearServiceClient from "../client/gearServiceClient";
 import { AttachmentVM } from "../client/viewModels/AttachmentVM";
 import { WeaponAttachment, WeaponAttachmentSlot } from "../types/types";
 
@@ -173,32 +174,31 @@ class WeaponAttachmentProvider {
   ];
 
   async GetAttachmentSlots(name: string): Promise<WeaponAttachmentSlot[]> {
-    let weaponModel = await client.GetWeaponByName(name);
-    let slots: WeaponAttachmentSlot[] = [
+    const weaponModel = await gearServiceClient.GetWeaponByName(name);
+    const slots: WeaponAttachmentSlot[] = [
       {
-        MaxSize: weaponModel.BarrelSlot.MaxSize,
-        MinSize: weaponModel.BarrelSlot.MinSize,
+        MaxSize: weaponModel.barrelSlot.maxSize,
+        MinSize: weaponModel.barrelSlot.minSize,
         Type: "Barrel",
         Attachments: [],
       },
       {
-        MaxSize: weaponModel.UnderbarrelSlot.MaxSize,
-        MinSize: weaponModel.UnderbarrelSlot.MinSize,
+        MaxSize: weaponModel.underbarrelSlot.maxSize,
+        MinSize: weaponModel.underbarrelSlot.minSize,
         Type: "Underbarrel",
         Attachments: [],
       },
       {
-        MaxSize: weaponModel.OpticSlot.MaxSize,
-        MinSize: weaponModel.OpticSlot.MinSize,
+        MaxSize: weaponModel.opticSlot.maxSize,
+        MinSize: weaponModel.opticSlot.minSize,
         Type: "Sight",
         Attachments: [],
       },
     ];
-
     return slots;
   }
 
-  private _attachmentTypes: { [id: string]: string } = {
+  private attachmentTypes: { [id: string]: string } = {
     Underbarrel: "BottomAttachment",
     Sight: "IronSight",
     Barrel: "Barrel",
@@ -209,13 +209,13 @@ class WeaponAttachmentProvider {
     maxSize: number,
     minSize: number
   ): Promise<AttachmentVM[]> {
-    let attachments = await client.GetAttachments("");
+    const attachments = await gearServiceClient.GetAttachments("");
 
     return attachments.filter(
       (a) =>
-        a.Type === this._attachmentTypes[type] &&
-        a.Size <= maxSize &&
-        a.Size >= minSize
+        a.type === this.attachmentTypes[type] &&
+        a.size <= maxSize &&
+        a.size >= minSize
     );
   }
 }

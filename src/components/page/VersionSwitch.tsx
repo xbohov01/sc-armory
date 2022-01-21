@@ -8,7 +8,7 @@ type VersionSwitchProps = {
   isEnabled: boolean;
 };
 
-export function VersionSwitch(props: VersionSwitchProps) {
+export default function VersionSwitch(props: VersionSwitchProps) {
   const [isPtu, setIsPtu] = useState(false);
 
   const wasPtuToggled = () => {
@@ -24,7 +24,7 @@ export function VersionSwitch(props: VersionSwitchProps) {
   };
 
   const getStoredValue = () => {
-    let value = localStorage.getItem("wasPtu");
+    const value = localStorage.getItem("wasPtu");
     if (value === undefined || value === "false") {
       return false;
     }

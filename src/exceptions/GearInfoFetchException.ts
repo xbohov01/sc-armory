@@ -1,4 +1,4 @@
-export class GearInfoFetchException {
+export default class GearInfoFetchException {
   message: string;
 
   constructor(message: string) {
