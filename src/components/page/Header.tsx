@@ -20,7 +20,7 @@ export default function Header() {
           </VStack>
           <Box width="100pt" />
         </HStack>
-        <VersionSwitch isEnabled />
+        <VersionSwitch isEnabled={false} />
       </VStack>
     </Box>
   );
