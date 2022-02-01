@@ -2,7 +2,7 @@ import React from "react";
 import { Image } from "@chakra-ui/image";
 import { Box, Heading, HStack, Link, VStack } from "@chakra-ui/layout";
 import logo from "../../logo.png";
-import { VersionSwitch } from "./VersionSwitch";
+import VersionSwitch from "./VersionSwitch"
 
 export default function Header() {
   return (
