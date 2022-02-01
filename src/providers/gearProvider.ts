@@ -1,52 +1,42 @@
-import client from "../client/client";
+import gearServiceClient from "../client/gearServiceClient";
 import { ArmorVM } from "../client/viewModels/ArmorVM";
 import { FPSGearBaseVM } from "../client/viewModels/FPSGearBaseVM";
 import { SelectOption } from "../types/types";
 
 class GearProvider {
-  public async GetGearOptions(type: string, filter: string): Promise<SelectOption[]> {
+  public async GetGearOptions(
+    type: string,
+    filter: string
+  ): Promise<SelectOption[]> {
     let result: FPSGearBaseVM[] = [];
 
     switch (type) {
-      case 'Helmet':
-        result = await client.GetHelmets(filter);
+      case "Helmet":
+      case "Arms":
+      case "Core":
+      case "Legs":
+      case "Undersuit":
+        result = await gearServiceClient.GetArmorPartByLocalizedName(
+          type,
+          filter
+        );
         break;
 
-      case 'Arms':
-        result = await client.GetArms(filter);
+      case "Sidearm":
+        result = await gearServiceClient.GetWeaponsByType(filter, "Pistol");
         break;
 
-      case 'Core':
-        result = await client.GetCores(filter);
+      case "Usable":
+        result = await gearServiceClient.GetUsable(filter);
         break;
 
-      case 'Legs':
-        result = await client.GetLegs(filter);
+      case "Primary":
+      case "Secondary":
+        result = await gearServiceClient.GetPrimaryWeapons(filter);
         break;
 
-      case 'Backpack':
-        result = await client.GetBackpacks(filter);
-        break;
-
-      case 'Sidearm':
-        result = await client.GetPistols(filter);
-        break;
-
-      case 'Undersuit':
-        result = await client.GetUndersuits(filter);
-        break;
-
-      case 'Usable':
-        result = await client.GetUsable(filter);
-        break;
-
-      case 'Primary':
-      case 'Secondary':
-        result = await client.GetWeapons(filter);
-        break;
-
-      case 'Tool':
-        result = await client.GetTools(filter);
+      case "Tool":
+        result = await gearServiceClient.GetTools(filter);
         break;
 
       default:
@@ -54,48 +44,49 @@ class GearProvider {
         break;
     }
 
-    return result.map((g) => {
-      return {
-        value: g.Id.toString(),
-        label: g.LocalizedName,
-        type: this.GetArmorTypeFromDesc(g.LocalizedDescription)
-      }
-    });
+    return result.map((gear) => this.GearToSelectOption(gear));
   }
 
-  public async GetBackpacksWithMaxSize(filter: string, size: number): Promise<SelectOption[]> {
-    let result = await client.GetBackpacks(filter);
-
-    return result.filter(b => b.Size <= size)
-      .map((g) => {
-        return {
-          value: g.Id.toString(),
-          label: g.LocalizedName,
-          type: this.GetArmorTypeFromDesc(g.LocalizedDescription)
-        }
-      });
+  public async GetBackpacksWithMaxSize(
+    name: string,
+    size: number
+  ): Promise<SelectOption[]> {
+    return (
+      await gearServiceClient.GetArmorPartByLocalizedName("Backpack", name)
+    )
+      .filter((backpack) => backpack.size <= size)
+      .map((backpack) => this.GearToSelectOption(backpack));
   }
 
   public async GetCore(name: string): Promise<ArmorVM> {
-    let result = await client.GetCoreByName(name);
-    return result[0];
+    const [first] = await gearServiceClient.GetArmorPartByLocalizedName(
+      "Core",
+      name
+    );
+    return first;
   }
-
 
   // Change this to retrieve from API
   private GetArmorTypeFromDesc(description: string): string {
-    if (description.includes('Item Type: Heavy Armor')){
-      return 'Heavy'
+    if (description.includes("Item Type: Heavy Armor")) {
+      return "Heavy";
     }
-    if (description.includes('Item Type: Medium Armor')){
-      return 'Medium'
+    if (description.includes("Item Type: Medium Armor")) {
+      return "Medium";
     }
-    if (description.includes('Item Type: Light Armor')){
-      return 'Light'
+    if (description.includes("Item Type: Light Armor")) {
+      return "Light";
     }
-    return '';
+    return "";
   }
 
+  private GearToSelectOption(gear: FPSGearBaseVM): SelectOption {
+    return {
+      value: gear.id.toString(),
+      label: gear.localizedName,
+      type: this.GetArmorTypeFromDesc(gear.localizedDescription),
+    };
+  }
 }
 
 export default new GearProvider();

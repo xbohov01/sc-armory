@@ -1,9 +1,10 @@
+import React from "react";
 import { Image } from "@chakra-ui/image";
 import { Box, Heading, HStack, Link, VStack } from "@chakra-ui/layout";
 import logo from "../../logo.png";
-import { VersionSwitch } from "./VersionSwitch";
+import VersionSwitch from "./VersionSwitch"
 
-export function Header() {
+export default function Header() {
   return (
     <Box marginTop="20pt" marginBottom="20pt">
       <VStack>
@@ -17,7 +18,7 @@ export function Header() {
               </Link>
             </>
           </VStack>
-          <Box width="100pt"></Box>
+          <Box width="100pt" />
         </HStack>
         <VersionSwitch isEnabled={false} />
       </VStack>

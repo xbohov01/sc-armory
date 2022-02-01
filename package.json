@@ -3,6 +3,7 @@
   "version": "3.1.0",
   "private": true,
   "dependencies": {
+    "@chakra-ui/layout": "^1.7.0",
     "@chakra-ui/react": "^1.6.1",
     "@cloudinary/base": "*",
     "@cloudinary/react": "*",
@@ -11,13 +12,6 @@
     "@fontsource/exo": "^4.4.5",
     "@fontsource/lato": "^4.4.5",
     "@fontsource/teko": "^4.4.5",
-    "@testing-library/jest-dom": "^5.12.0",
-    "@testing-library/react": "^11.2.6",
-    "@testing-library/user-event": "^12.8.3",
-    "@types/jest": "^26.0.23",
-    "@types/node": "^12.20.12",
-    "@types/react": "^17.0.5",
-    "@types/react-dom": "^17.0.4",
     "axios": "^0.21.1",
     "cloudinary-react": "^1.7.0",
     "framer-motion": "^4.1.16",
@@ -28,20 +22,14 @@
     "react-icons": "^4.2.0",
     "react-scripts": "^5.0.0",
     "react-select": "^4.3.1",
-    "typescript-eslint": "*",
     "web-vitals": "^1.1.2"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+    "eject": "react-scripts eject",
+    "format": "prettier --write ./src"
   },
   "browserslist": {
     "production": [
@@ -56,7 +44,26 @@
     ]
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^5.12.0",
+    "@testing-library/react": "^11.2.6",
+    "@testing-library/user-event": "^12.8.3",
+    "@types/jest": "^26.0.23",
+    "@types/node": "^12.20.12",
+    "@types/react": "^17.0.5",
+    "@types/react-dom": "^17.0.4",
     "@types/react-select": "^4.0.15",
-    "typescript": "^4.5.4"
+    "@typescript-eslint/eslint-plugin": "^5.10.2",
+    "eslint": "^8.7.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-import-resolver-typescript": "^2.5.0",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-prettier": "4.0.0",
+    "eslint-plugin-react": "^7.28.0",
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "prettier": "^2.5.1",
+    "typescript": "^4.5.4",
+    "typescript-eslint": "*"
   }
 }

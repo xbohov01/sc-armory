@@ -1,7 +1,7 @@
-export class GearInfoFetchException {
-  message:string;
+export default class GearInfoFetchException {
+  message: string;
 
-  constructor(message:string){
-    this.message = message
+  constructor(message: string) {
+    this.message = message;
   }
 }

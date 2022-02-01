@@ -1,97 +1,84 @@
-import client from "../client/client";
+import gearServiceClient from "../client/gearServiceClient";
 import { ArmorVM } from "../client/viewModels/ArmorVM";
 import { WeaponVM } from "../client/viewModels/WeaponVM";
-import { GearInfoFetchException } from "../exceptions/GearInfoFetchException";
+import GearInfoFetchException from "../exceptions/GearInfoFetchException";
 import { NameReference } from "../types/types";
 
 class GearInfoProvider {
-
   async GetArmorListInfo(names: string[]): Promise<ArmorVM[]> {
-    let armorInfo: ArmorVM[] = [];
-
-    for (let name of names) {
-      let info = await this.GetArmorInfo(name);
-
-      armorInfo.push(info);
-    }
-
-    return armorInfo;
+    const promises = names.map((name) => this.GetArmorInfo(name));
+    return Promise.all(promises);
   }
 
   async GetArmorInfo(name: string): Promise<ArmorVM> {
-    let result = await client.GetArmorInfo(name);
+    const { data, success, message } = await gearServiceClient.GetArmorInfo(
+      name
+    );
 
-    if (!result.success) {
-      throw new GearInfoFetchException(result.message);
+    if (!success) {
+      throw new GearInfoFetchException(message);
     }
 
-    return result.data;
+    return data;
   }
 
   async GetWeaponListInfo(names: string[]): Promise<WeaponVM[]> {
-    let weapons: WeaponVM[] = [];
-
-    for (let name of names) {
-      let info = await this.GetWeaponInfo(name);
-
-      weapons.push(info);
-    }
-
-    return weapons;
+    const promises = names.map((name) => this.GetWeaponInfo(name));
+    return Promise.all(promises);
   }
 
   async GetWeaponInfo(name: string): Promise<WeaponVM> {
-    let result = await client.GetWeaponInfo(name);
+    const { data, success, message } = await gearServiceClient.GetWeaponInfo(
+      name
+    );
 
-    if (!result.success) {
-      throw new GearInfoFetchException(result.message);
+    if (success) {
+      return data;
     }
-
-    return result.data;
+    throw new GearInfoFetchException(message);
   }
 
   IsArmor(name: string): boolean {
-    if (name.includes(' Arms') ||
-      name.includes(' Legs') ||
-      name.includes(' Core') ||
-      name.includes(' Helmet') ||
-      name.includes(' Armor') ||
-      name.includes(' Backpack') ||
-      name.includes(' Undersuit')
-    ) {
-      return true;
-    }
-    return false;
+    return (
+      name.includes(" Arms") ||
+      name.includes(" Legs") ||
+      name.includes(" Core") ||
+      name.includes(" Helmet") ||
+      name.includes(" Armor") ||
+      name.includes(" Backpack") ||
+      name.includes(" Undersuit")
+    );
   }
 
   IsWeapon(name: string): boolean {
-    if (name.includes(' Rifle') ||
-      name.includes(' SMG') ||
-      name.includes(' LMG') ||
-      name.includes(' Launcher') ||
-      name.includes(' Pistol') ||
-      name.includes(' Railgun')
-    ) {
-      return true;
-    }
-    return false;
+    return (
+      name.includes(" Rifle") ||
+      name.includes(" SMG") ||
+      name.includes(" LMG") ||
+      name.includes(" Launcher") ||
+      name.includes(" Pistol") ||
+      name.includes(" Railgun")
+    );
   }
 
   async GetGearListReferences(names: string[]): Promise<NameReference[]> {
-    let references: NameReference[] = [];
-
-    for (let name of names){
-      if(this.IsArmor(name)){
-        let info = await this.GetArmorInfo(name);
-        references.push({name:info.LocalizedName, reference:info.Reference})
+    const promises = names.map((name) => {
+      if (this.IsArmor(name)) {
+        return this.GetArmorInfo(name);
       }
-      if(this.IsWeapon(name)){
-        let info = await this.GetWeaponInfo(name);
-        references.push({name:info.LocalizedName, reference:info.Reference})
+      if (this.IsWeapon(name)) {
+        return this.GetWeaponInfo(name);
       }
-    }
+      return null;
+    });
+    const infos = await Promise.all(promises);
 
-    return references;
+    return infos
+      .filter((info) => !!info)
+      .map((info) => ({
+        name: info!.localizedName,
+        reference: info!.reference,
+      }));
   }
 }
 

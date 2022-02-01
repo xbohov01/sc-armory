@@ -1,50 +1,48 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
-import { Box, Heading } from '@chakra-ui/layout';
-import Select from "react-select"
-import { customStyles } from '../../selectStyle';
-import gearProvider from '../../providers/gearProvider';
-import { FormatProps, SelectOption } from '../../types/types';
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { Box, Heading } from "@chakra-ui/layout";
+import Select from "react-select";
+import { customStyles } from "../../selectStyle";
+import gearProvider from "../../providers/gearProvider";
+import { SelectOption } from "../../types/types";
+import CustomSelectOption from "./CustomSelectOption";
 
 type LoadoutComponentProps = {
   type: string;
   updater: Dispatch<SetStateAction<string>>;
-  isDisabled?: boolean
-}
+  isDisabled: boolean;
+};
 
-export function LoadoutComponent(props: LoadoutComponentProps) {
-  const [filter, setFilter] = useState('');
+export default function LoadoutComponent(props: LoadoutComponentProps) {
+  const [filter, setFilter] = useState("");
   const [options, setOptions] = useState<SelectOption[]>([]);
 
   useEffect(() => {
-    gearProvider.GetGearOptions(props.type, '').then(res => {
+    gearProvider.GetGearOptions(props.type, "").then((res) => {
       setOptions(res);
-    })
+    });
   }, [props.isDisabled, props.type]);
 
-  const loadOptions = () => options.filter(o => o.label.toLowerCase().includes(filter.toLowerCase()));
+  const loadOptions = () =>
+    options.filter((o) => o.label.toLowerCase().includes(filter.toLowerCase()));
 
   const handleGearChange = (selected: any) => {
     // Check for selection clearing
     if (selected === null) {
-      props.updater('');
+      props.updater("");
       return;
-    } 
+    }
     props.updater(selected.label);
-  }
-
-  const formatOptionLabel = (props: FormatProps) => (
-    <div style={{ display: "flex"}}>
-      <div>{props.label}</div>
-      <div style={{ marginLeft: "10px", color: "#ccc" }}>
-        {props.type}
-      </div>
-    </div>
-  );
+  };
 
   return (
-    <Box maxWidth='300pt' id={'component-' + props.type} padding='2pt' margin='auto'>
-      <Heading fontSize='md'>{props.type}</Heading>
-      <Box paddingTop='2pt'>
+    <Box
+      maxWidth="300pt"
+      id={`component-${props.type}`}
+      padding="2pt"
+      margin="auto"
+    >
+      <Heading fontSize="md">{props.type}</Heading>
+      <Box paddingTop="2pt">
         <Select
           id={props.type}
           styles={customStyles}
@@ -54,11 +52,11 @@ export function LoadoutComponent(props: LoadoutComponentProps) {
           isMulti={false}
           isDisabled={props.isDisabled !== undefined ? props.isDisabled : false}
           defaultOptions
-          formatOptionLabel={formatOptionLabel}
-          placeholder='Start typing...'
+          formatOptionLabel={CustomSelectOption}
+          placeholder="Start typing..."
           isClearable
         />
       </Box>
     </Box>
-  )
+  );
 }

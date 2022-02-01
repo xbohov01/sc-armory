@@ -1,38 +1,47 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
-import gearProvider from '../../providers/gearProvider';
-import { LoadoutComponent } from './LoadoutComponent';
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+import gearProvider from "../../providers/gearProvider";
+import LoadoutComponent from "./LoadoutComponent";
 
 type SecondarySelectorComponentProps = {
   coreName: string;
-  undersuitName:string
-  setSecondary: Dispatch<SetStateAction<string>>
-}
+  undersuitName: string;
+  setSecondary: Dispatch<SetStateAction<string>>;
+};
 
-export function SecondarySelectorComponent(props: SecondarySelectorComponentProps) {
+export default function SecondarySelectorComponent(
+  props: SecondarySelectorComponentProps
+) {
   const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
-    if (props.coreName === '' && props.undersuitName === '') {
+    if (props.coreName === "" && props.undersuitName === "") {
       setIsVisible(true);
-    } else if (props.coreName === '' && (props.undersuitName.includes("Pembroke") || props.undersuitName.includes("Novikov"))){
+    } else if (
+      props.coreName === "" &&
+      (props.undersuitName.includes("Pembroke") ||
+        props.undersuitName.includes("Novikov"))
+    ) {
       setIsVisible(true);
-    } else if (props.coreName === '' && props.undersuitName !== ''){
+    } else if (props.coreName === "" && props.undersuitName !== "") {
       setIsVisible(false);
-    } 
-    else {
+    } else {
       gearProvider.GetCore(props.coreName).then((result) => {
-        if (result.LocalizedDescription.includes("Light Armor")) {
+        if (result.localizedDescription.includes("Light Armor")) {
           setIsVisible(false);
         }
       });
       setIsVisible(true);
     }
-  }, [props.coreName, props.undersuitName])
+  }, [props.coreName, props.undersuitName]);
 
   return (
     <>
-    <LoadoutComponent type='Secondary' updater={props.setSecondary} isDisabled={!isVisible} />
-      { /*isVisible ? <LoadoutComponent type='Secondary' updater={props.setSecondary} /> : ""*/}
+      <LoadoutComponent
+        type="Secondary"
+        updater={props.setSecondary}
+        isDisabled={!isVisible}
+      />
+      {/*isVisible ? <LoadoutComponent type='Secondary' updater={props.setSecondary} /> : ""*/}
     </>
-  )
+  );
 }

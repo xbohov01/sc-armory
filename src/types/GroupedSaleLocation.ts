@@ -1,8 +1,8 @@
-import { LocatedItem } from "../types/types";
+import { LocatedItem } from "./types";
 
 type GroupedSaleLocation = {
-  chain:string;
-  items:LocatedItem[]
-}
+  chain: string;
+  items: LocatedItem[];
+};
 
 export default GroupedSaleLocation;

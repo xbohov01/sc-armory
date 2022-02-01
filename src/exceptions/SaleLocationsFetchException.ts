@@ -1,7 +1,7 @@
-export class SaleLocationsFetchException {
-  message:string;
+export default class SaleLocationsFetchException {
+  message: string;
 
-  constructor(message:string){
-    this.message = message
+  constructor(message: string) {
+    this.message = message;
   }
 }

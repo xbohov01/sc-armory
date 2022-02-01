@@ -1,0 +1,33 @@
+{
+  "extends": [
+    "react-app",
+    "react-app/jest",
+    "airbnb",
+    "prettier",
+    "plugin:import/typescript"
+  ],
+  "plugins": ["prettier", "@typescript-eslint"],
+  "rules": {
+    "prettier/prettier": "off",
+    "no-unused-vars": "warn",
+    "func-names": "off",
+    "no-process-exit": "off",
+    "object-shorthand": "off",
+    "class-methods-use-this": "off",
+    "spaced-comment": "off",
+    "import/extensions": 0,
+    "react/jsx-filename-extension": [1, { "extensions": [".tsx", ".ts"] }],
+    "import/no-extraneous-dependencies": [0, { "extensions": [".test.tsx"] }],
+    "camelcase": "off",
+    "react/destructuring-assignment": "off",
+    "no-use-before-define": "warn"
+  },
+  "settings": {
+    "import/resolver": {
+      "typescript": {
+        "paths": ["src"],
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    }
+  }
+}
