@@ -1,10 +1,6 @@
 import axios, { AxiosInstance } from "axios";
 import { sha3_512 } from "js-sha3";
-import { ResultObject, SaleLocationVM } from "../types/types";
-import { RetailProductVM } from "./viewModels/RetailProductVM";
 
-const RetailProductsEndpoint = "/retailproducts";
-const saleLocations = "/salelocations";
 const AuthenticationEndpoint = "/serviceaccounts";
 
 export class ApiClient {
@@ -18,7 +14,7 @@ export class ApiClient {
 
   token: string;
 
-  authenticationPromise: Promise<string>;
+  authenticationPromise!: Promise<string>;
 
   constructor() {
     const wasPtu = localStorage.getItem("wasPtu") === "true";
@@ -28,7 +24,7 @@ export class ApiClient {
       "https://res.cloudinary.com/thespacecoder/image/upload/v1630349759/armory/";
     this.token = "";
 
-    this.authenticationPromise = this.Authorize();
+    //this.authenticationPromise = this.Authorize();
   }
 
   async Authorize(
@@ -82,52 +78,6 @@ export class ApiClient {
     this.instance = axios.create({
       baseURL: this.url,
     });
-  }
-
-  async GetSaleLocations(
-    itemName: string
-  ): Promise<ResultObject<SaleLocationVM>> {
-    try {
-      const { status, statusText, data } = await this.instance.get<
-        SaleLocationVM[]
-      >(`${this.url + saleLocations}?item=${itemName}`);
-      // Remove after shop service is up with itemName in VM
-      const hackedData = data.map((d) => ({ ...d, itemName }));
-      return {
-        success: status === 200,
-        message: statusText,
-        data: hackedData,
-      };
-    } catch (err: any) {
-      if (err.response.status === 404) {
-        return {
-          success: false,
-          message: "Not sold",
-          data: [
-            {
-              saleLocationId: 0,
-              saleLocationName: "Item not sold",
-              itemId: 0,
-              price: 0,
-              saleLocationChain: "Possible sub/exclusive/lootable item",
-              itemName,
-            },
-          ],
-        };
-      }
-    }
-    return {
-      success: false,
-      message: "",
-      data: [],
-    };
-  }
-
-  async GetRetailProduct(id: number): Promise<RetailProductVM> {
-    const { data } = await this.instance.get(
-      `${this.url + RetailProductsEndpoint}(${id})`
-    );
-    return data;
   }
 
   async CheckIfImageExists(imageId: string): Promise<boolean> {

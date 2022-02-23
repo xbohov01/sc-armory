@@ -100,7 +100,7 @@ class GearServiceClient extends ApiClient {
 
   async GetPrimaryWeapons(name: string = ""): Promise<WeaponVM[]> {
     return this.GetWeapons(
-      `?$filter=type ne 'Pistol' and type ne 'Utility' and contains(tolower(localizedName),'${name.toLowerCase()}')`
+      `?$filter=type ne 'Pistol' and type ne 'Utility' and type ne 'Knife' and contains(tolower(localizedName),'${name.toLowerCase()}')`
     );
   }
 

@@ -3,7 +3,7 @@
 import { orderBy, uniq } from "lodash";
 import SaleLocationsFetchException from "../exceptions/SaleLocationsFetchException";
 import { KeyValue, ListKey, LocatedItem } from "../types/types";
-import client from "../client/client";
+import shopServiceClient from "../client/shopServiceClient";
 
 class ShoppingListGenerator {
   async GetShoppingList(
@@ -13,7 +13,7 @@ class ShoppingListGenerator {
     const locatedItems: LocatedItem[] = [];
     let price = 0;
 
-    const promises = loadout.map((gear) => client.GetSaleLocations(gear));
+    const promises = loadout.map((gear) => shopServiceClient.GetSaleLocations(gear));
     const results = await Promise.all(promises);
 
     results.forEach((result) => {
@@ -63,7 +63,7 @@ class ShoppingListGenerator {
     let locations: string[] = [];
 
     for (const gear of loadout) {
-      const result = await client.GetSaleLocations(gear);
+      const result = await shopServiceClient.GetSaleLocations(gear);
       const locatedItems: LocatedItem[] = [];
 
       if (!result.success && result.message !== "Not sold") {
