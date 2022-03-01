@@ -77,7 +77,7 @@ class ShoppingListGenerator {
 
       locatedItems.push(
         ...saleLocations.map((saleLocation) => ({
-          item: gear,
+          item: saleLocation.itemName,
           storeId: saleLocation.saleLocationId,
           storeName: saleLocation.saleLocationName,
           storeLocation: `${saleLocation.saleLocationName} - ${saleLocation.saleLocationChain}`,
