@@ -11,7 +11,7 @@ export class ShopServiceClient extends ApiClient {
     super();
 
     const value = localStorage.getItem("wasPtu");
-    if (value === undefined || value === "false") {
+    if (value === undefined || value === "false" || process.env.REACT_APP_PTU_ENABLED === "false") {
       this.isPtu = false;
       this.url = process.env.REACT_APP_SHOP_LIVE_URL || "";
     } else {

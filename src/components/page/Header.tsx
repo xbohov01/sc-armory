@@ -20,7 +20,7 @@ export default function Header() {
           </VStack>
           <Box width="100pt" />
         </HStack>
-        <VersionSwitch isEnabled={false} />
+        <VersionSwitch isEnabled={process.env.REACT_APP_PTU_ENABLED === "true"} />
       </VStack>
     </Box>
   );
