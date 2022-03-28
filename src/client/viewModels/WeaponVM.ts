@@ -13,4 +13,5 @@ export type WeaponVM = FPSGearBaseVM & {
   ammoType: string;
   magazineSize: string;
   alphaDamage: number;
+  ammoContainerReference: string;
 }

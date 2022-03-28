@@ -10,6 +10,7 @@ import { Stat, StatLabel, StatNumber } from "@chakra-ui/stat";
 import { Tooltip } from "@chakra-ui/tooltip";
 import React from "react";
 import { WeaponInfoDisplayProps } from "../../../types/types";
+import DamageDropDisplay from "./DamageDropDisplay";
 
 export default function WeaponInfoDisplay(props: WeaponInfoDisplayProps) {
   return (
@@ -160,6 +161,9 @@ export default function WeaponInfoDisplay(props: WeaponInfoDisplayProps) {
               </AccordionPanel>
             </AccordionItem>
           </Accordion>
+        </GridItem>
+        <GridItem colSpan={2}>
+          <DamageDropDisplay ammoContainerReference={props.weapon.ammoContainerReference}/>
         </GridItem>
       </Grid>
     </VStack>
