@@ -137,6 +137,9 @@ export default function WeaponInfoDisplay(props: WeaponInfoDisplayProps) {
           </GridItem>
         )}
         <GridItem colSpan={2}>
+          <DamageDropDisplay ammoContainerReference={props.weapon.ammoContainerReference}/>
+        </GridItem>
+        <GridItem colSpan={2}>
           <Accordion
             allowToggle
             width="inherit"
@@ -161,9 +164,6 @@ export default function WeaponInfoDisplay(props: WeaponInfoDisplayProps) {
               </AccordionPanel>
             </AccordionItem>
           </Accordion>
-        </GridItem>
-        <GridItem colSpan={2}>
-          <DamageDropDisplay ammoContainerReference={props.weapon.ammoContainerReference}/>
         </GridItem>
       </Grid>
     </VStack>

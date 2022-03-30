@@ -19,6 +19,7 @@ import Support from "./Support";
 import cig from "../../cig.png";
 import "@fontsource/lato";
 import JoinADI from "./JoinADI";
+import Bugs from "./Bugs";
 
 export default function Footer() {
   return (
@@ -26,6 +27,7 @@ export default function Footer() {
       <VStack>
         <JoinADI />
         <Support />
+        <Bugs />
         <HStack>
           <Link href="https://www.youtube.com/c/thespacecoder">
             <Icon boxSize="20pt" cursor="pointer" as={AiFillYoutube} />
@@ -55,7 +57,7 @@ export default function Footer() {
         <Divider width="60vw" />
         <VStack fontFamily="Lato">
           <Box width="fit-content" margin="auto">
-            ©TheSpaceCoder 2018 - 2021 thespacecoder.business@gmail.com
+            ©TheSpaceCoder 2018 - 2022 thespacecoder.business@gmail.com
           </Box>
           <HStack width="400pt" id="cig-notice">
             <Image width="100pt" src={cig} />

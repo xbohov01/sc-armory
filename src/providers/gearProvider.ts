@@ -1,6 +1,5 @@
-import mode from "@cloudinary/base/actions/rotate/mode";
 import gearServiceClient from "../client/gearServiceClient";
-import { AmmunitionInfo, AmmunitionVM } from "../client/viewModels/AmmunitionVM";
+import { AmmunitionInfo } from "../client/viewModels/AmmunitionVM";
 import { ArmorVM } from "../client/viewModels/ArmorVM";
 import { FPSGearBaseVM } from "../client/viewModels/FPSGearBaseVM";
 import { SelectOption } from "../types/types";

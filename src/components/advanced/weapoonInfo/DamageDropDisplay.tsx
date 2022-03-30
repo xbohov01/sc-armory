@@ -1,10 +1,8 @@
-import { Box, Heading } from "@chakra-ui/layout";
-import { max } from "lodash";
+import { Box, Heading} from "@chakra-ui/layout";
 import React, { useEffect, useState } from "react";
 import Chart from "react-google-charts";
 import {
   AmmunitionInfo,
-  AmmunitionVM,
   DamageType,
 } from "../../../client/viewModels/AmmunitionVM";
 import gearProvider from "../../../providers/gearProvider";
@@ -26,25 +24,6 @@ export default function DamageDropDisplay(props: DamageDropDisplayProps) {
       });
   }, [props.ammoContainerReference]);
 
-  const generateGraphData = () => {
-    if (ammo === undefined) return [];
-
-    const data = [];
-
-    for (let distance = 0; distance <= ammo.lifetime * ammo.speed; distance += 10) {
-      data.push([
-        distance,
-        generateDamageValue(distance, ammo.damagePhysical),
-        generateDamageValue(distance, ammo.damageEnergy),
-        generateDamageValue(distance, ammo.damageDistortion),
-        generateDamageValue(distance, ammo.damageThermal),
-        generateDamageValue(distance, ammo.damageBiochemical),
-        generateDamageValue(distance, ammo.damageStun),
-      ]);
-    }
-    return data;
-  };
-
   const generateDamageValue = (distance: number, damageType: DamageType) => {
     if (ammo === undefined) return 0;
 
@@ -64,10 +43,29 @@ export default function DamageDropDisplay(props: DamageDropDisplayProps) {
     return calculatedDamage;
   };
 
+  const generateGraphData = () => {
+    if (ammo === undefined) return [];
+
+    const data = [];
+
+    for (let distance = 0; distance <= ammo.lifetime * ammo.speed; distance += 10) {
+      data.push([
+        distance,
+        generateDamageValue(distance, ammo.damagePhysical),
+        generateDamageValue(distance, ammo.damageEnergy),
+        generateDamageValue(distance, ammo.damageDistortion),
+        generateDamageValue(distance, ammo.damageThermal),
+        generateDamageValue(distance, ammo.damageBiochemical),
+        generateDamageValue(distance, ammo.damageStun),
+      ]);
+    }
+    return data;
+  };
+
   return (
     <Box borderLeft="1pt solid whitesmoke" padding="5pt" bgColor="#1a2130">
       <Heading size="sm" textAlign="center" paddingTop="5pt">
-        Damage drop over distance
+        Damage over distance
       </Heading>
       {isLoading ? (
         "Loading..."
@@ -90,13 +88,18 @@ export default function DamageDropDisplay(props: DamageDropDisplayProps) {
             hAxis: {
               minValue: 0,
               textColor: "whitesmoke",
+              title: "Distance (m)",
+              'titleColor': "whitesmoke",
+              'titleFont': "Exo"
             },
             vAxis: {
               textColor: "whitesmoke",
+              title: "Damage",
+              'titleColor': "whitesmoke",
             },
             legend: "none",
             backgroundColor: "#1a2130",
-            chartArea: { width: "90%", height: "80%" },
+            chartArea: { width: "80%", height: "70%" },
           }}
         />
       )}
