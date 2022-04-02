@@ -32,6 +32,7 @@ function IsWeapon(name: string): boolean {
     name.includes(" LMG") ||
     name.includes(" Launcher") ||
     name.includes(" Pistol") ||
+    name.includes(" Shotgun") ||
     name.includes(" Railgun")
   ) {
     return true;
