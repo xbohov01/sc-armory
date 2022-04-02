@@ -2,7 +2,6 @@ import { Divider, HStack, VStack } from "@chakra-ui/layout";
 import React, { useEffect, useState } from "react";
 import { Switch } from "@chakra-ui/react";
 import "./App.css";
-import { AppNotice, PatreonNotice } from "./components/AppNotice";
 import Footer from "./components/page/Footer";
 import LoadoutBuilder from "./components/loadout/LoadoutBuilder";
 import Header from "./components/page/Header";
@@ -54,8 +53,6 @@ function App() {
     <div className="App">
       <header className="App-header">
         <Header />
-        <AppNotice />
-        <PatreonNotice />
       </header>
       <div className="App-body">
         <HStack>

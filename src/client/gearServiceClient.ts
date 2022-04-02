@@ -7,11 +7,13 @@ import { WeaponVM } from "./viewModels/WeaponVM";
 import { FPSGearBaseVM } from "./viewModels/FPSGearBaseVM";
 import { AttachmentVM } from "./viewModels/AttachmentVM";
 import { RetailProductVM } from "./viewModels/RetailProductVM";
+import { AmmunitionVM } from "./viewModels/AmmunitionVM";
 
 const ArmorsEndpoint = "/armors";
 const WeaponsEndpoint = "/weapons";
 const AttachmentsEndpoint = "/attachments";
 const ConsumablesEndpoint = "/consumables";
+const AmmunitionsEndpoint = "/ammunitions";
 
 class GearServiceClient extends ApiClient {
   constructor() {
@@ -150,6 +152,11 @@ class GearServiceClient extends ApiClient {
       ...(await this.GetTools(filter)),
       ...(await this.GetConsumable(filter)),
     ];
+  }
+
+  async GetAmmunitionByReference(reference: string): Promise<AmmunitionVM> {
+    const result = await this.instance.get<AmmunitionVM[]>(`${this.url + AmmunitionsEndpoint}?$filter=reference eq ${reference}`);
+    return result.data[0];
   }
 }
 
