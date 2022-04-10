@@ -3,12 +3,11 @@ import {
   AccordionButton,
   AccordionIcon,
   AccordionItem,
-  AccordionPanel,
+  AccordionPanel
 } from "@chakra-ui/accordion";
-import { VStack, Grid, Heading, GridItem } from "@chakra-ui/layout";
+import { Grid, GridItem, Heading, VStack } from "@chakra-ui/layout";
 import { Stat, StatLabel, StatNumber } from "@chakra-ui/stat";
 import { Tooltip } from "@chakra-ui/tooltip";
-import React from "react";
 import { WeaponInfoDisplayProps } from "../../../types/types";
 import DamageDropDisplay from "./DamageDropDisplay";
 

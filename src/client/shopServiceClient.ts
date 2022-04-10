@@ -11,11 +11,11 @@ export class ShopServiceClient extends ApiClient {
     super();
 
     const value = localStorage.getItem("wasPtu");
-    if (value === undefined || value === "false" || process.env.REACT_APP_PTU_ENABLED === "false") {
+    if (value === undefined || value === "false" || import.meta.env.VITE_PTU_ENABLED === "false") {
       this.isPtu = false;
-      this.url = process.env.REACT_APP_SHOP_LIVE_URL || "";
+      this.url = import.meta.env.VITE_SHOP_LIVE_URL || "";
     } else {
-      this.url = process.env.REACT_APP_SHOP_PTU_URL || "";
+      this.url = import.meta.env.VITE_SHOP_PTU_URL || "";
       this.isPtu = true;
     }
 
@@ -26,8 +26,8 @@ export class ShopServiceClient extends ApiClient {
     this.token = "";
 
     const password = this.isPtu
-      ? process.env.REACT_APP_SHOP_PTU_PASS!
-      : process.env.REACT_APP_SHOP_LIVE_PASS!;
+      ? import.meta.env.VITE_SHOP_PTU_PASS!
+      : import.meta.env.VITE_SHOP_LIVE_PASS!;
 
     this.authenticationPromise = super.Authorize(
       "/authentication/applogin",
@@ -38,8 +38,8 @@ export class ShopServiceClient extends ApiClient {
   override ChangeAPIs(isPtu: boolean) {
     this.isPtu = isPtu;
     this.url = isPtu
-      ? process.env.REACT_APP_SHOP_PTU_URL!
-      : process.env.REACT_APP_SHOP_LIVE_URL!;
+      ? import.meta.env.VITE_SHOP_PTU_URL!
+      : import.meta.env.VITE_SHOP_LIVE_URL!;
 
     this.instance = axios.create({
       baseURL: this.url,

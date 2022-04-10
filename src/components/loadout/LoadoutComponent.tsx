@@ -50,7 +50,7 @@ export default function LoadoutComponent(props: LoadoutComponentProps) {
           onChange={handleGearChange}
           onInputChange={setFilter}
           isMulti={false}
-          isDisabled={props.isDisabled !== undefined ? props.isDisabled : false}
+          isDisabled={props?.isDisabled ?? false}
           defaultOptions
           formatOptionLabel={CustomSelectOption}
           placeholder="Start typing..."

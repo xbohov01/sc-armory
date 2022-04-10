@@ -1,6 +1,5 @@
 import { Box, Heading, VStack } from "@chakra-ui/layout";
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/tabs";
-import React from "react";
 import ArmorInfo from "./ArmorInfo";
 import WeaponInfo from "./WeaponInfo";
 

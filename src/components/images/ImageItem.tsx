@@ -1,13 +1,10 @@
 import {
-  Box,
-  AccordionItem,
-  AccordionPanel,
   AccordionButton,
-  AccordionIcon,
-  Link,
+  AccordionIcon, AccordionItem,
+  AccordionPanel, Box, Link
 } from "@chakra-ui/react";
-import { Cloudinary } from "@cloudinary/base";
 import { AdvancedImage } from "@cloudinary/react";
+import { Cloudinary } from "@cloudinary/url-gen";
 import React, { useEffect, useState } from "react";
 import client from "../../client/client";
 import { NameReference } from "../../types/types";

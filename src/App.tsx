@@ -1,17 +1,17 @@
 import { Divider, HStack, VStack } from "@chakra-ui/layout";
-import React, { useEffect, useState } from "react";
 import { Switch } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
 import "./App.css";
-import Footer from "./components/page/Footer";
-import LoadoutBuilder from "./components/loadout/LoadoutBuilder";
-import Header from "./components/page/Header";
-import LoadoutExporter from "./components/loadout/LoadoutExporter";
-import { KeyValue, ListKey, LocatedItem } from "./types/types";
 import AdvancedInfo from "./components/advanced/AdvancedInfo";
 import ImageDisplay from "./components/images/ImageDisplay";
+import LoadoutBuilder from "./components/loadout/LoadoutBuilder";
+import LoadoutExporter from "./components/loadout/LoadoutExporter";
+import Footer from "./components/page/Footer";
+import Header from "./components/page/Header";
 import ShoppingWrapper from "./components/shoppingList/ShoppingWrapper";
+import { KeyValue, ListKey, LocatedItem } from "./types/types";
 
-function App() {
+function App(): JSX.Element {
   const [gear, setGear] = useState<string[]>([]);
   const [list, setList] = useState<KeyValue<ListKey, LocatedItem[]>[]>([]);
   const [showInfo, setShowInfo] = useState(false);

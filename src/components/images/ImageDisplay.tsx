@@ -1,28 +1,28 @@
-import { Box, Heading, Accordion } from "@chakra-ui/react";
-import { Cloudinary } from "@cloudinary/base";
-import React, { useEffect, useState } from "react";
-import gearInfoProvider from "../../providers/gearInfoProvider";
-import { NameReference } from "../../types/types";
-import { ImageItem } from "./ImageItem";
+import { Accordion, Box, Heading } from '@chakra-ui/react'
+import { Cloudinary } from '@cloudinary/url-gen'
+import React, { useEffect, useState } from 'react'
+import gearInfoProvider from '../../providers/gearInfoProvider'
+import { NameReference } from '../../types/types'
+import { ImageItem } from './ImageItem'
 
 type ImageDisplayProps = {
-  gear: string[];
-};
+  gear: string[]
+}
 
 export default function ImageDisplay(props: ImageDisplayProps) {
-  const [references, setReferences] = useState<NameReference[]>([]);
+  const [references, setReferences] = useState<NameReference[]>([])
 
   useEffect(() => {
     gearInfoProvider.GetGearListReferences(props.gear).then((res) => {
-      setReferences(res);
-    });
-  }, [props.gear]);
+      setReferences(res)
+    })
+  }, [props.gear])
 
   const cloudinary = new Cloudinary({
     cloud: {
-      cloudName: "thespacecoder",
+      cloudName: 'thespacecoder',
     },
-  });
+  })
 
   return (
     <Box
@@ -41,5 +41,5 @@ export default function ImageDisplay(props: ImageDisplayProps) {
         ))}
       </Accordion>
     </Box>
-  );
+  )
 }

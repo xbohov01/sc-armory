@@ -1,4 +1,3 @@
-import React from "react";
 import { Td, Tr } from "@chakra-ui/react";
 import { KeyValue, LocatedItem } from "../../types/types";
 

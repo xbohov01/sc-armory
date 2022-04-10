@@ -1,4 +1,3 @@
-import React from "react";
 import { Th, Thead, Tr } from "@chakra-ui/react";
 
 export type HeaderRowProps = {

@@ -1,5 +1,4 @@
 import { Box, VStack } from "@chakra-ui/layout";
-import React from "react";
 import { KeyValue, ListKey, LocatedItem } from "../../types/types";
 import { ShoppingListItem } from "./ShoppingListItem";
 
