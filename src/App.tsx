@@ -1,7 +1,8 @@
+import { useEffect, useState } from "react";
+
 import { Divider, HStack, VStack } from "@chakra-ui/layout";
 import { Switch } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
-import "./App.css";
+
 import AdvancedInfo from "./components/advanced/AdvancedInfo";
 import ImageDisplay from "./components/images/ImageDisplay";
 import LoadoutBuilder from "./components/loadout/LoadoutBuilder";
@@ -10,6 +11,8 @@ import Footer from "./components/page/Footer";
 import Header from "./components/page/Header";
 import ShoppingWrapper from "./components/shoppingList/ShoppingWrapper";
 import { KeyValue, ListKey, LocatedItem } from "./types/types";
+
+import "./App.css";
 
 function App(): JSX.Element {
   const [gear, setGear] = useState<string[]>([]);

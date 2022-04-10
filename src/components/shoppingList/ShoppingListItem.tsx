@@ -1,6 +1,8 @@
+import React from "react";
+
 import { Checkbox } from "@chakra-ui/checkbox";
 import { Box, Heading, HStack } from "@chakra-ui/layout";
-import React, { SyntheticEvent } from "react";
+
 import { LocatedItem } from "../../types/types";
 
 export type ShoppingListItemProps = {
@@ -9,8 +11,8 @@ export type ShoppingListItemProps = {
 };
 
 export function ShoppingListItem(props: ShoppingListItemProps) {
-  const handleToggle = (e: SyntheticEvent) => {
-    //e.preventDefault();
+  const handleToggle = () => {
+    // e.preventDefault();
     props.boughtSetter(props.item.item, !props.item.isBought);
   };
 

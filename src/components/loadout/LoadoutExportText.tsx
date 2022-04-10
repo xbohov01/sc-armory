@@ -1,5 +1,6 @@
-import { Button, Textarea } from "@chakra-ui/react";
 import React, { useState } from "react";
+
+import { Button, Textarea } from "@chakra-ui/react";
 
 export default function LoadoutExportText(props: { text: string }) {
   const [status, setStatus] = useState("Copy");

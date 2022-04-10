@@ -1,5 +1,7 @@
-import { Box } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
+
+import { Box } from "@chakra-ui/react";
+
 import weaponDemoProvider from "../../providers/weaponDemoProvider";
 
 export type WeaponDemoDisplayProps = {

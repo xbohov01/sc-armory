@@ -1,3 +1,5 @@
+// TODO: remove eslint-disable
+/* eslint-disable class-methods-use-this */
 import gearServiceClient from "../client/gearServiceClient";
 import { AmmunitionInfo } from "../client/viewModels/AmmunitionVM";
 import { ArmorVM } from "../client/viewModels/ArmorVM";
@@ -67,8 +69,12 @@ class GearProvider {
     return first;
   }
 
-  public async GetAmmunitionByReference(ammoContainerReference:string):Promise<AmmunitionInfo>{
-    const model = await gearServiceClient.GetAmmunitionByReference(ammoContainerReference);
+  public async GetAmmunitionByReference(
+    ammoContainerReference: string
+  ): Promise<AmmunitionInfo> {
+    const model = await gearServiceClient.GetAmmunitionByReference(
+      ammoContainerReference
+    );
 
     return {
       id: model.id,
@@ -114,8 +120,8 @@ class GearProvider {
         damageDropMinDistance: model.damageDropMinDistance.damageStun,
         damageDropPerMeter: model.damageDropPerMeter.damageStun,
         damageDropMinDamage: model.damageDropMinDamage.damageStun,
-      }
-    }
+      },
+    };
   }
 
   // Change this to retrieve from API

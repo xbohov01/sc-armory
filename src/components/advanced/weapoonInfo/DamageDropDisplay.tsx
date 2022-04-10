@@ -1,6 +1,8 @@
-import { Box, Heading} from "@chakra-ui/layout";
 import React, { useEffect, useState } from "react";
 import Chart from "react-google-charts";
+
+import { Box, Heading } from "@chakra-ui/layout";
+
 import {
   AmmunitionInfo,
   DamageType,
@@ -48,7 +50,11 @@ export default function DamageDropDisplay(props: DamageDropDisplayProps) {
 
     const data = [];
 
-    for (let distance = 0; distance <= ammo.lifetime * ammo.speed; distance += 10) {
+    for (
+      let distance = 0;
+      distance <= ammo.lifetime * ammo.speed;
+      distance += 10
+    ) {
       data.push([
         distance,
         generateDamageValue(distance, ammo.damagePhysical),
@@ -89,13 +95,13 @@ export default function DamageDropDisplay(props: DamageDropDisplayProps) {
               minValue: 0,
               textColor: "whitesmoke",
               title: "Distance (m)",
-              'titleColor': "whitesmoke",
-              'titleFont': "Exo"
+              titleColor: "whitesmoke",
+              titleFont: "Exo",
             },
             vAxis: {
               textColor: "whitesmoke",
               title: "Damage",
-              'titleColor': "whitesmoke",
+              titleColor: "whitesmoke",
             },
             legend: "none",
             backgroundColor: "#1a2130",

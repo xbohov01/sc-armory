@@ -1,5 +1,6 @@
 import { Image } from "@chakra-ui/image";
 import { Box, Link, VStack } from "@chakra-ui/layout";
+
 import adi from "../../adi.png";
 
 export default function JoinADI() {

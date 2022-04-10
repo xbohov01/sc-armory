@@ -1,10 +1,15 @@
-import { ChakraProvider } from "@chakra-ui/react";
-import "@fontsource/exo";
 import React from "react";
 import ReactDOM from "react-dom";
-import theme from "~/theme";
+
+import { ChakraProvider } from "@chakra-ui/react";
+
+import "@fontsource/exo";
+
 import App from "./App";
+import theme from "./theme";
+
 import "./index.css";
+
 
 ReactDOM.render(
   <ChakraProvider theme={theme}>

@@ -172,6 +172,7 @@ class WeaponAttachmentProvider {
     },
   ];
 
+  // eslint-disable-next-line class-methods-use-this
   async GetAttachmentSlots(name: string): Promise<WeaponAttachmentSlot[]> {
     const weaponModel = await gearServiceClient.GetWeaponByName(name);
     const slots: WeaponAttachmentSlot[] = [

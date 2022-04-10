@@ -1,5 +1,5 @@
 export type AmmunitionVM = {
-  id:number;
+  id: number;
   reference: string;
   size: number;
   lifetime: number;
@@ -7,11 +7,11 @@ export type AmmunitionVM = {
   hitType: string;
   name: string;
   impactRadius: number;
-  damage:DamageModel;
-  damageDropMinDistance:DamageModel;
-  damageDropPerMeter:DamageModel;
-  damageDropMinDamage:DamageModel;
-}
+  damage: DamageModel;
+  damageDropMinDistance: DamageModel;
+  damageDropPerMeter: DamageModel;
+  damageDropMinDamage: DamageModel;
+};
 
 type DamageModel = {
   id: number;
@@ -21,10 +21,10 @@ type DamageModel = {
   damageThermal: number;
   damageBiochemical: number;
   damageStun: number;
-}
+};
 
 export type AmmunitionInfo = {
-  id:number;
+  id: number;
   reference: string;
   size: number;
   lifetime: number;
@@ -38,11 +38,11 @@ export type AmmunitionInfo = {
   damageThermal: DamageType;
   damageBiochemical: DamageType;
   damageStun: DamageType;
-}
+};
 
 export type DamageType = {
   damage: number;
   damageDropMinDistance: number;
   damageDropPerMeter: number;
   damageDropMinDamage: number;
-}
+};

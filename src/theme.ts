@@ -1,19 +1,19 @@
-import { extendTheme } from '@chakra-ui/react'
+import { extendTheme } from "@chakra-ui/react";
 
 const fonts = {
-  heading: 'Exo',
-  switch: 'Exo',
-  tab: 'Exo',
-}
+  heading: "Exo",
+  switch: "Exo",
+  tab: "Exo",
+};
 
 const components = {
   Tab: {
     baseStyle: {
       _selected: {
-        backgroundColor: '#1a2130',
+        backgroundColor: "#1a2130",
       },
     },
   },
-}
+};
 
-export default extendTheme({ fonts, components })
+export default extendTheme({ fonts, components });

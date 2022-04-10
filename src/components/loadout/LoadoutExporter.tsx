@@ -1,6 +1,9 @@
-import { Button, VStack } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
+
+import { Button, VStack } from "@chakra-ui/react";
+
 import { KeyValue, ListKey, LocatedItem } from "../../types/types";
+
 import LoadoutExportText from "./LoadoutExportText";
 
 type LoadoutExporterProps = {

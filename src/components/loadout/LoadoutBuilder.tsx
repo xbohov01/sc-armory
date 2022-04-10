@@ -1,6 +1,8 @@
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+
 import { Button } from "@chakra-ui/button";
 import { Box, Heading } from "@chakra-ui/layout";
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+
 import BackpackSelectorComponent from "./BackpackSelectorComponent";
 import LoadoutComponent from "./LoadoutComponent";
 import OptionalLoadoutItems from "./OptionalLoadoutItems";
@@ -28,8 +30,10 @@ export default function LoadoutBuilder(props: LoadoutBuilderProps) {
   const [secAttachments, setSecAttachments] = useState<string[]>([]);
   const [sideAttachments, setSideAttachments] = useState<string[]>([]);
 
+  const { updater } = props
+
   useEffect(() => {
-    props.updater(
+    updater(
       [
         helmet,
         arms,
@@ -48,6 +52,7 @@ export default function LoadoutBuilder(props: LoadoutBuilderProps) {
       ].filter((g) => g !== "")
     );
   }, [
+    updater,
     helmet,
     arms,
     core,

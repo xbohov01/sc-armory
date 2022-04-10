@@ -3,12 +3,14 @@ import {
   AccordionButton,
   AccordionIcon,
   AccordionItem,
-  AccordionPanel
+  AccordionPanel,
 } from "@chakra-ui/accordion";
 import { Grid, GridItem, Heading, VStack } from "@chakra-ui/layout";
 import { Stat, StatLabel, StatNumber } from "@chakra-ui/stat";
 import { Tooltip } from "@chakra-ui/tooltip";
+
 import { WeaponInfoDisplayProps } from "../../../types/types";
+
 import DamageDropDisplay from "./DamageDropDisplay";
 
 export default function WeaponInfoDisplay(props: WeaponInfoDisplayProps) {
@@ -136,7 +138,9 @@ export default function WeaponInfoDisplay(props: WeaponInfoDisplayProps) {
           </GridItem>
         )}
         <GridItem colSpan={2}>
-          <DamageDropDisplay ammoContainerReference={props.weapon.ammoContainerReference}/>
+          <DamageDropDisplay
+            ammoContainerReference={props.weapon.ammoContainerReference}
+          />
         </GridItem>
         <GridItem colSpan={2}>
           <Accordion

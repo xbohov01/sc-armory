@@ -13,4 +13,4 @@ export type ArmorVM = FPSGearBaseVM & {
   oxygenPorts: number;
   grenadePorts: number;
   backpackMaxSize: number;
-}
+};

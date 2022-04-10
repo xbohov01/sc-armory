@@ -1,13 +1,25 @@
 import {
-  Box, Divider, HStack, Icon, Image, Link, VStack
-} from "@chakra-ui/react";
-import "@fontsource/lato";
-import {
-  AiFillInstagram, AiFillTwitterCircle, AiFillYoutube
+  AiFillInstagram,
+  AiFillTwitterCircle,
+  AiFillYoutube,
 } from "react-icons/ai";
 import { FaDiscord, FaFlickr, FaPatreon, FaTwitch } from "react-icons/fa";
 import { SiRedbubble } from "react-icons/si";
+
+import {
+  Box,
+  Divider,
+  HStack,
+  Icon,
+  Image,
+  Link,
+  VStack,
+} from "@chakra-ui/react";
+
+import "@fontsource/lato";
+
 import cig from "../../cig.png";
+
 import Bugs from "./Bugs";
 import JoinADI from "./JoinADI";
 import Support from "./Support";

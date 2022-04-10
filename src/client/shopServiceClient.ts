@@ -1,7 +1,9 @@
 import axios from "axios";
+
 import { ResultObject, SaleLocationVM } from "../types/types";
-import { ApiClient } from "./client";
+
 import { RetailProductVM } from "./viewModels/RetailProductVM";
+import { ApiClient } from "./client";
 
 const RetailProductsEndpoint = "/retailproducts";
 const saleLocations = "/salelocations";
@@ -11,7 +13,11 @@ export class ShopServiceClient extends ApiClient {
     super();
 
     const value = localStorage.getItem("wasPtu");
-    if (value === undefined || value === "false" || import.meta.env.VITE_PTU_ENABLED === "false") {
+    if (
+      value === undefined ||
+      value === "false" ||
+      import.meta.env.VITE_PTU_ENABLED === "false"
+    ) {
       this.isPtu = false;
       this.url = import.meta.env.VITE_SHOP_LIVE_URL || "";
     } else {
@@ -26,8 +32,8 @@ export class ShopServiceClient extends ApiClient {
     this.token = "";
 
     const password = this.isPtu
-      ? import.meta.env.VITE_SHOP_PTU_PASS!
-      : import.meta.env.VITE_SHOP_LIVE_PASS!;
+      ? import.meta.env.VITE_SHOP_PTU_PASS
+      : import.meta.env.VITE_SHOP_LIVE_PASS;
 
     this.authenticationPromise = super.Authorize(
       "/authentication/applogin",
@@ -38,8 +44,8 @@ export class ShopServiceClient extends ApiClient {
   override ChangeAPIs(isPtu: boolean) {
     this.isPtu = isPtu;
     this.url = isPtu
-      ? import.meta.env.VITE_SHOP_PTU_URL!
-      : import.meta.env.VITE_SHOP_LIVE_URL!;
+      ? import.meta.env.VITE_SHOP_PTU_URL
+      : import.meta.env.VITE_SHOP_LIVE_URL;
 
     this.instance = axios.create({
       baseURL: this.url,
@@ -60,8 +66,8 @@ export class ShopServiceClient extends ApiClient {
         message: statusText,
         data: hackedData,
       };
-    } catch (err: any) {
-      if (err.response.status === 404) {
+    } catch (err) {
+      if ((err as { response: { status: number } }).response.status === 404) {
         return {
           success: false,
           message: "Not sold",

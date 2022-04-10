@@ -1,11 +1,14 @@
-import { Grid, GridItem, VStack } from "@chakra-ui/layout";
-import { Stat, StatLabel, StatNumber } from "@chakra-ui/stat";
 import { sum } from "lodash";
 import React, { useEffect, useState } from "react";
+
+import { Grid, GridItem, VStack } from "@chakra-ui/layout";
+import { Stat, StatLabel, StatNumber } from "@chakra-ui/stat";
+
 import { ArmorVM } from "../../client/viewModels/ArmorVM";
 import gearInfoProvider from "../../providers/gearInfoProvider";
-import RangeInfo from "./armorInfo/RangeInfo";
+
 import BreakDownInfo from "./armorInfo/BreakDownInfo";
+import RangeInfo from "./armorInfo/RangeInfo";
 
 type ArmorInfoProps = {
   armors: string[];

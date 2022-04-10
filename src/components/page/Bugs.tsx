@@ -5,7 +5,7 @@ import {
   AccordionItem,
   AccordionPanel,
   Box,
-  Link
+  Link,
 } from "@chakra-ui/react";
 
 export default function Bugs() {

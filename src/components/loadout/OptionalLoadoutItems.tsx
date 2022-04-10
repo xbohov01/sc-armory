@@ -1,7 +1,10 @@
 import React, { Dispatch, SyntheticEvent, useEffect, useState } from "react";
+
 import { Button } from "@chakra-ui/button";
 import { Box, VStack } from "@chakra-ui/layout";
+
 import { KeyValue } from "../../types/types";
+
 import OptionalLoadoutComponent from "./OptionalLoadoutComponent";
 
 type OptionalLoadoutItemsProps = {
@@ -13,7 +16,7 @@ export default function OptionalLoadoutItems(props: OptionalLoadoutItemsProps) {
 
   useEffect(() => {
     props.updater(optionals.map((o) => o.value));
-  }, [optionals]);
+  }, [props, optionals]);
 
   const addOptional = (e: SyntheticEvent) => {
     e.preventDefault();

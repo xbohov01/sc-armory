@@ -1,10 +1,12 @@
-import { Box, Heading, HStack } from "@chakra-ui/layout";
-import AsyncSelect from "react-select/async";
 import React, { useState } from "react";
+import AsyncSelect from "react-select/async";
+
 import { Button } from "@chakra-ui/button";
-import { KeyValue } from "../../types/types";
-import { customStyles } from "../../selectStyle";
+import { Box, Heading, HStack } from "@chakra-ui/layout";
+
 import gearProvider from "../../providers/gearProvider";
+import { customStyles } from "../../selectStyle";
+import { KeyValue } from "../../types/types";
 
 type OptionalLoadoutComponentProps = {
   type: string;
@@ -21,7 +23,7 @@ export default function OptionalLoadoutComponent(
   const loadOptions = async () =>
     gearProvider.GetGearOptions(props.type, filter);
 
-  const handleGearChange = (selected: any) => {
+  const handleGearChange = (selected: Record<string, string>) => {
     props.updater({ key: props.id, value: selected.label });
   };
 

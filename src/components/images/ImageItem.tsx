@@ -1,13 +1,19 @@
+import React, { useEffect, useState } from "react";
+
 import {
   AccordionButton,
-  AccordionIcon, AccordionItem,
-  AccordionPanel, Box, Link
+  AccordionIcon,
+  AccordionItem,
+  AccordionPanel,
+  Box,
+  Link,
 } from "@chakra-ui/react";
 import { AdvancedImage } from "@cloudinary/react";
 import { Cloudinary } from "@cloudinary/url-gen";
-import React, { useEffect, useState } from "react";
+
 import client from "../../client/client";
 import { NameReference } from "../../types/types";
+
 import { WeaponDemoDisplay } from "./WeaponDemoDisplay";
 
 export type ImageItemProps = {

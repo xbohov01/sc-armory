@@ -1,9 +1,12 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { Box, Heading } from "@chakra-ui/layout";
 import Select from "react-select";
-import { customStyles } from "../../selectStyle";
+
+import { Box, Heading } from "@chakra-ui/layout";
+
 import gearProvider from "../../providers/gearProvider";
+import { customStyles } from "../../selectStyle";
 import { SelectOption } from "../../types/types";
+
 import CustomSelectOption from "./CustomSelectOption";
 
 type LoadoutComponentProps = {
@@ -25,7 +28,7 @@ export default function LoadoutComponent(props: LoadoutComponentProps) {
   const loadOptions = () =>
     options.filter((o) => o.label.toLowerCase().includes(filter.toLowerCase()));
 
-  const handleGearChange = (selected: any) => {
+  const handleGearChange = (selected: Record<string, string> | null) => {
     // Check for selection clearing
     if (selected === null) {
       props.updater("");
