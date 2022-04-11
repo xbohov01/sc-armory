@@ -37,7 +37,7 @@ export default function VersionSwitch(props: VersionSwitchProps) {
         setIsPtu(false);
         client.ChangeAPIs(false);
         gearServiceClient.ChangeAPIs(false);
-  
+
         localStorage.setItem("wasPtu", "false");
         return false;
       }

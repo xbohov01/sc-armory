@@ -16,7 +16,7 @@ export default function OptionalLoadoutItems(props: OptionalLoadoutItemsProps) {
 
   useEffect(() => {
     props.updater(optionals.map((o) => o.value));
-  }, [props, optionals]);
+  }, [optionals]);
 
   const addOptional = (e: SyntheticEvent) => {
     e.preventDefault();

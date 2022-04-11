@@ -30,10 +30,8 @@ export default function LoadoutBuilder(props: LoadoutBuilderProps) {
   const [secAttachments, setSecAttachments] = useState<string[]>([]);
   const [sideAttachments, setSideAttachments] = useState<string[]>([]);
 
-  const { updater } = props
-
   useEffect(() => {
-    updater(
+    props.updater(
       [
         helmet,
         arms,
@@ -52,7 +50,6 @@ export default function LoadoutBuilder(props: LoadoutBuilderProps) {
       ].filter((g) => g !== "")
     );
   }, [
-    updater,
     helmet,
     arms,
     core,

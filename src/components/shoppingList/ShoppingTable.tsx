@@ -33,7 +33,7 @@ export default function ShoppingTable(props: ShoppingTableProps) {
         isClosable: true,
       });
     }
-  }, [props.gear, toast]);
+  }, [props.gear]);
 
   return (
     <Box id="shopping-list-table" marginTop="100pt">

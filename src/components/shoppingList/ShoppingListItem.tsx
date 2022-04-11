@@ -1,5 +1,3 @@
-import React from "react";
-
 import { Checkbox } from "@chakra-ui/checkbox";
 import { Box, Heading, HStack } from "@chakra-ui/layout";
 

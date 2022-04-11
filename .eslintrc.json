@@ -2,7 +2,6 @@
   "extends": [
     "plugin:react/recommended",
     "plugin:react-hooks/recommended",
-    "airbnb",
     "plugin:@typescript-eslint/recommended",
     "prettier"
   ],
@@ -32,7 +31,6 @@
     "linebreak-style": "off",
     "eol-last": "off",
     "max-len": ["warn", { "code": 100 }],
-    "import/extensions": ["error", "never", { "svg": "always" }],
     "import/no-extraneous-dependencies": [
       "off",
       {
@@ -62,13 +60,6 @@
           // Style imports.
           ["^.+\\.s?css$"]
         ]
-      }
-    ],
-    "import/no-anonymous-default-export": [
-      "error",
-      {
-        "allowArrowFunction": true,
-        "allowAnonymousFunction": true
       }
     ]
   }

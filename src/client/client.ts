@@ -66,7 +66,7 @@ export class ApiClient {
     this.instance.interceptors.request.use((config) => ({
       ...config,
       headers: {
-        Authorization: token ? `Bearer ${token}` : "",
+        "Authorization": token ? `Bearer ${token}` : "",
         "Content-Type": "application/json",
       },
     }));

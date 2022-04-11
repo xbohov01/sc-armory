@@ -35,7 +35,7 @@ export default function ShoppingList(props: ShoppingListProps) {
         isClosable: true,
       });
     }
-  }, [props, toast]);
+  }, [props.gear]);
 
   const setItemBought = (itemName: string, bought: boolean) => {
     const copy = cloneDeep(list);

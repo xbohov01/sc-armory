@@ -1,5 +1,4 @@
 // TODO: remove eslint-disable
-/* eslint-disable class-methods-use-this */
 import gearServiceClient from "../client/gearServiceClient";
 import { AmmunitionInfo } from "../client/viewModels/AmmunitionVM";
 import { ArmorVM } from "../client/viewModels/ArmorVM";

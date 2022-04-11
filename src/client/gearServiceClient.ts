@@ -89,8 +89,8 @@ class GearServiceClient extends ApiClient {
     localizedName: string
   ): Promise<ArmorVM[]> {
     return this.GetArmors(
-      `?$filter=armorPart eq '${part}' ` + 
-      `and contains(tolower(localizedName),'${localizedName.toLowerCase()}')`
+      `?$filter=armorPart eq '${part}' ` +
+        `and contains(tolower(localizedName),'${localizedName.toLowerCase()}')`
     );
   }
 
@@ -109,8 +109,8 @@ class GearServiceClient extends ApiClient {
 
   async GetPrimaryWeapons(name = ""): Promise<WeaponVM[]> {
     return this.GetWeapons(
-      `?$filter=type ne 'Pistol' and type ne 'Utility'` + 
-      ` and type ne 'Knife' and contains(tolower(localizedName),'${name.toLowerCase()}')`
+      `?$filter=type ne 'Pistol' and type ne 'Utility'` +
+        ` and type ne 'Knife' and contains(tolower(localizedName),'${name.toLowerCase()}')`
     );
   }
 
@@ -151,8 +151,8 @@ class GearServiceClient extends ApiClient {
 
   async GetTools(name = ""): Promise<WeaponVM[]> {
     return this.GetWeapons(
-      `?$filter=(type eq 'Utility' or type eq 'Medical Device' ` + 
-      `or type eq 'Knife') and contains(tolower(localizedName),'${name.toLowerCase()}')`
+      `?$filter=(type eq 'Utility' or type eq 'Medical Device' ` +
+        `or type eq 'Knife') and contains(tolower(localizedName),'${name.toLowerCase()}')`
     );
   }
 
