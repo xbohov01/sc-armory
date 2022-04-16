@@ -1,8 +1,11 @@
-import { Box, Heading, Accordion } from "@chakra-ui/react";
-import { Cloudinary } from "@cloudinary/base";
 import React, { useEffect, useState } from "react";
+
+import { Accordion, Box, Heading } from "@chakra-ui/react";
+import { Cloudinary } from "@cloudinary/url-gen";
+
 import gearInfoProvider from "../../providers/gearInfoProvider";
 import { NameReference } from "../../types/types";
+
 import { ImageItem } from "./ImageItem";
 
 type ImageDisplayProps = {

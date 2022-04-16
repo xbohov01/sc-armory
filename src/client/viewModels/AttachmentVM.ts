@@ -6,4 +6,4 @@ export type AttachmentVM = FPSGearBaseVM & {
   maxRange: number;
   rangeIncrement: number;
   autoZeroingTime: number;
-}
+};

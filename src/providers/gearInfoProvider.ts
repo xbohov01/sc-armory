@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import gearServiceClient from "../client/gearServiceClient";
 import { ArmorVM } from "../client/viewModels/ArmorVM";
 import { WeaponVM } from "../client/viewModels/WeaponVM";

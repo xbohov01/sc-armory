@@ -9,4 +9,4 @@ export type FPSGearBaseVM = {
   size: number;
   inventoryOccupancy: number;
   tags: string;
-}
+};

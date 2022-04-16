@@ -1,3 +1,5 @@
+import React, { useState } from "react";
+
 import {
   Alert,
   AlertDescription,
@@ -7,7 +9,6 @@ import {
   CloseButton,
   Link,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
 
 export function AppNotice() {
   const [hidden, setHidden] = useState(false);

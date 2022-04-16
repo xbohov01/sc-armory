@@ -14,7 +14,7 @@ class WeaponAttachmentProvider {
       { MaxSize: 1, MinSize: 1, Type: "Sight", Attachments: [] },
       { MaxSize: 2, MinSize: 1, Type: "Underbarrel", Attachments: [] },
     ],
-    R97Shotgun: [
+    "R97Shotgun": [
       { MaxSize: 1, MinSize: 1, Type: "Sight", Attachments: [] },
       { MaxSize: 2, MinSize: 1, Type: "Underbarrel", Attachments: [] },
     ],
@@ -36,12 +36,12 @@ class WeaponAttachmentProvider {
   };
 
   private _generalSlots: { [id: string]: WeaponAttachmentSlot[] } = {
-    Pistol: [
+    "Pistol": [
       { MaxSize: 1, MinSize: 1, Type: "Barrel", Attachments: [] },
       { MaxSize: 1, MinSize: 1, Type: "Underbarrel", Attachments: [] },
       { MaxSize: 1, MinSize: 1, Type: "Sight", Attachments: [] },
     ],
-    Rifle: [
+    "Rifle": [
       { MaxSize: 2, MinSize: 1, Type: "Barrel", Attachments: [] },
       { MaxSize: 2, MinSize: 1, Type: "Underbarrel", Attachments: [] },
       { MaxSize: 2, MinSize: 1, Type: "Sight", Attachments: [] },
@@ -51,22 +51,22 @@ class WeaponAttachmentProvider {
       { MaxSize: 2, MinSize: 1, Type: "Underbarrel", Attachments: [] },
       { MaxSize: 3, MinSize: 1, Type: "Sight", Attachments: [] },
     ],
-    LMG: [
+    "LMG": [
       { MaxSize: 2, MinSize: 1, Type: "Barrel", Attachments: [] },
       { MaxSize: 2, MinSize: 1, Type: "Underbarrel", Attachments: [] },
       { MaxSize: 2, MinSize: 1, Type: "Sight", Attachments: [] },
     ],
-    SMG: [
+    "SMG": [
       { MaxSize: 1, MinSize: 1, Type: "Barrel", Attachments: [] },
       { MaxSize: 1, MinSize: 1, Type: "Underbarrel", Attachments: [] },
       { MaxSize: 1, MinSize: 1, Type: "Sight", Attachments: [] },
     ],
-    Shotgun: [
+    "Shotgun": [
       { MaxSize: 3, MinSize: 1, Type: "Barrel", Attachments: [] },
       { MaxSize: 2, MinSize: 1, Type: "Underbarrel", Attachments: [] },
       { MaxSize: 1, MinSize: 1, Type: "Sight", Attachments: [] },
     ],
-    default: [],
+    "default": [],
   };
 
   private _attachments: WeaponAttachment[] = [
@@ -172,6 +172,7 @@ class WeaponAttachmentProvider {
     },
   ];
 
+  // eslint-disable-next-line class-methods-use-this
   async GetAttachmentSlots(name: string): Promise<WeaponAttachmentSlot[]> {
     const weaponModel = await gearServiceClient.GetWeaponByName(name);
     const slots: WeaponAttachmentSlot[] = [

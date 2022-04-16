@@ -1,9 +1,12 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { Box, Heading } from "@chakra-ui/layout";
 import Select from "react-select";
-import { customStyles } from "../../selectStyle";
+
+import { Box, Heading } from "@chakra-ui/layout";
+
 import gearProvider from "../../providers/gearProvider";
+import { customStyles } from "../../selectStyle";
 import { SelectOption } from "../../types/types";
+
 import CustomSelectOption from "./CustomSelectOption";
 import WrongSizeWarning from "./WrongSizeWarning";
 
@@ -38,7 +41,7 @@ export function BackpackSelectorDropdown(props: BackpackSelectorDropdownProps) {
   const loadOptions = () =>
     backpacks.filter((b) => b.label.toLowerCase().includes(filter));
 
-  const handleGearChange = (selected: any) => {
+  const handleGearChange = (selected: { label: string } | null) => {
     // Check for selection clearing
     if (selected === null) {
       props.setBackpack("");

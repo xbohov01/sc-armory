@@ -1,4 +1,3 @@
-import React from "react";
 import { FormatProps } from "../../types/types";
 
 export default function CustomSelectOption(props: FormatProps) {

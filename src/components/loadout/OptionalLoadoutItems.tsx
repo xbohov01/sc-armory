@@ -1,7 +1,10 @@
 import React, { Dispatch, SyntheticEvent, useEffect, useState } from "react";
+
 import { Button } from "@chakra-ui/button";
 import { Box, VStack } from "@chakra-ui/layout";
+
 import { KeyValue } from "../../types/types";
+
 import OptionalLoadoutComponent from "./OptionalLoadoutComponent";
 
 type OptionalLoadoutItemsProps = {

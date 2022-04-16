@@ -11,4 +11,4 @@ export type RetailProductVM = {
   MaxDiscountPercentage: number;
   MaxPremiumPercentage: number;
   RetailType: number;
-}
+};

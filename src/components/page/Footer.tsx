@@ -1,25 +1,28 @@
-import React from "react";
+import {
+  AiFillInstagram,
+  AiFillTwitterCircle,
+  AiFillYoutube,
+} from "react-icons/ai";
+import { FaDiscord, FaFlickr, FaPatreon, FaTwitch } from "react-icons/fa";
+import { SiRedbubble } from "react-icons/si";
+
 import {
   Box,
-  Icon,
-  HStack,
-  VStack,
-  Link,
   Divider,
+  HStack,
+  Icon,
   Image,
+  Link,
+  VStack,
 } from "@chakra-ui/react";
-import {
-  AiFillYoutube,
-  AiFillTwitterCircle,
-  AiFillInstagram,
-} from "react-icons/ai";
-import { FaTwitch, FaDiscord, FaFlickr, FaPatreon } from "react-icons/fa";
-import { SiRedbubble } from "react-icons/si";
-import Support from "./Support";
-import cig from "../../cig.png";
+
 import "@fontsource/lato";
-import JoinADI from "./JoinADI";
+
+import cig from "../../cig.png";
+
 import Bugs from "./Bugs";
+import JoinADI from "./JoinADI";
+import Support from "./Support";
 
 export default function Footer() {
   return (

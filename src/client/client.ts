@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import axios, { AxiosInstance } from "axios";
 import { sha3_512 } from "js-sha3";
 
@@ -20,23 +21,23 @@ export class ApiClient {
     const wasPtu = localStorage.getItem("wasPtu") === "true";
     this.ChangeAPIs(wasPtu);
     this.cloudinary =
-      process.env.REACT_APP_CLOUDINARY_URL ||
+      import.meta.env.VITE_CLOUDINARY_URL ||
       "https://res.cloudinary.com/thespacecoder/image/upload/v1630349759/armory/";
     this.token = "";
 
-    //this.authenticationPromise = this.Authorize();
+    // this.authenticationPromise = this.Authorize();
   }
 
   async Authorize(
-    endpoint: string = "",
+    endpoint = "",
     password: string = this.isPtu
-      ? process.env.REACT_APP_PTU_PASSWORD!
-      : process.env.REACT_APP_PASSWORD!
+      ? import.meta.env.VITE_PTU_PASSWORD
+      : import.meta.env.VITE_PASSWORD
   ): Promise<string> {
     const code = (Math.random() + 1).toString(36).substring(2);
     const username = this.isPtu
-      ? process.env.REACT_APP_PTU_LOGIN
-      : process.env.REACT_APP_LOGIN;
+      ? import.meta.env.VITE_PTU_LOGIN
+      : import.meta.env.VITE_LOGIN;
 
     try {
       const result = await this.instance.post(
@@ -44,16 +45,17 @@ export class ApiClient {
           endpoint !== "" ? endpoint : `${AuthenticationEndpoint}/login`
         }`,
         {
-          username: username,
+          username,
           sequence: sha3_512(password + code),
-          code: code,
+          code,
         }
       );
 
       this.SetToken(result.data.token);
       return result.data.token;
-    } catch (e: any) {
-      console.warn(`Authentication failed ${e.message}`);
+    } catch (error: unknown) {
+      // eslint-disable-next-line no-console
+      console.warn(`Authentication failed ${(error as Error).message}`);
       return "";
     }
   }
@@ -64,7 +66,7 @@ export class ApiClient {
     this.instance.interceptors.request.use((config) => ({
       ...config,
       headers: {
-        Authorization: token ? `Bearer ${token}` : "",
+        "Authorization": token ? `Bearer ${token}` : "",
         "Content-Type": "application/json",
       },
     }));
@@ -73,8 +75,8 @@ export class ApiClient {
   ChangeAPIs(isPtu: boolean) {
     this.isPtu = isPtu;
     this.url = isPtu
-      ? process.env.REACT_APP_API_PTU_URL!
-      : process.env.REACT_APP_API_URL!;
+      ? import.meta.env.VITE_API_PTU_URL
+      : import.meta.env.VITE_API_URL;
     this.instance = axios.create({
       baseURL: this.url,
     });

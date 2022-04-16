@@ -1,9 +1,11 @@
+/* eslint-disable class-methods-use-this */
 /* eslint-disable no-await-in-loop */
 /* eslint-disable no-restricted-syntax */
 import { orderBy, uniq } from "lodash";
+
+import shopServiceClient from "../client/shopServiceClient";
 import SaleLocationsFetchException from "../exceptions/SaleLocationsFetchException";
 import { KeyValue, ListKey, LocatedItem } from "../types/types";
-import shopServiceClient from "../client/shopServiceClient";
 
 class ShoppingListGenerator {
   async GetShoppingList(
@@ -13,7 +15,9 @@ class ShoppingListGenerator {
     const locatedItems: LocatedItem[] = [];
     let price = 0;
 
-    const promises = loadout.map((gear) => shopServiceClient.GetSaleLocations(gear));
+    const promises = loadout.map((gear) =>
+      shopServiceClient.GetSaleLocations(gear)
+    );
     const results = await Promise.all(promises);
 
     results.forEach((result) => {

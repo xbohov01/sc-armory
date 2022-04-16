@@ -1,9 +1,11 @@
-import { Heading, VStack } from "@chakra-ui/layout";
 import React, { useEffect, useState } from "react";
 import Select from "react-select";
-import { compactStyles } from "../../selectStyle";
-import weaponAttachmentProvider from "../../providers/weaponAttachmentProvider";
+
+import { Heading, VStack } from "@chakra-ui/layout";
+
 import { AttachmentVM } from "../../client/viewModels/AttachmentVM";
+import weaponAttachmentProvider from "../../providers/weaponAttachmentProvider";
+import { compactStyles } from "../../selectStyle";
 import { WeaponAttachmentSlot } from "../../types/types";
 
 export type WeaponAttachmentSelectorProps = {
@@ -31,7 +33,7 @@ export function WeaponAttachmentSelector(props: WeaponAttachmentSelectorProps) {
     props.attachmentSlot.MinSize,
   ]);
 
-  const handleGearChange = (selectedOption: any) => {
+  const handleGearChange = (selectedOption: Record<string, string> | null) => {
     // Check for selection clearing
     if (selectedOption === null) {
       props.updater(props.attachmentSlot.Type, "");

@@ -1,6 +1,8 @@
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+
 import { Button } from "@chakra-ui/button";
 import { Box, Heading } from "@chakra-ui/layout";
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+
 import BackpackSelectorComponent from "./BackpackSelectorComponent";
 import LoadoutComponent from "./LoadoutComponent";
 import OptionalLoadoutItems from "./OptionalLoadoutItems";

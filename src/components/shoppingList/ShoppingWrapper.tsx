@@ -1,8 +1,11 @@
+import React, { Dispatch, SetStateAction, useState } from "react";
+
 import { Box, Heading, HStack } from "@chakra-ui/layout";
 import { Switch } from "@chakra-ui/switch";
 import { useToast } from "@chakra-ui/toast";
-import React, { Dispatch, SetStateAction, useState } from "react";
+
 import { KeyValue, ListKey, LocatedItem } from "../../types/types";
+
 import ShoppingList from "./ShoppingList";
 import ShoppingTable from "./ShoppingTable";
 

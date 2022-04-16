@@ -1,9 +1,12 @@
-import { Box, Heading, HStack, VStack } from "@chakra-ui/layout";
-import { useToast } from "@chakra-ui/toast";
 import { cloneDeep } from "lodash";
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
-import shoppingListGenerator from "../shoppingListGenerator";
+
+import { Box, Heading, HStack, VStack } from "@chakra-ui/layout";
+import { useToast } from "@chakra-ui/toast";
+
 import { KeyValue, ListKey, LocatedItem } from "../../types/types";
+import shoppingListGenerator from "../shoppingListGenerator";
+
 import ShoppingLocation from "./ShoppingLocation";
 
 type ShoppingListProps = {

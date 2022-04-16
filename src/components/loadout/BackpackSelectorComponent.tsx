@@ -1,5 +1,7 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+
 import gearProvider from "../../providers/gearProvider";
+
 import { BackpackSelectorDropdown } from "./BackpackSelectorDropdown";
 
 type BackpackSelectorComponentProps = {

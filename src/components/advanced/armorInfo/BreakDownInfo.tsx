@@ -1,14 +1,15 @@
+import { sum } from "lodash";
+
 import { Box, HStack, List, ListItem } from "@chakra-ui/layout";
 import {
   Accordion,
-  AccordionItem,
   AccordionButton,
   AccordionIcon,
+  AccordionItem,
   AccordionPanel,
 } from "@chakra-ui/react";
 import { Stat, StatLabel, StatNumber } from "@chakra-ui/stat";
-import { sum } from "lodash";
-import React from "react";
+
 import { RangeInfoProps } from "../../../types/types";
 
 export default function BreakDownInfo(props: RangeInfoProps) {

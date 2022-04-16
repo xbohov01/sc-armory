@@ -1,7 +1,10 @@
-import { HStack } from "@chakra-ui/layout";
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { KeyValue, WeaponAttachmentSlot } from "../../types/types";
+
+import { HStack } from "@chakra-ui/layout";
+
 import weaponAttachmentProvider from "../../providers/weaponAttachmentProvider";
+import { KeyValue, WeaponAttachmentSlot } from "../../types/types";
+
 import { WeaponAttachmentSelector } from "./WeaponAttachmentSelector";
 
 type WeaponAttachmentsListProps = {

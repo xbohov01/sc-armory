@@ -1,7 +1,10 @@
-import { VStack } from "@chakra-ui/layout";
 import React, { useEffect, useState } from "react";
+
+import { VStack } from "@chakra-ui/layout";
+
 import { WeaponVM } from "../../client/viewModels/WeaponVM";
 import gearInfoProvider from "../../providers/gearInfoProvider";
+
 import WeaponInfoDisplay from "./weapoonInfo/WeaponInfoDisplay";
 
 type WeaponInfoProps = {
