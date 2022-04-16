@@ -18,9 +18,7 @@
     "serve": "vite preview",
     "lint": "eslint src --ext .tsx --ext .ts --fix",
     "format": "prettier -w 'src/**/*.{tsx,ts}'",
-    "pretest": "yarn lint:fix",
     "test": "jest --colors --passWithNoTests",
-    "posttest": "npx http-server coverage/lcov-report",
     "test:watch": "yarn test --collectCoverage=false --watch"
   },
   "dependencies": {
