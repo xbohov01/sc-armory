@@ -23,8 +23,8 @@ export default function OptionalLoadoutComponent(
   const loadOptions = async () =>
     gearProvider.GetGearOptions(props.type, filter);
 
-  const handleGearChange = (selected: Record<string, string>) => {
-    props.updater({ key: props.id, value: selected.label });
+  const handleGearChange = (selected: Record<string, string> | null) => {
+    props.updater({ key: props.id, value: selected?.label || '' });
   };
 
   const handleRemove = () => {
