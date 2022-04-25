@@ -1,9 +1,9 @@
 import { Image } from "@chakra-ui/image";
 import { Box, Heading, HStack, Link, VStack } from "@chakra-ui/layout";
 
-import logo from "../../logo.png";
-
 import VersionSwitch from "./VersionSwitch";
+
+import logo from "~/assets/logo.png";
 
 export default function Header() {
   const isPTU = import.meta.env.VITE_PTU_ENABLED === "true";
