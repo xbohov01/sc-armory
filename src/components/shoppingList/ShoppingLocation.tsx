@@ -1,8 +1,10 @@
 import { Box, VStack } from "@chakra-ui/layout";
 
-import { KeyValue, ListKey, LocatedItem } from "../../types/types";
+import {  ListKey, LocatedItem } from "../../types/types";
 
 import { ShoppingListItem } from "./ShoppingListItem";
+
+import type { KeyValue } from '~type/select'
 
 type ShoppingLocationProps = {
   items: KeyValue<ListKey, LocatedItem[]>;

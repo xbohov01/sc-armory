@@ -1,6 +1,8 @@
 import { Td, Tr } from "@chakra-ui/react";
 
-import { KeyValue, LocatedItem } from "../../types/types";
+import {  LocatedItem } from "../../types/types";
+
+import type { KeyValue } from '~type/select'
 
 export type DataRowProps = {
   locations: string[];

@@ -14,11 +14,6 @@ export type Loadout = {
   secondary: RetailProductVM;
 };
 
-export type KeyValue<K, V> = {
-  key: K;
-  value: V;
-};
-
 export type ListKey = {
   id: number;
   name: string;
