@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 
 import { Button, VStack } from "@chakra-ui/react";
 
-import { ListKey, LocatedItem } from "../../types/types";
+import { ListKey } from "../../types/types";
 
 import LoadoutExportText from "./LoadoutExportText";
 
+import type { LocatedItem } from '~type/search'
 import type { KeyValue } from '~type/select'
 
 type LoadoutExporterProps = {

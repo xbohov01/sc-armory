@@ -1,7 +1,7 @@
 import { Checkbox } from "@chakra-ui/checkbox";
 import { Box, Heading, HStack } from "@chakra-ui/layout";
 
-import { LocatedItem } from "../../types/types";
+import type { LocatedItem } from "~type/search";
 
 export type ShoppingListItemProps = {
   item: LocatedItem;

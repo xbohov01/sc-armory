@@ -3,10 +3,11 @@ import { AiFillQuestionCircle } from "react-icons/ai";
 import { Box, HStack, VStack } from "@chakra-ui/layout";
 import { Tooltip } from "@chakra-ui/react";
 
-import {  ListKey, LocatedItem } from "../../types/types";
+import { ListKey } from "../../types/types";
 
 import { ShoppingListItem } from "./ShoppingListItem";
 
+import type { LocatedItem } from '~type/search'
 import type { KeyValue } from '~type/select'
 
 type ShoppingLocationProps = {

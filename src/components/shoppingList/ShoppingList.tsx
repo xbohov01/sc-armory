@@ -4,11 +4,12 @@ import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { Box, Heading, HStack, VStack } from "@chakra-ui/layout";
 import { useToast } from "@chakra-ui/toast";
 
-import {  ListKey, LocatedItem } from "../../types/types";
+import {  ListKey } from "../../types/types";
 import shoppingListGenerator from "../shoppingListGenerator";
 
 import ShoppingLocation from "./ShoppingLocation";
 
+import type { LocatedItem } from '~type/search'
 import type { KeyValue } from '~type/select'
 
 type ShoppingListProps = {

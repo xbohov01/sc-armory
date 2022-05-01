@@ -1,4 +1,4 @@
-import { LocatedItem } from "./types";
+import type { LocatedItem } from "~type/search";
 
 type GroupedSaleLocation = {
   chain: string;

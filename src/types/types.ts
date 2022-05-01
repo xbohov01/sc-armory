@@ -7,16 +7,6 @@ export type ListKey = {
   chain: string;
 };
 
-export type LocatedItem = {
-  item: string;
-  storeId: number;
-  storeName: string;
-  storeLocation: string;
-  storeChain: string;
-  price: string;
-  isBought: boolean;
-};
-
 export type SaleLocationVM = {
   itemId: number;
   itemName: string;
