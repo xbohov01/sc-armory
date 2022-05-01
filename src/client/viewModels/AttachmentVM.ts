@@ -1,6 +1,6 @@
-import { FPSGearBaseVM } from "./FPSGearBaseVM";
+import type { FPSGear } from "~type/loadout";
 
-export type AttachmentVM = FPSGearBaseVM & {
+export type AttachmentVM = FPSGear & {
   grade: number;
   defaultRange: number;
   maxRange: number;

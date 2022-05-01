@@ -1,7 +1,8 @@
-import { FPSGearBaseVM } from "./FPSGearBaseVM";
 import { WeaponAttachmentPortVM } from "./WeaponAttachmentPortVM";
 
-export type WeaponVM = FPSGearBaseVM & {
+import type { FPSGear } from '~type/loadout'
+
+export type WeaponVM = FPSGear & {
   barrelSlot: WeaponAttachmentPortVM;
   opticSlot: WeaponAttachmentPortVM;
   underbarrelSlot: WeaponAttachmentPortVM;

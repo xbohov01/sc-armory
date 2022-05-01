@@ -6,11 +6,10 @@ import { SingleResultObject } from "../types/types";
 import { AmmunitionVM } from "./viewModels/AmmunitionVM";
 import { ArmorVM } from "./viewModels/ArmorVM";
 import { AttachmentVM } from "./viewModels/AttachmentVM";
-import { FPSGearBaseVM } from "./viewModels/FPSGearBaseVM";
 import { WeaponVM } from "./viewModels/WeaponVM";
 import { ApiClient } from "./client";
 
-import type { RetailProduct } from "~type/loadout";
+import type { FPSGear, RetailProduct } from "~type/loadout";
 
 const ArmorsEndpoint = "/armors";
 const WeaponsEndpoint = "/weapons";
@@ -134,7 +133,7 @@ class GearServiceClient extends ApiClient {
     };
   }
 
-  async GetConsumable(filter = ""): Promise<FPSGearBaseVM[]> {
+  async GetConsumable(filter = ""): Promise<FPSGear[]> {
     const result = await this.instance.get(
       this.url + ConsumablesEndpoint + filter
     );
@@ -157,7 +156,7 @@ class GearServiceClient extends ApiClient {
     );
   }
 
-  async GetUsable(filter = ""): Promise<FPSGearBaseVM[]> {
+  async GetUsable(filter = ""): Promise<FPSGear[]> {
     return [
       ...(await this.GetTools(filter)),
       ...(await this.GetConsumable(filter)),

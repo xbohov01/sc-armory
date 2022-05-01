@@ -2,8 +2,8 @@
 import gearServiceClient from "../client/gearServiceClient";
 import { AmmunitionInfo } from "../client/viewModels/AmmunitionVM";
 import { ArmorVM } from "../client/viewModels/ArmorVM";
-import { FPSGearBaseVM } from "../client/viewModels/FPSGearBaseVM";
 
+import type { FPSGear } from "~type/loadout"
 import type { SelectOption } from "~type/select";
 
 class GearProvider {
@@ -11,7 +11,7 @@ class GearProvider {
     type: string,
     filter: string
   ): Promise<SelectOption[]> {
-    let result: FPSGearBaseVM[] = [];
+    let result: FPSGear[] = [];
 
     switch (type) {
       case "Helmet":
@@ -138,7 +138,7 @@ class GearProvider {
     return "";
   }
 
-  private GearToSelectOption(gear: FPSGearBaseVM): SelectOption {
+  private GearToSelectOption(gear: FPSGear): SelectOption {
     return {
       value: gear.id.toString(),
       label: gear.localizedName,
