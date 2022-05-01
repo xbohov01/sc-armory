@@ -1,3 +1,5 @@
+import type { SelectOption } from "~type/select";
+
 export type RetailProduct = {
   Id: number;
   Uuid: string;
@@ -117,4 +119,17 @@ export type Armor = FPSGear & {
   oxygenPorts: number;
   grenadePorts: number;
   backpackMaxSize: number;
+};
+
+export type WeaponAttachment = {
+  Name: string;
+  Size: number;
+  Type: string;
+};
+
+export type WeaponAttachmentSlot = {
+  MaxSize: number;
+  MinSize: number;
+  Type: string;
+  Attachments: SelectOption[];
 };

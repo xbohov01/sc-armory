@@ -1,4 +1,8 @@
-import { FormatProps } from "../../types/types";
+type FormatProps = {
+  value: string;
+  label: string;
+  type: string;
+};
 
 export default function CustomSelectOption(props: FormatProps) {
   return (

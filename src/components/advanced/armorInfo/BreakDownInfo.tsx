@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 import { Stat, StatLabel, StatNumber } from "@chakra-ui/stat";
 
-import { RangeInfoProps } from "../../../types/types";
+import type { RangeInfoProps } from "./RangeInfo";
 
 export default function BreakDownInfo(props: RangeInfoProps) {
   return (

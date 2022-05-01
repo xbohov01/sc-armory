@@ -1,7 +1,10 @@
 import gearServiceClient from "../client/gearServiceClient";
-import { WeaponAttachment, WeaponAttachmentSlot } from "../types/types";
 
-import type { Attachment } from "~type/loadout"
+import type {
+  Attachment,
+  WeaponAttachment,
+  WeaponAttachmentSlot,
+} from "~type/loadout";
 
 class WeaponAttachmentProvider {
   private _specificSlots: { [id: string]: WeaponAttachmentSlot[] } = {

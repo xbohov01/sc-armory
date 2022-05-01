@@ -13,3 +13,12 @@ export type ListKey = {
   name: string;
   chain: string;
 };
+
+export type SaleLocation = {
+  itemId: number;
+  itemName: string;
+  price: number;
+  saleLocationChain: string;
+  saleLocationId: number;
+  saleLocationName: string;
+};

@@ -5,9 +5,8 @@ import { Heading, VStack } from "@chakra-ui/layout";
 
 import weaponAttachmentProvider from "../../providers/weaponAttachmentProvider";
 import { compactStyles } from "../../selectStyle";
-import { WeaponAttachmentSlot } from "../../types/types";
 
-import type { Attachment } from "~type/loadout" 
+import type { Attachment, WeaponAttachmentSlot } from "~type/loadout";
 
 export type WeaponAttachmentSelectorProps = {
   attachmentSlot: WeaponAttachmentSlot;

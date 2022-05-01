@@ -1,10 +1,10 @@
 import axios from "axios";
 
-import { ResultObject, SaleLocationVM } from "../types/types";
-
 import { ApiClient } from "./client";
 
+import type { ResultObject } from "~type/fetch";
 import type { RetailProduct } from "~type/loadout";
+import type { SaleLocation } from "~type/search";
 
 const RetailProductsEndpoint = "/retailproducts";
 const saleLocations = "/salelocations";
@@ -55,25 +55,28 @@ export class ShopServiceClient extends ApiClient {
 
   async GetSaleLocations(
     itemName: string
-  ): Promise<ResultObject<SaleLocationVM>> {
+  ): Promise<ResultObject<SaleLocation>> {
     try {
       const { status, statusText, data } = await this.instance.get<
-        SaleLocationVM[]
+        SaleLocation[]
       >(`${this.url + saleLocations}?item=${itemName}`);
 
       return {
         success: status === 200,
         message: statusText,
-        data: data.length > 0 ? data : [
-          {
-            saleLocationId: 0,
-            saleLocationName: "N/A",
-            itemId: 0,
-            price: 0,
-            saleLocationChain: "N/A",
-            itemName,
-          },
-        ],
+        data:
+          data.length > 0
+            ? data
+            : [
+                {
+                  saleLocationId: 0,
+                  saleLocationName: "N/A",
+                  itemId: 0,
+                  price: 0,
+                  saleLocationChain: "N/A",
+                  itemName,
+                },
+              ],
       };
     } catch (err) {
       if ((err as { response: { status: number } }).response.status === 404) {

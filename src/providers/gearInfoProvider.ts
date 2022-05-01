@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import gearServiceClient from "../client/gearServiceClient";
 import GearInfoFetchException from "../exceptions/GearInfoFetchException";
-import { NameReference } from "../types/types";
 
-import type { Armor, Weapon } from "~type/loadout"
+import type { NameReference } from "~type/image";
+import type { Armor, Weapon } from "~type/loadout";
 
 class GearInfoProvider {
   async GetArmorListInfo(names: string[]): Promise<Armor[]> {

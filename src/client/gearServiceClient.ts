@@ -1,11 +1,17 @@
 import axios from "axios";
 import { orderBy } from "lodash";
 
-import { SingleResultObject } from "../types/types";
-
 import { ApiClient } from "./client";
 
-import type { Ammunition, Armor, Attachment, FPSGear, RetailProduct, Weapon } from "~type/loadout";
+import type { SingleResultObject } from "~type/fetch";
+import type {
+  Ammunition,
+  Armor,
+  Attachment,
+  FPSGear,
+  RetailProduct,
+  Weapon,
+} from "~type/loadout";
 
 const ArmorsEndpoint = "/armors";
 const WeaponsEndpoint = "/weapons";
