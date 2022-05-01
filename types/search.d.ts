@@ -22,3 +22,15 @@ export type SaleLocation = {
   saleLocationId: number;
   saleLocationName: string;
 };
+
+type GroupedSaleLocation = {
+  chain: string;
+  items: LocatedItem[];
+};
+
+type ItemPrices = {
+  item: string;
+  prices: number[];
+  low: number;
+  high: number;
+};

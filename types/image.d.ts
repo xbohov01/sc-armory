@@ -1,6 +1,4 @@
-
 export type NameReference = {
-    name: string;
-    reference: string;
-  };
-  
+  name: string;
+  reference: string;
+};
