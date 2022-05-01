@@ -1,6 +1,4 @@
-
-import { WeaponVM } from "../client/viewModels/WeaponVM";
-
+import type { Weapon } from "~type/loadout"
 import type { SelectOption } from "~type/select";
 
 export type ListKey = {
@@ -72,5 +70,5 @@ export type RangeInfoProps = {
 };
 
 export type WeaponInfoDisplayProps = {
-  weapon: WeaponVM;
+  weapon: Weapon;
 };

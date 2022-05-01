@@ -1,9 +1,10 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import gearServiceClient from "../client/gearServiceClient";
 import { ArmorVM } from "../client/viewModels/ArmorVM";
-import { WeaponVM } from "../client/viewModels/WeaponVM";
 import GearInfoFetchException from "../exceptions/GearInfoFetchException";
 import { NameReference } from "../types/types";
+
+import type { Weapon } from "~type/loadout"
 
 class GearInfoProvider {
   async GetArmorListInfo(names: string[]): Promise<ArmorVM[]> {
@@ -23,12 +24,12 @@ class GearInfoProvider {
     return data;
   }
 
-  async GetWeaponListInfo(names: string[]): Promise<WeaponVM[]> {
+  async GetWeaponListInfo(names: string[]): Promise<Weapon[]> {
     const promises = names.map((name) => this.GetWeaponInfo(name));
     return Promise.all(promises);
   }
 
-  async GetWeaponInfo(name: string): Promise<WeaponVM> {
+  async GetWeaponInfo(name: string): Promise<Weapon> {
     const { data, success, message } = await gearServiceClient.GetWeaponInfo(
       name
     );

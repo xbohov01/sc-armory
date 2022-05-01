@@ -6,10 +6,9 @@ import { SingleResultObject } from "../types/types";
 import { AmmunitionVM } from "./viewModels/AmmunitionVM";
 import { ArmorVM } from "./viewModels/ArmorVM";
 import { AttachmentVM } from "./viewModels/AttachmentVM";
-import { WeaponVM } from "./viewModels/WeaponVM";
 import { ApiClient } from "./client";
 
-import type { FPSGear, RetailProduct } from "~type/loadout";
+import type { FPSGear, RetailProduct, Weapon } from "~type/loadout";
 
 const ArmorsEndpoint = "/armors";
 const WeaponsEndpoint = "/weapons";
@@ -94,34 +93,34 @@ class GearServiceClient extends ApiClient {
     );
   }
 
-  async GetWeapons(filter = ""): Promise<WeaponVM[]> {
+  async GetWeapons(filter = ""): Promise<Weapon[]> {
     await this.authenticationPromise;
 
     const result = await this.instance.get(this.url + WeaponsEndpoint + filter);
-    return orderBy(result.data, (v: WeaponVM) => v.localizedName);
+    return orderBy(result.data, (v: Weapon) => v.localizedName);
   }
 
-  async GetWeaponsByType(name: string, type: string): Promise<WeaponVM[]> {
+  async GetWeaponsByType(name: string, type: string): Promise<Weapon[]> {
     return this.GetWeapons(
       `?$filter=type eq '${type}' and contains(tolower(localizedName),'${name.toLowerCase()}')`
     );
   }
 
-  async GetPrimaryWeapons(name = ""): Promise<WeaponVM[]> {
+  async GetPrimaryWeapons(name = ""): Promise<Weapon[]> {
     return this.GetWeapons(
       `?$filter=type ne 'Pistol' and type ne 'Utility'` +
         ` and type ne 'Knife' and contains(tolower(localizedName),'${name.toLowerCase()}')`
     );
   }
 
-  async GetWeaponByName(name: string): Promise<WeaponVM> {
+  async GetWeaponByName(name: string): Promise<Weapon> {
     const [first] = await this.GetWeapons(
       `?$filter=localizedName eq '${name}'`
     );
     return first;
   }
 
-  async GetWeaponInfo(name: string): Promise<SingleResultObject<WeaponVM>> {
+  async GetWeaponInfo(name: string): Promise<SingleResultObject<Weapon>> {
     const { status, statusText, data } = await this.instance.get(
       `${this.url + WeaponsEndpoint}?$filter=localizedName eq '${name}'`
     );
@@ -137,7 +136,7 @@ class GearServiceClient extends ApiClient {
     const result = await this.instance.get(
       this.url + ConsumablesEndpoint + filter
     );
-    return orderBy(result.data, (v: WeaponVM) => v.localizedName);
+    return orderBy(result.data, (v: Weapon) => v.localizedName);
   }
 
   async GetAttachments(filter = ""): Promise<AttachmentVM[]> {
@@ -149,7 +148,7 @@ class GearServiceClient extends ApiClient {
     return orderBy(result.data, (v: RetailProduct) => v.LocalizedName);
   }
 
-  async GetTools(name = ""): Promise<WeaponVM[]> {
+  async GetTools(name = ""): Promise<Weapon[]> {
     return this.GetWeapons(
       `?$filter=(type eq 'Utility' or type eq 'Medical Device' ` +
         `or type eq 'Knife') and contains(tolower(localizedName),'${name.toLowerCase()}')`
