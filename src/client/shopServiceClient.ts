@@ -2,8 +2,9 @@ import axios from "axios";
 
 import { ResultObject, SaleLocationVM } from "../types/types";
 
-import { RetailProductVM } from "./viewModels/RetailProductVM";
 import { ApiClient } from "./client";
+
+import type { RetailProduct } from "~type/loadout";
 
 const RetailProductsEndpoint = "/retailproducts";
 const saleLocations = "/salelocations";
@@ -91,7 +92,7 @@ export class ShopServiceClient extends ApiClient {
     };
   }
 
-  async GetRetailProduct(id: number): Promise<RetailProductVM> {
+  async GetRetailProduct(id: number): Promise<RetailProduct> {
     const { data } = await this.instance.get(
       `${this.url + RetailProductsEndpoint}/${id}`
     );

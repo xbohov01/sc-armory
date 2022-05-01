@@ -1,18 +1,7 @@
-import { RetailProductVM } from "../client/viewModels/RetailProductVM";
+
 import { WeaponVM } from "../client/viewModels/WeaponVM";
 
 import type { SelectOption } from "~type/select";
-
-export type Loadout = {
-  name: string;
-  helmet: RetailProductVM;
-  arms: RetailProductVM;
-  core: RetailProductVM;
-  legs: RetailProductVM;
-  sidearm: RetailProductVM;
-  primary: RetailProductVM;
-  secondary: RetailProductVM;
-};
 
 export type ListKey = {
   id: number;

@@ -1,4 +1,4 @@
-export type RetailProductVM = {
+export type RetailProduct = {
   Id: number;
   Uuid: string;
   LocalizedName: string;
@@ -11,4 +11,15 @@ export type RetailProductVM = {
   MaxDiscountPercentage: number;
   MaxPremiumPercentage: number;
   RetailType: number;
+};
+
+export type Loadout = {
+  name: string;
+  helmet: RetailProduct;
+  arms: RetailProduct;
+  core: RetailProduct;
+  legs: RetailProduct;
+  sidearm: RetailProduct;
+  primary: RetailProduct;
+  secondary: RetailProduct;
 };

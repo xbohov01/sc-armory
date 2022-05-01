@@ -7,9 +7,10 @@ import { AmmunitionVM } from "./viewModels/AmmunitionVM";
 import { ArmorVM } from "./viewModels/ArmorVM";
 import { AttachmentVM } from "./viewModels/AttachmentVM";
 import { FPSGearBaseVM } from "./viewModels/FPSGearBaseVM";
-import { RetailProductVM } from "./viewModels/RetailProductVM";
 import { WeaponVM } from "./viewModels/WeaponVM";
 import { ApiClient } from "./client";
+
+import type { RetailProduct } from "~type/loadout";
 
 const ArmorsEndpoint = "/armors";
 const WeaponsEndpoint = "/weapons";
@@ -146,7 +147,7 @@ class GearServiceClient extends ApiClient {
         this.url + AttachmentsEndpoint
       }?$filter=contains(tolower(LocalizedName),'${filter.toLowerCase()}')`
     );
-    return orderBy(result.data, (v: RetailProductVM) => v.LocalizedName);
+    return orderBy(result.data, (v: RetailProduct) => v.LocalizedName);
   }
 
   async GetTools(name = ""): Promise<WeaponVM[]> {
