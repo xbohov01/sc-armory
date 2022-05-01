@@ -3,7 +3,8 @@ import gearServiceClient from "../client/gearServiceClient";
 import { AmmunitionInfo } from "../client/viewModels/AmmunitionVM";
 import { ArmorVM } from "../client/viewModels/ArmorVM";
 import { FPSGearBaseVM } from "../client/viewModels/FPSGearBaseVM";
-import { SelectOption } from "../types/types";
+
+import type { SelectOption } from "~type/select";
 
 class GearProvider {
   public async GetGearOptions(

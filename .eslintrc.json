@@ -16,8 +16,8 @@
   "settings": {
     "import/resolver": {
       "alias": {
-        "extensions": [".ts", ".tsx"],
-        "map": [["~", "./src"]]
+        "extensions": [".ts", ".tsx", ".d.ts"],
+        "map": [["~", "./src"], ["~type", "./types"]]
       }
     }
   },

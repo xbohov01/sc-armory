@@ -1,11 +1,7 @@
 import { RetailProductVM } from "../client/viewModels/RetailProductVM";
 import { WeaponVM } from "../client/viewModels/WeaponVM";
 
-export type SelectOption = {
-  value: string;
-  label: string;
-  type: string;
-};
+import type { SelectOption } from "~type/select";
 
 export type Loadout = {
   name: string;

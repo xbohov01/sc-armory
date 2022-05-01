@@ -5,9 +5,10 @@ import { Box, Heading } from "@chakra-ui/layout";
 
 import gearProvider from "../../providers/gearProvider";
 import { customStyles } from "../../selectStyle";
-import { SelectOption } from "../../types/types";
 
 import CustomSelectOption from "./CustomSelectOption";
+
+import type { SelectOption } from "~type/select";
 
 type LoadoutComponentProps = {
   type: string;

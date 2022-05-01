@@ -10,7 +10,8 @@ export default defineConfig({
   plugins: [reactRefresh(), reactJsx()],
   resolve: {
     alias: {
-      '~' : path.resolve(__dirname, './src')
+      '~' : path.resolve(__dirname, './src'),
+      '~type': path.resolve(__dirname, './types')
     }
   },
   build: {
