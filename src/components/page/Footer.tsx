@@ -18,11 +18,11 @@ import {
 
 import "@fontsource/lato";
 
-import cig from "../../cig.png";
-
 import Bugs from "./Bugs";
 import JoinADI from "./JoinADI";
 import Support from "./Support";
+
+import cig from "~/assets/cig.png";
 
 export default function Footer() {
   return (

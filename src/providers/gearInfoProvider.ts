@@ -1,17 +1,17 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import gearServiceClient from "../client/gearServiceClient";
-import { ArmorVM } from "../client/viewModels/ArmorVM";
-import { WeaponVM } from "../client/viewModels/WeaponVM";
 import GearInfoFetchException from "../exceptions/GearInfoFetchException";
-import { NameReference } from "../types/types";
+
+import type { NameReference } from "~type/image";
+import type { Armor, Weapon } from "~type/loadout";
 
 class GearInfoProvider {
-  async GetArmorListInfo(names: string[]): Promise<ArmorVM[]> {
+  async GetArmorListInfo(names: string[]): Promise<Armor[]> {
     const promises = names.map((name) => this.GetArmorInfo(name));
     return Promise.all(promises);
   }
 
-  async GetArmorInfo(name: string): Promise<ArmorVM> {
+  async GetArmorInfo(name: string): Promise<Armor> {
     const { data, success, message } = await gearServiceClient.GetArmorInfo(
       name
     );
@@ -23,12 +23,12 @@ class GearInfoProvider {
     return data;
   }
 
-  async GetWeaponListInfo(names: string[]): Promise<WeaponVM[]> {
+  async GetWeaponListInfo(names: string[]): Promise<Weapon[]> {
     const promises = names.map((name) => this.GetWeaponInfo(name));
     return Promise.all(promises);
   }
 
-  async GetWeaponInfo(name: string): Promise<WeaponVM> {
+  async GetWeaponInfo(name: string): Promise<Weapon> {
     const { data, success, message } = await gearServiceClient.GetWeaponInfo(
       name
     );

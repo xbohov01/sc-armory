@@ -3,9 +3,11 @@ import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { HStack } from "@chakra-ui/layout";
 
 import weaponAttachmentProvider from "../../providers/weaponAttachmentProvider";
-import { KeyValue, WeaponAttachmentSlot } from "../../types/types";
 
 import { WeaponAttachmentSelector } from "./WeaponAttachmentSelector";
+
+import type { WeaponAttachmentSlot } from "~type/loadout";
+import type { KeyValue } from "~type/select";
 
 type WeaponAttachmentsListProps = {
   weapon: string;

@@ -5,7 +5,9 @@ import { orderBy, uniq } from "lodash";
 
 import shopServiceClient from "../client/shopServiceClient";
 import SaleLocationsFetchException from "../exceptions/SaleLocationsFetchException";
-import { KeyValue, ListKey, LocatedItem } from "../types/types";
+
+import type { ListKey, LocatedItem } from "~type/search";
+import type { KeyValue } from "~type/select";
 
 class ShoppingListGenerator {
   async GetShoppingList(

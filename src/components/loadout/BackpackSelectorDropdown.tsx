@@ -5,10 +5,11 @@ import { Box, Heading } from "@chakra-ui/layout";
 
 import gearProvider from "../../providers/gearProvider";
 import { customStyles } from "../../selectStyle";
-import { SelectOption } from "../../types/types";
 
 import CustomSelectOption from "./CustomSelectOption";
 import WrongSizeWarning from "./WrongSizeWarning";
+
+import type { SelectOption } from "~type/select";
 
 export type BackpackSelectorDropdownProps = {
   setBackpack: Dispatch<SetStateAction<string>>;

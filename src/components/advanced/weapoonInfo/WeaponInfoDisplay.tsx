@@ -9,9 +9,13 @@ import { Grid, GridItem, Heading, VStack } from "@chakra-ui/layout";
 import { Stat, StatLabel, StatNumber } from "@chakra-ui/stat";
 import { Tooltip } from "@chakra-ui/tooltip";
 
-import { WeaponInfoDisplayProps } from "../../../types/types";
-
 import DamageDropDisplay from "./DamageDropDisplay";
+
+import type { Weapon } from "~type/loadout";
+
+type WeaponInfoDisplayProps = {
+  weapon: Weapon;
+};
 
 export default function WeaponInfoDisplay(props: WeaponInfoDisplayProps) {
   return (

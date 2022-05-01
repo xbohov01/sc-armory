@@ -1,6 +1,10 @@
 import gearServiceClient from "../client/gearServiceClient";
-import { AttachmentVM } from "../client/viewModels/AttachmentVM";
-import { WeaponAttachment, WeaponAttachmentSlot } from "../types/types";
+
+import type {
+  Attachment,
+  WeaponAttachment,
+  WeaponAttachmentSlot,
+} from "~type/loadout";
 
 class WeaponAttachmentProvider {
   private _specificSlots: { [id: string]: WeaponAttachmentSlot[] } = {
@@ -208,7 +212,7 @@ class WeaponAttachmentProvider {
     type: string,
     maxSize: number,
     minSize: number
-  ): Promise<AttachmentVM[]> {
+  ): Promise<Attachment[]> {
     const attachments = await gearServiceClient.GetAttachments("");
 
     return attachments.filter(

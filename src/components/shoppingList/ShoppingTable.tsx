@@ -3,11 +3,13 @@ import React, { useEffect, useState } from "react";
 import { Box } from "@chakra-ui/layout";
 import { Table, Tbody, useToast } from "@chakra-ui/react";
 
-import { KeyValue, LocatedItem } from "../../types/types";
 import shoppingListGenerator from "../shoppingListGenerator";
 
 import { DataRow } from "./DataRow";
 import { HeaderRow } from "./HeaderRow";
+
+import type { LocatedItem } from '~type/search'
+import type { KeyValue } from '~type/select'
 
 type ShoppingTableProps = {
   gear: string[];

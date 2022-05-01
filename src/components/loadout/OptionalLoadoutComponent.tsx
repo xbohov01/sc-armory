@@ -6,7 +6,8 @@ import { Box, Heading, HStack } from "@chakra-ui/layout";
 
 import gearProvider from "../../providers/gearProvider";
 import { customStyles } from "../../selectStyle";
-import { KeyValue } from "../../types/types";
+
+import type { KeyValue } from '~type/select'
 
 type OptionalLoadoutComponentProps = {
   type: string;

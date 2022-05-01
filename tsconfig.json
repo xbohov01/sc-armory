@@ -17,9 +17,11 @@
     "jsx": "react-jsx",
     "allowUmdGlobalAccess": true,
     "paths": {
-      "~/*": ["./src/*"]
+      "~/*": ["./src/*"],
+      "~type/*": ["./types/*"]
     },
     "baseUrl": "./"
   },
-  "include": ["src"]
+  "include": ["src", "types/**/*.d.ts"],
+  "exclude": ["node_modules"]
 }

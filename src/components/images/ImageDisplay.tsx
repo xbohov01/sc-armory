@@ -4,9 +4,10 @@ import { Accordion, Box, Heading } from "@chakra-ui/react";
 import { Cloudinary } from "@cloudinary/url-gen";
 
 import gearInfoProvider from "../../providers/gearInfoProvider";
-import { NameReference } from "../../types/types";
 
 import { ImageItem } from "./ImageItem";
+
+import type { NameReference } from "~type/image";
 
 type ImageDisplayProps = {
   gear: string[];

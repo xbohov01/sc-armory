@@ -1,16 +1,15 @@
 // TODO: remove eslint-disable
 import gearServiceClient from "../client/gearServiceClient";
-import { AmmunitionInfo } from "../client/viewModels/AmmunitionVM";
-import { ArmorVM } from "../client/viewModels/ArmorVM";
-import { FPSGearBaseVM } from "../client/viewModels/FPSGearBaseVM";
-import { SelectOption } from "../types/types";
+
+import type { AmmunitionInfo, Armor, FPSGear } from "~type/loadout";
+import type { SelectOption } from "~type/select";
 
 class GearProvider {
   public async GetGearOptions(
     type: string,
     filter: string
   ): Promise<SelectOption[]> {
-    let result: FPSGearBaseVM[] = [];
+    let result: FPSGear[] = [];
 
     switch (type) {
       case "Helmet":
@@ -60,7 +59,7 @@ class GearProvider {
       .map((backpack) => this.GearToSelectOption(backpack));
   }
 
-  public async GetCore(name: string): Promise<ArmorVM> {
+  public async GetCore(name: string): Promise<Armor> {
     const [first] = await gearServiceClient.GetArmorPartByLocalizedName(
       "Core",
       name
@@ -137,7 +136,7 @@ class GearProvider {
     return "";
   }
 
-  private GearToSelectOption(gear: FPSGearBaseVM): SelectOption {
+  private GearToSelectOption(gear: FPSGear): SelectOption {
     return {
       value: gear.id.toString(),
       label: gear.localizedName,

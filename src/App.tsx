@@ -10,9 +10,11 @@ import LoadoutExporter from "./components/loadout/LoadoutExporter";
 import Footer from "./components/page/Footer";
 import Header from "./components/page/Header";
 import ShoppingWrapper from "./components/shoppingList/ShoppingWrapper";
-import { KeyValue, ListKey, LocatedItem } from "./types/types";
 
 import "./App.css";
+
+import type { ListKey, LocatedItem } from "~type/search";
+import type { KeyValue } from "~type/select";
 
 function App(): JSX.Element {
   const [gear, setGear] = useState<string[]>([]);

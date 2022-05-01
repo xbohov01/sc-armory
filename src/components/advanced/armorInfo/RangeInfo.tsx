@@ -10,7 +10,12 @@ import {
 } from "@chakra-ui/react";
 import { Stat, StatLabel, StatNumber } from "@chakra-ui/stat";
 
-import { RangeInfoProps } from "../../../types/types";
+export type RangeInfoProps = {
+  namedValues: { name: string; value: number }[];
+  unit: string;
+  breakdownText: string;
+  label: string;
+};
 
 export default function RangeInfo(props: RangeInfoProps) {
   const getRangeString = (): string => {

@@ -3,9 +3,10 @@ import { AiFillQuestionCircle } from "react-icons/ai";
 import { Box, HStack, VStack } from "@chakra-ui/layout";
 import { Tooltip } from "@chakra-ui/react";
 
-import { KeyValue, ListKey, LocatedItem } from "../../types/types";
-
 import { ShoppingListItem } from "./ShoppingListItem";
+
+import type { ListKey,LocatedItem } from "~type/search";
+import type { KeyValue } from "~type/select";
 
 type ShoppingLocationProps = {
   items: KeyValue<ListKey, LocatedItem[]>;
@@ -15,9 +16,11 @@ type ShoppingLocationProps = {
 export default function ShoppingLocation(props: ShoppingLocationProps) {
   const buildLocationToolTip = () => {
     return (
-      <Tooltip 
-        placement="auto" 
-        label={props.items.key.name === 'N/A' ? 'Possible loot only item(s)' : ''}
+      <Tooltip
+        placement="auto"
+        label={
+          props.items.key.name === "N/A" ? "Possible loot only item(s)" : ""
+        }
       >
         <HStack>
           <>
@@ -26,7 +29,7 @@ export default function ShoppingLocation(props: ShoppingLocationProps) {
               .reverse()
               .join(" - ")}`}
           </>
-          <>{props.items.key.name === 'N/A' ? <AiFillQuestionCircle /> : ""}</>
+          <>{props.items.key.name === "N/A" ? <AiFillQuestionCircle /> : ""}</>
         </HStack>
       </Tooltip>
     );

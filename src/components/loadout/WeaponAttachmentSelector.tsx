@@ -3,10 +3,10 @@ import Select from "react-select";
 
 import { Heading, VStack } from "@chakra-ui/layout";
 
-import { AttachmentVM } from "../../client/viewModels/AttachmentVM";
 import weaponAttachmentProvider from "../../providers/weaponAttachmentProvider";
 import { compactStyles } from "../../selectStyle";
-import { WeaponAttachmentSlot } from "../../types/types";
+
+import type { Attachment, WeaponAttachmentSlot } from "~type/loadout";
 
 export type WeaponAttachmentSelectorProps = {
   attachmentSlot: WeaponAttachmentSlot;
@@ -14,7 +14,7 @@ export type WeaponAttachmentSelectorProps = {
 };
 export function WeaponAttachmentSelector(props: WeaponAttachmentSelectorProps) {
   const [filter, setFilter] = useState("");
-  const [attachments, setAttachments] = useState<AttachmentVM[]>([]);
+  const [attachments, setAttachments] = useState<Attachment[]>([]);
   const [selected, setSelected] = useState("");
 
   useEffect(() => {

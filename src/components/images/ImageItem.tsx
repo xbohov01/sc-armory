@@ -12,9 +12,10 @@ import { AdvancedImage } from "@cloudinary/react";
 import { Cloudinary } from "@cloudinary/url-gen";
 
 import client from "../../client/client";
-import { NameReference } from "../../types/types";
 
 import { WeaponDemoDisplay } from "./WeaponDemoDisplay";
+
+import type { NameReference } from "~type/image";
 
 export type ImageItemProps = {
   item: NameReference;
