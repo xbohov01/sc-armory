@@ -1,11 +1,6 @@
 import type { Weapon } from "~type/loadout"
 import type { SelectOption } from "~type/select";
 
-export type ListKey = {
-  id: number;
-  name: string;
-  chain: string;
-};
 
 export type SaleLocationVM = {
   itemId: number;

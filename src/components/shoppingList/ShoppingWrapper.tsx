@@ -4,13 +4,11 @@ import { Box, Heading, HStack } from "@chakra-ui/layout";
 import { Switch } from "@chakra-ui/switch";
 import { useToast } from "@chakra-ui/toast";
 
-import { ListKey } from "../../types/types";
-
 import ShoppingList from "./ShoppingList";
 import ShoppingTable from "./ShoppingTable";
 
-import type { LocatedItem } from '~type/search'
-import type { KeyValue } from '~type/select'
+import type { ListKey, LocatedItem } from "~type/search";
+import type { KeyValue } from "~type/select";
 
 type ShoppingWrapperProps = {
   gear: string[];

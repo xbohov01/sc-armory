@@ -7,3 +7,9 @@ export type LocatedItem = {
   price: string;
   isBought: boolean;
 };
+
+export type ListKey = {
+  id: number;
+  name: string;
+  chain: string;
+};
