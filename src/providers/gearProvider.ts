@@ -2,11 +2,11 @@
 import gearServiceClient from "../client/gearServiceClient";
 
 import type { AmmunitionInfo, Armor, FPSGear } from "~type/loadout";
-import type { SelectOption } from "~type/select";
+import type { GearType, SelectOption } from "~type/select";
 
 class GearProvider {
   public async GetGearOptions(
-    type: string,
+    type: GearType,
     filter: string
   ): Promise<SelectOption[]> {
     let result: FPSGear[] = [];
