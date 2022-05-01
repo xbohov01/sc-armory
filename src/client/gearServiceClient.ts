@@ -5,10 +5,9 @@ import { SingleResultObject } from "../types/types";
 
 import { AmmunitionVM } from "./viewModels/AmmunitionVM";
 import { ArmorVM } from "./viewModels/ArmorVM";
-import { AttachmentVM } from "./viewModels/AttachmentVM";
 import { ApiClient } from "./client";
 
-import type { FPSGear, RetailProduct, Weapon } from "~type/loadout";
+import type { Attachment, FPSGear, RetailProduct, Weapon } from "~type/loadout";
 
 const ArmorsEndpoint = "/armors";
 const WeaponsEndpoint = "/weapons";
@@ -139,7 +138,7 @@ class GearServiceClient extends ApiClient {
     return orderBy(result.data, (v: Weapon) => v.localizedName);
   }
 
-  async GetAttachments(filter = ""): Promise<AttachmentVM[]> {
+  async GetAttachments(filter = ""): Promise<Attachment[]> {
     const result = await this.instance.get(
       `${
         this.url + AttachmentsEndpoint

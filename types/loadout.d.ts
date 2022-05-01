@@ -46,3 +46,11 @@ export type Weapon = FPSGear & {
   alphaDamage: number;
   ammoContainerReference: string;
 };
+
+export type Attachment = FPSGear & {
+  grade: number;
+  defaultRange: number;
+  maxRange: number;
+  rangeIncrement: number;
+  autoZeroingTime: number;
+};
