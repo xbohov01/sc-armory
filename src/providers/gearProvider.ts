@@ -1,9 +1,7 @@
 // TODO: remove eslint-disable
 import gearServiceClient from "../client/gearServiceClient";
-import { AmmunitionInfo } from "../client/viewModels/AmmunitionVM";
-import { ArmorVM } from "../client/viewModels/ArmorVM";
 
-import type { FPSGear } from "~type/loadout"
+import type { AmmunitionInfo, Armor, FPSGear } from "~type/loadout";
 import type { SelectOption } from "~type/select";
 
 class GearProvider {
@@ -61,7 +59,7 @@ class GearProvider {
       .map((backpack) => this.GearToSelectOption(backpack));
   }
 
-  public async GetCore(name: string): Promise<ArmorVM> {
+  public async GetCore(name: string): Promise<Armor> {
     const [first] = await gearServiceClient.GetArmorPartByLocalizedName(
       "Core",
       name

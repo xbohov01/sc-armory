@@ -4,18 +4,19 @@ import React, { useEffect, useState } from "react";
 import { Grid, GridItem, VStack } from "@chakra-ui/layout";
 import { Stat, StatLabel, StatNumber } from "@chakra-ui/stat";
 
-import { ArmorVM } from "../../client/viewModels/ArmorVM";
 import gearInfoProvider from "../../providers/gearInfoProvider";
 
 import BreakDownInfo from "./armorInfo/BreakDownInfo";
 import RangeInfo from "./armorInfo/RangeInfo";
+
+import type { Armor } from "~type/loadout";
 
 type ArmorInfoProps = {
   armors: string[];
 };
 
 export default function ArmorInfo(props: ArmorInfoProps) {
-  const [armorData, setArmorData] = useState<ArmorVM[]>([]);
+  const [armorData, setArmorData] = useState<Armor[]>([]);
 
   useEffect(() => {
     gearInfoProvider.GetArmorListInfo(props.armors).then((res) => {
@@ -52,7 +53,7 @@ export default function ArmorInfo(props: ArmorInfoProps) {
             unit="microSCU"
             breakdownText="Capacity by piece"
             label="InventoryCapacity"
-            namedValues={armorData.map((a: ArmorVM) => ({
+            namedValues={armorData.map((a: Armor) => ({
               name: a.localizedName,
               value: a.inventoryCapacity,
             }))}
@@ -63,7 +64,7 @@ export default function ArmorInfo(props: ArmorInfoProps) {
             unit="%"
             breakdownText="Reduction by piece"
             label="Damage reduction"
-            namedValues={armorData.map((a: ArmorVM) => ({
+            namedValues={armorData.map((a: Armor) => ({
               name: a.localizedName,
               value: a.damageReduction,
             }))}
@@ -74,7 +75,7 @@ export default function ArmorInfo(props: ArmorInfoProps) {
             unit="°C"
             breakdownText="Resistance by piece"
             label="MAX Temperature"
-            namedValues={armorData.map((a: ArmorVM) => ({
+            namedValues={armorData.map((a: Armor) => ({
               name: a.localizedName,
               value: a.maxResistance,
             }))}
@@ -85,7 +86,7 @@ export default function ArmorInfo(props: ArmorInfoProps) {
             unit="°C"
             breakdownText="Resistance by piece"
             label="MIN Temperature"
-            namedValues={armorData.map((a: ArmorVM) => ({
+            namedValues={armorData.map((a: Armor) => ({
               name: a.localizedName,
               value: a.minResistance,
             }))}

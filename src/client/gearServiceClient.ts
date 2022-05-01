@@ -3,11 +3,9 @@ import { orderBy } from "lodash";
 
 import { SingleResultObject } from "../types/types";
 
-import { AmmunitionVM } from "./viewModels/AmmunitionVM";
-import { ArmorVM } from "./viewModels/ArmorVM";
 import { ApiClient } from "./client";
 
-import type { Attachment, FPSGear, RetailProduct, Weapon } from "~type/loadout";
+import type { Ammunition, Armor, Attachment, FPSGear, RetailProduct, Weapon } from "~type/loadout";
 
 const ArmorsEndpoint = "/armors";
 const WeaponsEndpoint = "/weapons";
@@ -63,7 +61,7 @@ class GearServiceClient extends ApiClient {
     });
   }
 
-  async GetArmorInfo(name: string): Promise<SingleResultObject<ArmorVM>> {
+  async GetArmorInfo(name: string): Promise<SingleResultObject<Armor>> {
     const result = await this.instance.get(
       `${this.url + ArmorsEndpoint}?$filter=localizedName eq '${name}'`
     );
@@ -74,18 +72,18 @@ class GearServiceClient extends ApiClient {
     };
   }
 
-  async GetArmors(filter = ""): Promise<ArmorVM[]> {
+  async GetArmors(filter = ""): Promise<Armor[]> {
     await this.authenticationPromise;
 
     const result = await this.instance.get(this.url + ArmorsEndpoint + filter);
 
-    return orderBy(result.data, (v: ArmorVM) => v.localizedName);
+    return orderBy(result.data, (v: Armor) => v.localizedName);
   }
 
   async GetArmorPartByLocalizedName(
     part: string,
     localizedName: string
-  ): Promise<ArmorVM[]> {
+  ): Promise<Armor[]> {
     return this.GetArmors(
       `?$filter=armorPart eq '${part}' ` +
         `and contains(tolower(localizedName),'${localizedName.toLowerCase()}')`
@@ -161,8 +159,8 @@ class GearServiceClient extends ApiClient {
     ];
   }
 
-  async GetAmmunitionByReference(reference: string): Promise<AmmunitionVM> {
-    const result = await this.instance.get<AmmunitionVM[]>(
+  async GetAmmunitionByReference(reference: string): Promise<Ammunition> {
+    const result = await this.instance.get<Ammunition[]>(
       `${this.url + AmmunitionsEndpoint}?$filter=reference eq ${reference}`
     );
     return result.data[0];

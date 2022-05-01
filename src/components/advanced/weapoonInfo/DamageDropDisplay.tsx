@@ -3,11 +3,12 @@ import Chart from "react-google-charts";
 
 import { Box, Heading } from "@chakra-ui/layout";
 
+import gearProvider from "../../../providers/gearProvider";
+
 import {
   AmmunitionInfo,
   DamageType,
-} from "../../../client/viewModels/AmmunitionVM";
-import gearProvider from "../../../providers/gearProvider";
+} from "~type/loadout";
 
 type DamageDropDisplayProps = {
   ammoContainerReference: string;
