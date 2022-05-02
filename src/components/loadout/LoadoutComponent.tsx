@@ -1,4 +1,5 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
+import { useQuery } from "react-query";
 import Select from "react-select";
 
 import { Box, Heading } from "@chakra-ui/layout";
@@ -18,17 +19,6 @@ type LoadoutComponentProps = {
 
 export default function LoadoutComponent(props: LoadoutComponentProps) {
   const [filter, setFilter] = useState("");
-  const [options, setOptions] = useState<SelectOption[]>([]);
-
-  useEffect(() => {
-    getGearOptions(props.type, "").then((res) => {
-      setOptions(res);
-    });
-  }, [props.isDisabled, props.type]);
-
-  const loadOptions = () =>
-    options.filter((o) => o.label.toLowerCase().includes(filter.toLowerCase()));
-
   const handleGearChange = (selected: Record<string, string> | null) => {
     // Check for selection clearing
     if (selected === null) {
@@ -37,6 +27,16 @@ export default function LoadoutComponent(props: LoadoutComponentProps) {
     }
     props.updater(selected.label);
   };
+
+  const { data: options } = useQuery(
+    ["gearOptions", props.isDisabled, props.type],
+    () =>
+      getGearOptions(props.type, "").then((result: SelectOption[]) =>
+        result.filter((option: SelectOption) =>
+          option.label.toLowerCase().includes(filter.toLowerCase())
+        )
+      )
+  );
 
   return (
     <Box
@@ -50,7 +50,7 @@ export default function LoadoutComponent(props: LoadoutComponentProps) {
         <Select
           id={props.type}
           styles={customStyles}
-          options={loadOptions()}
+          options={options ?? []}
           onChange={handleGearChange}
           onInputChange={setFilter}
           isMulti={false}

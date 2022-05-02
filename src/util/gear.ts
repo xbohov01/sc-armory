@@ -1,31 +1,17 @@
-// TODO: remove eslint-disable
 import gearServiceClient from "~/client/gearServiceClient";
 import type { Armor, FPSGear, Weapon } from "~type/loadout";
-import type { ArmorType, GearType, WeaponType } from "~type/select";
+import type {
+  ArmorType,
+  GearType,
+  SelectOption,
+  WeaponType,
+} from "~type/select";
 import { armorTypes, weaponTypes } from "~type/select";
 
-const getArmorWeightFromDescription = (
-  description: string
-): "Heavy" | "Medium" | "Light" | "" => {
-  if (description.includes("Item Type: Heavy Armor")) {
-    return "Heavy";
-  }
-  if (description.includes("Item Type: Medium Armor")) {
-    return "Medium";
-  }
-  if (description.includes("Item Type: Light Armor")) {
-    return "Light";
-  }
-  return "";
-};
-
-const gearToSelectOption = (gear: FPSGear | Weapon) => ({
-  value: gear.id.toString(),
-  label: gear.localizedName,
-  type: getArmorWeightFromDescription(gear.localizedDescription),
-});
-
-export const getGearOptions = async (type: GearType, filter: string) => {
+export const getGearOptions = async (
+  type: GearType,
+  filter: string
+): Promise<SelectOption[]> => {
   const gearOptions = await getGearPromise(type, filter);
 
   return gearOptions.map((gear: FPSGear | Weapon) => gearToSelectOption(gear));
@@ -90,6 +76,27 @@ export const getAmmunitionByReference = async (
     },
   };
 };
+
+const getArmorWeightFromDescription = (
+  description: string
+): "Heavy" | "Medium" | "Light" | "" => {
+  if (description.includes("Item Type: Heavy Armor")) {
+    return "Heavy";
+  }
+  if (description.includes("Item Type: Medium Armor")) {
+    return "Medium";
+  }
+  if (description.includes("Item Type: Light Armor")) {
+    return "Light";
+  }
+  return "";
+};
+
+const gearToSelectOption = (gear: FPSGear | Weapon) => ({
+  value: gear.id.toString(),
+  label: gear.localizedName,
+  type: getArmorWeightFromDescription(gear.localizedDescription),
+});
 
 const getGearPromise = (
   type: GearType,
