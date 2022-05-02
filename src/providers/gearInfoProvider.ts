@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import gearServiceClient from "../client/gearServiceClient";
-import GearInfoFetchException from "../exceptions/GearInfoFetchException";
 
 import type { NameReference } from "~type/image";
 import type { Armor, Weapon } from "~type/loadout";
@@ -17,7 +16,7 @@ class GearInfoProvider {
     );
 
     if (!success) {
-      throw new GearInfoFetchException(message);
+      throw new Error(`GearInfoFetchException: ${message}`);
     }
 
     return data;
@@ -36,7 +35,7 @@ class GearInfoProvider {
     if (success) {
       return data;
     }
-    throw new GearInfoFetchException(message);
+    throw new Error(`GearInfoFetchException: ${message}`);
   }
 
   IsArmor(name: string): boolean {

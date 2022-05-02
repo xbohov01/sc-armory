@@ -24,7 +24,7 @@ class ShoppingListGenerator {
 
     results.forEach((result) => {
       if (!result.success && result.message !== "Not sold") {
-        throw new SaleLocationsFetchException(result.message);
+        throw new Error(`SaleLocationsFetchException: ${result.message}`);
       }
 
       price += result.data.length > 0 ? result.data[0].price : 0;
@@ -73,7 +73,7 @@ class ShoppingListGenerator {
       const locatedItems: LocatedItem[] = [];
 
       if (!result.success && result.message !== "Not sold") {
-        throw new SaleLocationsFetchException(result.message);
+        throw new Error(`SaleLocationsFetchException: ${result.message}`);
       }
 
       const saleLocations = result.data;
