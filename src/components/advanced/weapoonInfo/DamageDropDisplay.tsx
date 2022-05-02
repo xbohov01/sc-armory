@@ -3,12 +3,8 @@ import Chart from "react-google-charts";
 
 import { Box, Heading } from "@chakra-ui/layout";
 
-import gearProvider from "../../../providers/gearProvider";
-
-import {
-  AmmunitionInfo,
-  DamageType,
-} from "~type/loadout";
+import { getAmmunitionByReference } from "~/util/gear";
+import { AmmunitionInfo, DamageType } from "~type/loadout";
 
 type DamageDropDisplayProps = {
   ammoContainerReference: string;
@@ -19,12 +15,10 @@ export default function DamageDropDisplay(props: DamageDropDisplayProps) {
   const [ammo, setAmmo] = useState<AmmunitionInfo>();
 
   useEffect(() => {
-    gearProvider
-      .GetAmmunitionByReference(props.ammoContainerReference)
-      .then((res) => {
-        setAmmo(res);
-        setLoading(false);
-      });
+    getAmmunitionByReference(props.ammoContainerReference).then((res) => {
+      setAmmo(res);
+      setLoading(false);
+    });
   }, [props.ammoContainerReference]);
 
   const generateDamageValue = (distance: number, damageType: DamageType) => {

@@ -1,8 +1,8 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 
-import gearProvider from "../../providers/gearProvider";
-
 import { BackpackSelectorDropdown } from "./BackpackSelectorDropdown";
+
+import { getCore } from "~/util/gear";
 
 type BackpackSelectorComponentProps = {
   coreName: string;
@@ -26,7 +26,7 @@ export default function BackpackSelectorComponent(
     if (props.coreName === "") {
       setMaxBackpackSize(0);
     } else {
-      gearProvider.GetCore(props.coreName).then((result) => {
+      getCore(props.coreName).then((result) => {
         setMaxBackpackSize(result.backpackMaxSize);
       });
     }

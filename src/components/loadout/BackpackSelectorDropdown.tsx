@@ -3,12 +3,12 @@ import Select from "react-select";
 
 import { Box, Heading } from "@chakra-ui/layout";
 
-import gearProvider from "../../providers/gearProvider";
 import { customStyles } from "../../selectStyle";
 
 import CustomSelectOption from "./CustomSelectOption";
 import WrongSizeWarning from "./WrongSizeWarning";
 
+import { getBackpacksWithMinimumSize } from "~/util/gear";
 import type { SelectOption } from "~type/select";
 
 export type BackpackSelectorDropdownProps = {
@@ -31,12 +31,10 @@ export function BackpackSelectorDropdown(props: BackpackSelectorDropdownProps) {
   };
 
   useEffect(() => {
-    gearProvider
-      .GetBackpacksWithMaxSize("", props.maxBackpackSize)
-      .then((res) => {
-        setBackpacks(res);
-        checkSize(currentPack, res);
-      });
+    getBackpacksWithMinimumSize("", props.maxBackpackSize).then((res) => {
+      setBackpacks(res);
+      checkSize(currentPack, res);
+    });
   }, [props.maxBackpackSize, currentPack]);
 
   const loadOptions = () =>

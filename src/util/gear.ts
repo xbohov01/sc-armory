@@ -1,6 +1,6 @@
 // TODO: remove eslint-disable
 import gearServiceClient from "~/client/gearServiceClient";
-import type { FPSGear, Weapon } from "~type/loadout";
+import type { Armor, FPSGear, Weapon } from "~type/loadout";
 import type { ArmorType, GearType, WeaponType } from "~type/select";
 import { armorTypes, weaponTypes } from "~type/select";
 
@@ -25,23 +25,20 @@ const gearToSelectOption = (gear: FPSGear | Weapon) => ({
   type: getArmorWeightFromDescription(gear.localizedDescription),
 });
 
-const getGearOptions = async (type: GearType, filter: string) => {
-  const promise = getGearPromise(type, filter);
-  if (promise === []) {
-    return [];
-  }
+export const getGearOptions = async (type: GearType, filter: string) => {
+  const gearOptions = await getGearPromise(type, filter);
 
-  return (await promise).map((gear: FPSGear | Weapon) =>
-    gearToSelectOption(gear)
-  );
+  return gearOptions.map((gear: FPSGear | Weapon) => gearToSelectOption(gear));
 };
 
-const getBackpacksWithMaxSize = async (name: string, size: number) =>
+export const getBackpacksWithMinimumSize = async (name: string, size: number) =>
   (await gearServiceClient.GetArmorPartByLocalizedName("Backpack", name))
     .filter((backpack) => backpack.size <= size)
     .map((backpack) => gearToSelectOption(backpack));
 
-const getAmmunitionByReference = async (ammoContainerReference: string) => {
+export const getAmmunitionByReference = async (
+  ammoContainerReference: string
+) => {
   const model = await gearServiceClient.GetAmmunitionByReference(
     ammoContainerReference
   );
@@ -97,7 +94,7 @@ const getAmmunitionByReference = async (ammoContainerReference: string) => {
 const getGearPromise = (
   type: GearType,
   filter: string
-): Promise<FPSGear[] | Weapon[]> | [] => {
+): Promise<FPSGear[] | Weapon[]> => {
   if (armorTypes.includes(type as ArmorType)) {
     return gearServiceClient.GetArmorPartByLocalizedName(type, filter);
   }
@@ -118,5 +115,13 @@ const getGearPromise = (
     return gearServiceClient.GetTools(filter);
   }
 
-  return [];
+  return Promise.resolve([]);
+};
+
+export const getCore = async (name: string): Promise<Armor> => {
+  const [first] = await gearServiceClient.GetArmorPartByLocalizedName(
+    "Core",
+    name
+  );
+  return first;
 };

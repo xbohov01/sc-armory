@@ -3,11 +3,11 @@ import Select from "react-select";
 
 import { Box, Heading } from "@chakra-ui/layout";
 
-import gearProvider from "../../providers/gearProvider";
 import { customStyles } from "../../selectStyle";
 
 import CustomSelectOption from "./CustomSelectOption";
 
+import { getGearOptions } from "~/util/gear";
 import type { SelectOption } from "~type/select";
 
 type LoadoutComponentProps = {
@@ -21,7 +21,7 @@ export default function LoadoutComponent(props: LoadoutComponentProps) {
   const [options, setOptions] = useState<SelectOption[]>([]);
 
   useEffect(() => {
-    gearProvider.GetGearOptions(props.type, "").then((res) => {
+    getGearOptions(props.type, "").then((res) => {
       setOptions(res);
     });
   }, [props.isDisabled, props.type]);
