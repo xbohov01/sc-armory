@@ -3,10 +3,9 @@ import React, { useEffect, useState } from "react";
 import { Accordion, Box, Heading } from "@chakra-ui/react";
 import { Cloudinary } from "@cloudinary/url-gen";
 
-import gearInfoProvider from "../../providers/gearInfoProvider";
-
 import { ImageItem } from "./ImageItem";
 
+import { getGearListReferences } from "~/util/gearInfo";
 import type { NameReference } from "~type/image";
 
 type ImageDisplayProps = {
@@ -17,7 +16,7 @@ export default function ImageDisplay(props: ImageDisplayProps) {
   const [references, setReferences] = useState<NameReference[]>([]);
 
   useEffect(() => {
-    gearInfoProvider.GetGearListReferences(props.gear).then((res) => {
+    getGearListReferences(props.gear).then((res) => {
       setReferences(res);
     });
   }, [props.gear]);

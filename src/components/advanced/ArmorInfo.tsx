@@ -4,11 +4,10 @@ import React, { useEffect, useState } from "react";
 import { Grid, GridItem, VStack } from "@chakra-ui/layout";
 import { Stat, StatLabel, StatNumber } from "@chakra-ui/stat";
 
-import gearInfoProvider from "../../providers/gearInfoProvider";
-
 import BreakDownInfo from "./armorInfo/BreakDownInfo";
 import RangeInfo from "./armorInfo/RangeInfo";
 
+import { getArmorListInfo } from "~/util/gearInfo";
 import type { Armor } from "~type/loadout";
 
 type ArmorInfoProps = {
@@ -19,7 +18,7 @@ export default function ArmorInfo(props: ArmorInfoProps) {
   const [armorData, setArmorData] = useState<Armor[]>([]);
 
   useEffect(() => {
-    gearInfoProvider.GetArmorListInfo(props.armors).then((res) => {
+    getArmorListInfo(props.armors).then((res) => {
       setArmorData(res);
     });
   }, [props.armors]);

@@ -2,11 +2,10 @@ import React, { useEffect, useState } from "react";
 
 import { VStack } from "@chakra-ui/layout";
 
-import gearInfoProvider from "../../providers/gearInfoProvider";
-
 import WeaponInfoDisplay from "./weapoonInfo/WeaponInfoDisplay";
 
-import type { Weapon } from "~type/loadout"
+import { getWeaponListInfo } from "~/util/gearInfo";
+import type { Weapon } from "~type/loadout";
 
 type WeaponInfoProps = {
   weapons: string[];
@@ -16,7 +15,7 @@ export default function WeaponInfo(props: WeaponInfoProps) {
   const [weaponData, setWeaponData] = useState<Weapon[]>([]);
 
   useEffect(() => {
-    gearInfoProvider.GetWeaponListInfo(props.weapons).then((res) => {
+    getWeaponListInfo(props.weapons).then((res) => {
       setWeaponData(res);
     });
   }, [props.weapons]);
