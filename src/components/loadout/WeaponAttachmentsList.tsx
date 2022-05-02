@@ -2,10 +2,9 @@ import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 
 import { HStack } from "@chakra-ui/layout";
 
-import weaponAttachmentProvider from "../../providers/weaponAttachmentProvider";
-
 import { WeaponAttachmentSelector } from "./WeaponAttachmentSelector";
 
+import { getAttachmentSlots } from "~/util/weaponAttachment";
 import type { WeaponAttachmentSlot } from "~type/loadout";
 import type { KeyValue } from "~type/select";
 
@@ -21,7 +20,7 @@ export default function WeaponAttachmentsList(
   const [selected, setSelected] = useState<KeyValue<string, string>[]>([]);
 
   useEffect(() => {
-    weaponAttachmentProvider.GetAttachmentSlots(props.weapon).then((res) => {
+    getAttachmentSlots(props.weapon).then((res) => {
       setSlots(res);
     });
   }, [props.weapon]);
