@@ -1,5 +1,9 @@
 import gearServiceClient from "~/client/gearServiceClient";
-import type { Attachment, WeaponAttachmentSlot } from "~type/loadout";
+import type {
+  Attachment,
+  WeaponAttachment,
+  WeaponAttachmentSlot,
+} from "~type/loadout";
 
 type AttachmentSlots = { [id: string]: WeaponAttachmentSlot[] };
 
