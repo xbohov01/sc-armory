@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import { Box } from "@chakra-ui/react";
 
-import weaponDemoProvider from "../../providers/weaponDemoProvider";
+import { getTimes } from "~/util/weaponDemo";
 
 export type WeaponDemoDisplayProps = {
   name: string;
@@ -13,7 +13,7 @@ export function WeaponDemoDisplay(props: WeaponDemoDisplayProps) {
   const [end, setEnd] = useState("");
 
   useEffect(() => {
-    const times = weaponDemoProvider.GetTimes(props.name);
+    const times = getTimes(props.name);
     setStart(times[0]);
     setEnd(times[1]);
   }, [props.name]);
