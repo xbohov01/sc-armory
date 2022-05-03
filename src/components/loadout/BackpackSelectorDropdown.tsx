@@ -1,14 +1,15 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
+import { useQuery } from "react-query";
 import Select from "react-select";
 
 import { Box, Heading } from "@chakra-ui/layout";
 
-import gearProvider from "../../providers/gearProvider";
 import { customStyles } from "../../selectStyle";
 
 import CustomSelectOption from "./CustomSelectOption";
 import WrongSizeWarning from "./WrongSizeWarning";
 
+import { getBackpacksWithMinimumSize } from "~/util/gear";
 import type { SelectOption } from "~type/select";
 
 export type BackpackSelectorDropdownProps = {
@@ -18,7 +19,6 @@ export type BackpackSelectorDropdownProps = {
 
 export function BackpackSelectorDropdown(props: BackpackSelectorDropdownProps) {
   const [filter, setFilter] = useState("");
-  const [backpacks, setBackpacks] = useState<SelectOption[]>([]);
   const [currentPack, setCurrentPack] = useState("");
   const [sizeWarning, setSizeWarning] = useState(false);
 
@@ -30,17 +30,16 @@ export function BackpackSelectorDropdown(props: BackpackSelectorDropdownProps) {
     }
   };
 
-  useEffect(() => {
-    gearProvider
-      .GetBackpacksWithMaxSize("", props.maxBackpackSize)
-      .then((res) => {
-        setBackpacks(res);
-        checkSize(currentPack, res);
-      });
-  }, [props.maxBackpackSize, currentPack]);
-
-  const loadOptions = () =>
-    backpacks.filter((b) => b.label.toLowerCase().includes(filter));
+  const { data: backpacks } = useQuery(
+    ["backpacks", props.maxBackpackSize, currentPack],
+    () =>
+      getBackpacksWithMinimumSize("", props.maxBackpackSize).then((result) => {
+        checkSize(currentPack, result);
+        return result.filter((backpack) =>
+          backpack.label.toLowerCase().includes(filter)
+        );
+      })
+  );
 
   const handleGearChange = (selected: { label: string } | null) => {
     // Check for selection clearing
@@ -51,7 +50,7 @@ export function BackpackSelectorDropdown(props: BackpackSelectorDropdownProps) {
     }
     props.setBackpack(selected.label);
     setCurrentPack(selected.label);
-    checkSize(selected.label, backpacks);
+    checkSize(selected.label, backpacks ?? []);
   };
 
   return (
@@ -62,7 +61,7 @@ export function BackpackSelectorDropdown(props: BackpackSelectorDropdownProps) {
         <Select
           id="backpack"
           styles={customStyles}
-          options={loadOptions()}
+          options={backpacks}
           onChange={handleGearChange}
           onInputChange={setFilter}
           isMulti={false}

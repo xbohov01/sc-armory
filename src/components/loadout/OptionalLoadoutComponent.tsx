@@ -4,10 +4,10 @@ import AsyncSelect from "react-select/async";
 import { Button } from "@chakra-ui/button";
 import { Box, Heading, HStack } from "@chakra-ui/layout";
 
-import gearProvider from "../../providers/gearProvider";
 import { customStyles } from "../../selectStyle";
 
-import type { KeyValue } from '~type/select'
+import { getGearOptions } from "~/util/gear";
+import type { KeyValue } from "~type/select";
 
 type OptionalLoadoutComponentProps = {
   type: string;
@@ -21,11 +21,10 @@ export default function OptionalLoadoutComponent(
 ) {
   const [filter, setFilter] = useState("");
 
-  const loadOptions = async () =>
-    gearProvider.GetGearOptions(props.type, filter);
+  const loadOptions = async () => getGearOptions(props.type, filter);
 
   const handleGearChange = (selected: Record<string, string> | null) => {
-    props.updater({ key: props.id, value: selected?.label || '' });
+    props.updater({ key: props.id, value: selected?.label || "" });
   };
 
   const handleRemove = () => {

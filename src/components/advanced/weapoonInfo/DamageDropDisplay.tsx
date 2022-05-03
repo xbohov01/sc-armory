@@ -1,31 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Chart from "react-google-charts";
+import { useQuery } from "react-query";
 
 import { Box, Heading } from "@chakra-ui/layout";
 
-import gearProvider from "../../../providers/gearProvider";
-
-import {
-  AmmunitionInfo,
-  DamageType,
-} from "~type/loadout";
+import { getAmmunitionByReference } from "~/util/gear";
+import { DamageType } from "~type/loadout";
 
 type DamageDropDisplayProps = {
   ammoContainerReference: string;
 };
 
 export default function DamageDropDisplay(props: DamageDropDisplayProps) {
-  const [isLoading, setLoading] = useState(true);
-  const [ammo, setAmmo] = useState<AmmunitionInfo>();
-
-  useEffect(() => {
-    gearProvider
-      .GetAmmunitionByReference(props.ammoContainerReference)
-      .then((res) => {
-        setAmmo(res);
-        setLoading(false);
-      });
-  }, [props.ammoContainerReference]);
+  const { data: ammo, isLoading } = useQuery(
+    ["ammo", props.ammoContainerReference],
+    () => getAmmunitionByReference(props.ammoContainerReference)
+  );
 
   const generateDamageValue = (distance: number, damageType: DamageType) => {
     if (ammo === undefined) return 0;

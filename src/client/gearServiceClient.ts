@@ -12,6 +12,7 @@ import type {
   RetailProduct,
   Weapon,
 } from "~type/loadout";
+import type { ArmorType, LooseAutocomplete } from "~type/select";
 
 const ArmorsEndpoint = "/armors";
 const WeaponsEndpoint = "/weapons";
@@ -87,7 +88,7 @@ class GearServiceClient extends ApiClient {
   }
 
   async GetArmorPartByLocalizedName(
-    part: string,
+    part: LooseAutocomplete<ArmorType | "Backpack">,
     localizedName: string
   ): Promise<Armor[]> {
     return this.GetArmors(

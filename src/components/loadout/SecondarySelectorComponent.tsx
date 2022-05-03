@@ -1,8 +1,8 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 
-import gearProvider from "../../providers/gearProvider";
-
 import LoadoutComponent from "./LoadoutComponent";
+
+import { getCore } from "~/util/gear";
 
 type SecondarySelectorComponentProps = {
   coreName: string;
@@ -27,7 +27,7 @@ export default function SecondarySelectorComponent(
     } else if (props.coreName === "" && props.undersuitName !== "") {
       setIsVisible(false);
     } else {
-      gearProvider.GetCore(props.coreName).then((result) => {
+      getCore(props.coreName).then((result) => {
         if (result.localizedDescription.includes("Light Armor")) {
           setIsVisible(false);
         }

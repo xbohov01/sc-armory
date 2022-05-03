@@ -1,8 +1,9 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
-
-import gearProvider from "../../providers/gearProvider";
+import React, { Dispatch, SetStateAction } from "react";
+import { useQuery } from "react-query";
 
 import { BackpackSelectorDropdown } from "./BackpackSelectorDropdown";
+
+import { getCore } from "~/util/gear";
 
 type BackpackSelectorComponentProps = {
   coreName: string;
@@ -13,29 +14,27 @@ type BackpackSelectorComponentProps = {
 export default function BackpackSelectorComponent(
   props: BackpackSelectorComponentProps
 ) {
-  const [maxBackpackSize, setMaxBackpackSize] = useState(0);
-
-  useEffect(() => {
-    if (
-      props.undersuitName.includes("Pembroke") ||
-      props.undersuitName.includes("Novikov")
-    ) {
-      setMaxBackpackSize(3);
-      return;
+  const { data: maxBackpackSize } = useQuery(
+    ["getCore", props.coreName, props.undersuitName],
+    () => {
+      if (
+        props.undersuitName.includes("Pembroke") ||
+        props.undersuitName.includes("Novikov")
+      ) {
+        return 3;
+      }
+      if (props.coreName === "") {
+        return 0;
+      } else {
+        return getCore(props.coreName).then((result) => result.backpackMaxSize);
+      }
     }
-    if (props.coreName === "") {
-      setMaxBackpackSize(0);
-    } else {
-      gearProvider.GetCore(props.coreName).then((result) => {
-        setMaxBackpackSize(result.backpackMaxSize);
-      });
-    }
-  }, [props.coreName, props.undersuitName]);
+  );
 
   return (
     <BackpackSelectorDropdown
       setBackpack={props.setBackpack}
-      maxBackpackSize={maxBackpackSize}
+      maxBackpackSize={maxBackpackSize ?? 0}
     />
   );
 }

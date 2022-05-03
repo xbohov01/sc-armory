@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { useQuery } from "react-query";
 import Select from "react-select";
 
 import { Heading, VStack } from "@chakra-ui/layout";
 
-import weaponAttachmentProvider from "../../providers/weaponAttachmentProvider";
 import { compactStyles } from "../../selectStyle";
 
+import { getAttachments } from "~/util/weaponAttachment";
 import type { Attachment, WeaponAttachmentSlot } from "~type/loadout";
+import { SelectOption } from "~type/select";
 
 export type WeaponAttachmentSelectorProps = {
   attachmentSlot: WeaponAttachmentSlot;
@@ -14,26 +16,36 @@ export type WeaponAttachmentSelectorProps = {
 };
 export function WeaponAttachmentSelector(props: WeaponAttachmentSelectorProps) {
   const [filter, setFilter] = useState("");
-  const [attachments, setAttachments] = useState<Attachment[]>([]);
   const [selected, setSelected] = useState("");
 
-  useEffect(() => {
-    weaponAttachmentProvider
-      .GetAttachments(
+  const { data: attachments } = useQuery(
+    [
+      "attachments",
+      props.attachmentSlot.Type,
+      props.attachmentSlot.MinSize,
+      props.attachmentSlot.MaxSize,
+    ],
+    () =>
+      getAttachments(
         props.attachmentSlot.Type,
         props.attachmentSlot.MaxSize,
         props.attachmentSlot.MinSize
+      ).then((attachmentItems) =>
+        attachmentItems
+          .filter((a) =>
+            a.localizedName.toLowerCase().includes(filter.toLowerCase())
+          )
+          .map((a) => ({
+            ...a,
+            value: a.localizedName,
+            label: a.localizedName,
+          }))
       )
-      .then((res) => {
-        setAttachments(res);
-      });
-  }, [
-    props.attachmentSlot.Type,
-    props.attachmentSlot.MaxSize,
-    props.attachmentSlot.MinSize,
-  ]);
+  );
 
-  const handleGearChange = (selectedOption: Record<string, string> | null) => {
+  const handleGearChange = (
+    selectedOption: (Attachment & SelectOption) | null
+  ) => {
     // Check for selection clearing
     if (selectedOption === null) {
       props.updater(props.attachmentSlot.Type, "");
@@ -44,14 +56,10 @@ export function WeaponAttachmentSelector(props: WeaponAttachmentSelectorProps) {
     setSelected(selectedOption.label);
   };
 
-  const loadOptions = () =>
-    attachments
-      .filter((a) =>
-        a.localizedName.toLowerCase().includes(filter.toLowerCase())
-      )
-      .map((a) => ({ value: a.localizedName, label: a.localizedName }));
-
   const determineZeroing = (): string => {
+    if (!attachments) {
+      return "";
+    }
     const vm = attachments.find((a) => a.localizedName === selected);
     if (vm === undefined || vm.type !== "IronSight") {
       return "";
@@ -70,7 +78,7 @@ export function WeaponAttachmentSelector(props: WeaponAttachmentSelectorProps) {
       <Heading fontSize="sm">{props.attachmentSlot.Type}</Heading>
       <Select
         styles={compactStyles}
-        options={loadOptions()}
+        options={attachments}
         onChange={handleGearChange}
         onInputChange={setFilter}
         isMulti={false}

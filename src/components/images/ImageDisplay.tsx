@@ -1,26 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { useQuery } from "react-query";
 
 import { Accordion, Box, Heading } from "@chakra-ui/react";
 import { Cloudinary } from "@cloudinary/url-gen";
 
-import gearInfoProvider from "../../providers/gearInfoProvider";
-
 import { ImageItem } from "./ImageItem";
 
-import type { NameReference } from "~type/image";
+import { getGearListReferences } from "~/util/gearInfo";
 
 type ImageDisplayProps = {
   gear: string[];
 };
 
 export default function ImageDisplay(props: ImageDisplayProps) {
-  const [references, setReferences] = useState<NameReference[]>([]);
-
-  useEffect(() => {
-    gearInfoProvider.GetGearListReferences(props.gear).then((res) => {
-      setReferences(res);
-    });
-  }, [props.gear]);
+  const { data: references, isLoading } = useQuery(
+    ["references", props.gear],
+    () => getGearListReferences(props.gear)
+  );
 
   const cloudinary = new Cloudinary({
     cloud: {
@@ -39,11 +35,17 @@ export default function ImageDisplay(props: ImageDisplayProps) {
       <Heading size="lg" marginBottom="10pt">
         Images
       </Heading>
-      <Accordion width="30vw" maxWidth="300pt" minWidth="200pt" allowMultiple>
-        {references.map((r) => (
-          <ImageItem item={r} cloud={cloudinary} key={Math.random()} />
-        ))}
-      </Accordion>
+      {isLoading ? (
+        "Loading... "
+      ) : (
+        <Accordion width="30vw" maxWidth="300pt" minWidth="200pt" allowMultiple>
+          {!references
+            ? "No images"
+            : references.map((r) => (
+                <ImageItem item={r} cloud={cloudinary} key={Math.random()} />
+              ))}
+        </Accordion>
+      )}
     </Box>
   );
 }
