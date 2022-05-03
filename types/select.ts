@@ -1,7 +1,7 @@
 export type SelectOption = {
   value: string;
   label: string;
-  type: LooseAutocomplete<"Heavy" | "Medium" | "Light">;
+  type: string;
 };
 
 export type KeyValue<K, V> = {

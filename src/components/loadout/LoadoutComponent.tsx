@@ -19,7 +19,7 @@ type LoadoutComponentProps = {
 
 export default function LoadoutComponent(props: LoadoutComponentProps) {
   const [filter, setFilter] = useState("");
-  const handleGearChange = (selected: Record<string, string> | null) => {
+  const handleGearChange = (selected: SelectOption | null) => {
     // Check for selection clearing
     if (selected === null) {
       props.updater("");
@@ -50,7 +50,7 @@ export default function LoadoutComponent(props: LoadoutComponentProps) {
         <Select
           id={props.type}
           styles={customStyles}
-          options={options ?? []}
+          options={options}
           onChange={handleGearChange}
           onInputChange={setFilter}
           isMulti={false}

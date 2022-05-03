@@ -8,6 +8,7 @@ import { compactStyles } from "../../selectStyle";
 
 import { getAttachments } from "~/util/weaponAttachment";
 import type { Attachment, WeaponAttachmentSlot } from "~type/loadout";
+import { SelectOption } from "~type/select";
 
 export type WeaponAttachmentSelectorProps = {
   attachmentSlot: WeaponAttachmentSlot;
@@ -43,7 +44,7 @@ export function WeaponAttachmentSelector(props: WeaponAttachmentSelectorProps) {
   );
 
   const handleGearChange = (
-    selectedOption: (Attachment & { value: string; label: string }) | null
+    selectedOption: (Attachment & SelectOption) | null
   ) => {
     // Check for selection clearing
     if (selectedOption === null) {
@@ -77,7 +78,7 @@ export function WeaponAttachmentSelector(props: WeaponAttachmentSelectorProps) {
       <Heading fontSize="sm">{props.attachmentSlot.Type}</Heading>
       <Select
         styles={compactStyles}
-        options={attachments ?? []}
+        options={attachments}
         onChange={handleGearChange}
         onInputChange={setFilter}
         isMulti={false}
