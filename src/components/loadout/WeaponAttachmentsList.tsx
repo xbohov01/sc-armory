@@ -1,11 +1,11 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
+import { useQuery } from "react-query";
 
 import { HStack } from "@chakra-ui/layout";
 
 import { WeaponAttachmentSelector } from "./WeaponAttachmentSelector";
 
 import { getAttachmentSlots } from "~/util/weaponAttachment";
-import type { WeaponAttachmentSlot } from "~type/loadout";
 import type { KeyValue } from "~type/select";
 
 type WeaponAttachmentsListProps = {
@@ -16,14 +16,12 @@ type WeaponAttachmentsListProps = {
 export default function WeaponAttachmentsList(
   props: WeaponAttachmentsListProps
 ) {
-  const [slots, setSlots] = useState<WeaponAttachmentSlot[]>([]);
   const [selected, setSelected] = useState<KeyValue<string, string>[]>([]);
 
-  useEffect(() => {
-    getAttachmentSlots(props.weapon).then((res) => {
-      setSlots(res);
-    });
-  }, [props.weapon]);
+  const { data: slots, isLoading } = useQuery(
+    ["attachmentSlots", props.weapon],
+    () => getAttachmentSlots(props.weapon)
+  );
 
   const update = (type: string, name: string) => {
     const newSelected = selected.filter((s) => s.key !== type);
@@ -32,6 +30,10 @@ export default function WeaponAttachmentsList(
     setSelected(newSelected);
     props.updater(newSelected.map((s) => s.value));
   };
+
+  if (isLoading || !slots) {
+    return <></>;
+  }
 
   return (
     <HStack

@@ -2,22 +2,30 @@ import gearServiceClient from "~/client/gearServiceClient";
 import type { NameReference } from "~type/image";
 import type { Armor, Weapon } from "~type/loadout";
 
-export const getArmorInfo = async (name: string): Promise<Armor> => {
-  const { data, success, message } = await gearServiceClient.GetArmorInfo(name);
-
-  if (!success) {
-    throw new Error(`GearInfoFetchException: ${message}`);
-  }
-
-  return data;
-};
-
 export const getArmorListInfo = async (names: string[]): Promise<Armor[]> => {
   const promises = names.map((name) => getArmorInfo(name));
   return Promise.all(promises);
 };
 
-export const getWeaponInfo = async (name: string): Promise<Weapon> => {
+export const getWeaponListInfo = async (names: string[]): Promise<Weapon[]> => {
+  const promises = names.map((name) => getWeaponInfo(name));
+  return Promise.all(promises);
+};
+
+export const getGearListReferences = async (
+  names: string[]
+): Promise<NameReference[]> => {
+  const infoPromises = names.map(getGearInfo);
+  const gearInformation = await Promise.all(infoPromises);
+  return gearInformation
+    .filter((info) => info !== null)
+    .map((info) => {
+      const gearInfo = info as Weapon | Armor;
+      return { name: gearInfo.localizedName, reference: gearInfo.reference };
+    });
+};
+
+const getWeaponInfo = async (name: string): Promise<Weapon> => {
   const { data, success, message } = await gearServiceClient.GetWeaponInfo(
     name
   );
@@ -29,9 +37,14 @@ export const getWeaponInfo = async (name: string): Promise<Weapon> => {
   return data;
 };
 
-export const getWeaponListInfo = async (names: string[]): Promise<Weapon[]> => {
-  const promises = names.map((name) => getWeaponInfo(name));
-  return Promise.all(promises);
+const getArmorInfo = async (name: string): Promise<Armor> => {
+  const { data, success, message } = await gearServiceClient.GetArmorInfo(name);
+
+  if (!success) {
+    throw new Error(`GearInfoFetchException: ${message}`);
+  }
+
+  return data;
 };
 
 const isWeapon = (name: string): boolean =>
@@ -50,19 +63,6 @@ const isArmor = (name: string): boolean =>
   name.includes(" Armor") ||
   name.includes(" Backpack") ||
   name.includes(" Undersuit");
-
-export const getGearListReferences = async (
-  names: string[]
-): Promise<NameReference[]> => {
-  const infoPromises = names.map(getGearInfo);
-  const gearInformation = await Promise.all(infoPromises);
-  return gearInformation
-    .filter((info) => info !== null)
-    .map((info) => {
-      const gearInfo = info as Weapon | Armor;
-      return { name: gearInfo.localizedName, reference: gearInfo.reference };
-    });
-};
 
 const getGearInfo = async (name: string) => {
   if (isArmor(name)) {
