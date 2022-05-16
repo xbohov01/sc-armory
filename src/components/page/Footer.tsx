@@ -23,6 +23,7 @@ import JoinADI from "./JoinADI";
 import Support from "./Support";
 
 import cig from "~/assets/cig.png";
+import vt from "~/assets/veeroTech.png";
 
 export default function Footer() {
   return (
@@ -71,6 +72,11 @@ export default function Footer() {
               owners
             </p>
           </HStack>
+          <Box width="fit-content" margin="auto">
+            <Link href="">
+              Powered by <Image src={vt} height="45px" />
+            </Link>
+          </Box>
         </VStack>
       </VStack>
     </Box>
