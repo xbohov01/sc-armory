@@ -73,7 +73,7 @@ export default function Footer() {
             </p>
           </HStack>
           <Box width="fit-content" margin="auto">
-            <Link href="">
+            <Link href="https://www.veerotech.net/">
               Powered by <Image src={vt} height="45px" />
             </Link>
           </Box>
