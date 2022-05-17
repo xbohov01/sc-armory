@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Box, SimpleGrid, VStack } from "@chakra-ui/layout";
+import { Box, SimpleGrid } from "@chakra-ui/layout";
 
 import LocationItem from "./Locationitem";
 

@@ -1,7 +1,7 @@
 import { Dispatch, useState } from "react";
 
 import { Divider, Heading, HStack, Stack, VStack } from "@chakra-ui/layout";
-import { Tooltip } from "@chakra-ui/react";
+import { Switch, Tooltip } from "@chakra-ui/react";
 
 import LootList from "../lootList/LootList";
 import ShoppingWrapper from "../shoppingList/ShoppingWrapper";
@@ -19,14 +19,27 @@ type ShopsLootProps = {
 export default function ShopsLoot(props: ShopsLootProps) {
   const [isTable, setIsTable] = useState(false);
 
+  const switchListType = () => {
+    setIsTable(!isTable);
+  };
+
   return (
-    <VStack paddingTop="100px">
+    <VStack paddingTop="50px">
+      <HStack justifyContent="center">
+        <Heading padding="5pt" fontFamily="Exo" color="whitesmoke" size="sm">
+          List view
+        </Heading>
+        <Switch id="list-type-switch" onChange={switchListType} width="auto" />
+        <Heading padding="5pt" fontFamily="Exo" color="whitesmoke" size="sm">
+          Grid view
+        </Heading>
+      </HStack>
       {isTable ? <Heading color="whitesmoke">Shops</Heading> : <CombinedHeader/>}
       <Stack direction={isTable ? "column" : "row"} alignItems={isTable ? "center" : "baseline"}>
         <ShoppingWrapper
           gear={props.gear}
           listUpstream={props.listSetter}
-          layoutUpstream={setIsTable}
+          isTable={isTable}
         />
         {isTable ? <Heading paddingTop="20px" color="whitesmoke">Loots</Heading> : ""}
         <LootList gear={props.gear} multiColumn={isTable}/>
