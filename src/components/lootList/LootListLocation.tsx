@@ -2,7 +2,7 @@ import React from 'react'
 
 import { Box, SimpleGrid } from "@chakra-ui/layout";
 
-import LocationItem from "./Locationitem";
+import LocationItem from './LocationItem';
 
 import { LootItem } from "~type/search";
 
