@@ -38,7 +38,7 @@ export default function ShoppingTable(props: ShoppingTableProps) {
   }, [props.gear]);
 
   return (
-    <Box id="shopping-list-table" marginTop="100pt">
+    <Box id="shopping-list-table">
       <Table size="sm">
         <HeaderRow locations={locations.map((l) => l)} />
         <Tbody>

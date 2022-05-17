@@ -34,3 +34,11 @@ type ItemPrices = {
   low: number;
   high: number;
 };
+
+type LootItem = {
+  id: number;
+  item: string;
+  location: string;
+  container: string;
+  probability: number;
+}

@@ -4,10 +4,11 @@ import { ApiClient } from "./client";
 
 import type { ResultObject } from "~type/fetch";
 import type { RetailProduct } from "~type/loadout";
-import type { SaleLocation } from "~type/search";
+import type { LootItem, SaleLocation } from "~type/search";
 
 const RetailProductsEndpoint = "/retailproducts";
 const saleLocations = "/salelocations";
+const lootItems = "/lootitems";
 
 export class ShopServiceClient extends ApiClient {
   constructor() {
@@ -108,6 +109,19 @@ export class ShopServiceClient extends ApiClient {
       `${this.url + RetailProductsEndpoint}/${id}`
     );
     return data;
+  }
+
+  async GetLootLocationProbabilities(itemName:string): Promise<LootItem[]>{
+
+    try {
+      const { data } = await this.instance.get<LootItem[]>
+        (`${this.url + lootItems}?item=${itemName}`);
+
+        return data
+    } catch (err){
+      return [];
+    }
+    
   }
 }
 

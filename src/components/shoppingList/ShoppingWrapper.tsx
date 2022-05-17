@@ -13,6 +13,7 @@ import type { KeyValue } from "~type/select";
 type ShoppingWrapperProps = {
   gear: string[];
   listUpstream: Dispatch<SetStateAction<KeyValue<ListKey, LocatedItem[]>[]>>;
+  layoutUpstream: Dispatch<SetStateAction<boolean>>
 };
 
 export default function ShoppingWrapper(props: ShoppingWrapperProps) {
@@ -20,6 +21,7 @@ export default function ShoppingWrapper(props: ShoppingWrapperProps) {
   useToast();
 
   const switchListType = () => {
+    props.layoutUpstream(!isTable);
     setIsTable(!isTable);
   };
 

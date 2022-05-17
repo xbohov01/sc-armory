@@ -61,7 +61,6 @@ export default function ShoppingList(props: ShoppingListProps) {
       marginTop="10pt"
       width="400pt"
       marginBottom="10pt"
-      marginLeft="20pt"
       backgroundColor="#282c34"
       color="whitesmoke"
       id="shopping-list"

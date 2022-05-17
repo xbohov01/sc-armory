@@ -9,7 +9,7 @@ import LoadoutBuilder from "./components/loadout/LoadoutBuilder";
 import LoadoutExporter from "./components/loadout/LoadoutExporter";
 import Footer from "./components/page/Footer";
 import Header from "./components/page/Header";
-import ShoppingWrapper from "./components/shoppingList/ShoppingWrapper";
+import ShopsLoot from "./components/page/ShopsLoot";
 
 import "./App.css";
 
@@ -92,7 +92,7 @@ function App(): JSX.Element {
               margin="auto"
             />
             {gear.length > 0 && showList ? (
-              <ShoppingWrapper gear={gear} listUpstream={setList} />
+              <ShopsLoot gear={gear} listSetter={setList}/>
             ) : (
               ""
             )}
