@@ -1,0 +1,7 @@
+{
+  "name": "sc-armory",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
