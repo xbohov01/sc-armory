@@ -17,33 +17,40 @@ type WeaponInfoDisplayProps = {
   weapon: Weapon;
 };
 
+const hoverStyle = {
+  background:
+    "linear-gradient(90deg, rgba(245, 143, 41, 0.2) 0%, rgba(245, 143, 41, 0) 12.65%), linear-gradient(90deg, #1a2130 50%, rgba(40, 50, 65, 0) 101.34%)",
+};
+
 export default function WeaponInfoDisplay(props: WeaponInfoDisplayProps) {
   return (
     <VStack id="weapon-info">
       <Heading
         size="md"
-        width="30vw"
-        maxWidth="300pt"
-        minWidth="200pt"
+        width="29vw"
+        maxWidth="290pt"
+        minWidth="240pt"
         textAlign="left"
-        borderLeft="1pt solid whitesmoke"
+        borderLeft="3px solid #F58F29"
         padding="5pt"
-        bgColor="#1a2130"
+        background="linear-gradient(90deg, #1a2130 50%, rgba(26, 33, 48, 0) 100%)"
+        _hover={hoverStyle}
       >
         {props.weapon.localizedName}
       </Heading>
       <Grid
         templateColumns="repeat(2, 1fr)"
         gap={4}
-        width="30vw"
-        maxWidth="300pt"
-        minWidth="200pt"
+        width="29vw"
+        maxWidth="290pt"
+        minWidth="240pt"
       >
         <GridItem>
           <Stat
-            borderLeft="1pt solid whitesmoke"
+            borderLeft="3px solid #F58F29"
             padding="5pt"
-            bgColor="#1a2130"
+            background="linear-gradient(90deg, #1a2130 50%, rgba(26, 33, 48, 0) 100%)"
+            _hover={hoverStyle}
           >
             <StatLabel fontSize="lg">Range</StatLabel>
             <StatNumber fontSize="md">{`${props.weapon.range} m`}</StatNumber>
@@ -51,9 +58,10 @@ export default function WeaponInfoDisplay(props: WeaponInfoDisplayProps) {
         </GridItem>
         <GridItem>
           <Stat
-            borderLeft="1pt solid whitesmoke"
+            borderLeft="3px solid #F58F29"
             padding="5pt"
-            bgColor="#1a2130"
+            background="linear-gradient(90deg, #1a2130 50%, rgba(26, 33, 48, 0) 100%)"
+            _hover={hoverStyle}
           >
             <StatLabel fontSize="lg">Type</StatLabel>
             <StatNumber fontSize="md">{props.weapon.ammoType}</StatNumber>
@@ -61,9 +69,10 @@ export default function WeaponInfoDisplay(props: WeaponInfoDisplayProps) {
         </GridItem>
         <GridItem>
           <Stat
-            borderLeft="1pt solid whitesmoke"
+            borderLeft="3px solid #F58F29"
             padding="5pt"
-            bgColor="#1a2130"
+            background="linear-gradient(90deg, #1a2130 50%, rgba(26, 33, 48, 0) 100%)"
+            _hover={hoverStyle}
           >
             <StatLabel fontSize="lg">Magazine capacity</StatLabel>
             <StatNumber fontSize="md">{props.weapon.magazineSize}</StatNumber>
@@ -71,9 +80,10 @@ export default function WeaponInfoDisplay(props: WeaponInfoDisplayProps) {
         </GridItem>
         <GridItem>
           <Stat
-            borderLeft="1pt solid whitesmoke"
+            borderLeft="3px solid #F58F29"
             padding="5pt"
-            bgColor="#1a2130"
+            background="linear-gradient(90deg, #1a2130 50%, rgba(26, 33, 48, 0) 100%)"
+            _hover={hoverStyle}
           >
             <StatLabel fontSize="lg">Alpha damage</StatLabel>
             <StatNumber fontSize="md">{props.weapon.alphaDamage}</StatNumber>
@@ -84,9 +94,10 @@ export default function WeaponInfoDisplay(props: WeaponInfoDisplayProps) {
         ) : (
           <GridItem>
             <Stat
-              borderLeft="1pt solid whitesmoke"
+              borderLeft="3px solid #F58F29"
               padding="5pt"
-              bgColor="#1a2130"
+              background="linear-gradient(90deg, #1a2130 50%, rgba(26, 33, 48, 0) 100%)"
+              _hover={hoverStyle}
             >
               <StatLabel fontSize="lg">Semi RoF</StatLabel>
               <StatNumber fontSize="md">
@@ -100,9 +111,10 @@ export default function WeaponInfoDisplay(props: WeaponInfoDisplayProps) {
         ) : (
           <GridItem>
             <Stat
-              borderLeft="1pt solid whitesmoke"
+              borderLeft="3px solid #F58F29"
               padding="5pt"
-              bgColor="#1a2130"
+              background="linear-gradient(90deg, #1a2130 50%, rgba(26, 33, 48, 0) 100%)"
+              _hover={hoverStyle}
             >
               <StatLabel fontSize="lg">Auto RoF</StatLabel>
               <StatNumber fontSize="md">
@@ -116,9 +128,10 @@ export default function WeaponInfoDisplay(props: WeaponInfoDisplayProps) {
         ) : (
           <GridItem>
             <Stat
-              borderLeft="1pt solid whitesmoke"
+              borderLeft="3px solid #F58F29"
               padding="5pt"
-              bgColor="#1a2130"
+              background="linear-gradient(90deg, #1a2130 50%, rgba(26, 33, 48, 0) 100%)"
+              _hover={hoverStyle}
             >
               <StatLabel fontSize="lg">Burst RoF</StatLabel>
               <StatNumber fontSize="md">
@@ -132,28 +145,35 @@ export default function WeaponInfoDisplay(props: WeaponInfoDisplayProps) {
         ) : (
           <GridItem>
             <Stat
-              borderLeft="1pt solid whitesmoke"
+              borderLeft="3px solid #F58F29"
               padding="5pt"
-              bgColor="#1a2130"
+              background="linear-gradient(90deg, #1a2130 50%, rgba(26, 33, 48, 0) 100%)"
+              _hover={hoverStyle}
             >
               <StatLabel fontSize="lg">Burst size</StatLabel>
               <StatNumber fontSize="md">{props.weapon.burstSize}</StatNumber>
             </Stat>
           </GridItem>
         )}
-        <GridItem colSpan={2}>
+        <GridItem
+          colSpan={2}
+          borderLeft="3px solid #F58F29"
+          padding="5pt"
+          background="linear-gradient(90deg, #1a2130 50%, rgba(26, 33, 48, 0) 100%)"
+          _hover={hoverStyle}
+        >
           <DamageDropDisplay
             ammoContainerReference={props.weapon.ammoContainerReference}
           />
         </GridItem>
-        <GridItem colSpan={2}>
-          <Accordion
-            allowToggle
-            width="inherit"
-            borderLeft="1pt solid whitesmoke"
-            padding="5pt"
-            bgColor="#1a2130"
-          >
+        <GridItem
+          colSpan={2}
+          borderLeft="3px solid #F58F29"
+          padding="5pt"
+          background="linear-gradient(90deg, #1a2130 50%, rgba(26, 33, 48, 0) 100%)"
+          _hover={hoverStyle}
+        >
+          <Accordion allowToggle width="inherit" bgColor="#1a2130">
             <AccordionItem>
               <h2>
                 <AccordionButton>

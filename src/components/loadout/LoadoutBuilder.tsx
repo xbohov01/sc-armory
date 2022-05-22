@@ -77,10 +77,13 @@ export default function LoadoutBuilder(props: LoadoutBuilderProps) {
 
   return (
     <Box
-      backgroundColor="#282c34"
+      backgroundColor="#1a2130"
+      padding="10px"
+      borderRadius="8px"
       color="whitesmoke"
       id="loadout-builder"
       marginBottom="10pt"
+      boxShadow="4px 4px 8px rgba(0, 0, 0, 0.25), -2px -2px 6px #293342"
     >
       <Heading size="lg">Build your loadout:</Heading>
       <Box marginBottom="10pt" fontSize="md">
