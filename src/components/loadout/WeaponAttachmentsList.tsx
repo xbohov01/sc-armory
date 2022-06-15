@@ -39,8 +39,8 @@ export default function WeaponAttachmentsList(
     <HStack
       marginTop="5pt"
       marginBottom="10pt"
-      borderLeft="1pt solid whitesmoke"
-      borderRight="1pt solid whitesmoke"
+      borderLeft="2pt solid #F58F29"
+      borderRight="2pt solid #F58F29"
       paddingLeft="5pt"
       paddingRight="5pt"
     >

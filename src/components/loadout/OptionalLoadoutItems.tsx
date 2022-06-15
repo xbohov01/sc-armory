@@ -39,13 +39,11 @@ export default function OptionalLoadoutItems(props: OptionalLoadoutItemsProps) {
   };
 
   return (
-    <Box marginTop="10pt" maxWidth="300pt" margin="auto">
+    <Box marginTop="10pt" width="360pt" margin="auto">
       <Button
         marginBottom="10pt"
         marginTop="10pt"
-        width="15vw"
-        minWidth="150pt"
-        maxWidth="300pt"
+        width="300pt"
         colorScheme="blue"
         onClick={addOptional}
       >

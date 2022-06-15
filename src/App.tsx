@@ -60,7 +60,7 @@ function App(): JSX.Element {
         <Header />
       </header>
       <div className="App-body">
-        <HStack>
+        <HStack marginBottom={3}>
           <Switch
             padding="5pt"
             fontFamily="Exo"
@@ -80,14 +80,14 @@ function App(): JSX.Element {
             Show images
           </Switch>
         </HStack>
-        <HStack width="auto" margin="auto" alignItems="start" spacing="60pt">
+        <HStack width="auto" margin="auto" alignItems="start" spacing="10pt">
           {showInfo ? <AdvancedInfo gear={gear} /> : ""}
           <VStack id="loadout-section" width="400pt">
             <LoadoutBuilder updater={setGear} listRefresher={setShowList} />
             <Divider
               orientation="horizontal"
               width="40vw"
-              maxWidth="300pt"
+              maxWidth="350pt"
               minWidth="200pt"
               margin="auto"
             />

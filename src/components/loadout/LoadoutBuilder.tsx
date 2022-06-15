@@ -157,9 +157,7 @@ export default function LoadoutBuilder(props: LoadoutBuilderProps) {
         <OptionalLoadoutItems updater={setOptionals} />
       </Box>
       <Button
-        width="30vw"
-        maxWidth="300pt"
-        minWidth="200pt"
+        width="100%"
         colorScheme="teal"
         onClick={sendBuildToList}
       >
