@@ -3,7 +3,6 @@ import React from "react";
 import { useQuery } from "react-query";
 
 import { Grid, GridItem, VStack } from "@chakra-ui/layout";
-import { background } from "@chakra-ui/react";
 import { Stat, StatLabel, StatNumber } from "@chakra-ui/stat";
 
 import BreakDownInfo from "./armorInfo/BreakDownInfo";
@@ -18,7 +17,7 @@ type ArmorInfoProps = {
 
 const hoverStyle = {
   background:
-    "linear-gradient(90deg, rgba(245, 143, 41, 0.2) 0%, rgba(245, 143, 41, 0) 12.65%), linear-gradient(90deg, #1a2130 50%, rgba(40, 50, 65, 0) 101.34%)",
+    "linear-gradient(90deg, rgba(245, 143, 41, 0.2) 0%, rgba(245, 143, 41, 0) 12.65%), #1a2130",
 };
 
 export default function ArmorInfo(props: ArmorInfoProps) {
@@ -42,7 +41,7 @@ export default function ArmorInfo(props: ArmorInfoProps) {
           <Stat
             borderLeft="3px solid #F58F29"
             padding="5pt"
-            background="linear-gradient(90deg, #1a2130 50%, rgba(26, 33, 48, 0) 100%)"
+            background="#1a2130"
             _hover={hoverStyle}
           >
             <StatLabel fontSize="lg">Inventory Occupancy</StatLabel>
@@ -55,7 +54,7 @@ export default function ArmorInfo(props: ArmorInfoProps) {
           colSpan={2}
           borderLeft="3px solid #F58F29"
           padding="5pt"
-          background="linear-gradient(90deg, #1a2130 50%, rgba(26, 33, 48, 0) 100%)"
+          background="#1a2130"
           _hover={hoverStyle}
         >
           <BreakDownInfo
@@ -76,7 +75,7 @@ export default function ArmorInfo(props: ArmorInfoProps) {
           colSpan={2}
           borderLeft="3px solid #F58F29"
           padding="5pt"
-          background="linear-gradient(90deg, #1a2130 50%, rgba(26, 33, 48, 0) 100%)"
+          background="#1a2130"
           _hover={hoverStyle}
         >
           <RangeInfo
@@ -97,7 +96,7 @@ export default function ArmorInfo(props: ArmorInfoProps) {
           colSpan={2}
           borderLeft="3px solid #F58F29"
           padding="5pt"
-          background="linear-gradient(90deg, #1a2130 50%, rgba(26, 33, 48, 0) 100%)"
+          background="#1a2130"
           _hover={hoverStyle}
         >
           <RangeInfo
@@ -118,7 +117,7 @@ export default function ArmorInfo(props: ArmorInfoProps) {
           colSpan={2}
           borderLeft="3px solid #F58F29"
           padding="5pt"
-          background="linear-gradient(90deg, #1a2130 50%, rgba(26, 33, 48, 0) 100%)"
+          background="#1a2130"
           _hover={hoverStyle}
         >
           <RangeInfo
@@ -139,7 +138,7 @@ export default function ArmorInfo(props: ArmorInfoProps) {
           <Stat
             borderLeft="3px solid #F58F29"
             padding="5pt"
-            background="linear-gradient(90deg, #1a2130 50%, rgba(26, 33, 48, 0) 100%)"
+            background="#1a2130"
             _hover={hoverStyle}
           >
             <StatLabel fontSize="lg">Weapon ports</StatLabel>
@@ -152,7 +151,7 @@ export default function ArmorInfo(props: ArmorInfoProps) {
           <Stat
             borderLeft="3px solid #F58F29"
             padding="5pt"
-            background="linear-gradient(90deg, #1a2130 50%, rgba(26, 33, 48, 0) 100%)"
+            background="#1a2130"
             _hover={hoverStyle}
           >
             <StatLabel fontSize="lg">Ammo ports</StatLabel>
@@ -165,7 +164,7 @@ export default function ArmorInfo(props: ArmorInfoProps) {
           <Stat
             borderLeft="3px solid #F58F29"
             padding="5pt"
-            background="linear-gradient(90deg, #1a2130 50%, rgba(26, 33, 48, 0) 100%)"
+            background="#1a2130"
             _hover={hoverStyle}
           >
             <StatLabel fontSize="lg">Utility ports</StatLabel>
@@ -178,7 +177,7 @@ export default function ArmorInfo(props: ArmorInfoProps) {
           <Stat
             borderLeft="3px solid #F58F29"
             padding="5pt"
-            background="linear-gradient(90deg, #1a2130 50%, rgba(26, 33, 48, 0) 100%)"
+            background="#1a2130"
             _hover={hoverStyle}
           >
             <StatLabel fontSize="lg">Throwable ports</StatLabel>
@@ -191,7 +190,7 @@ export default function ArmorInfo(props: ArmorInfoProps) {
           <Stat
             borderLeft="3px solid #F58F29"
             padding="5pt"
-            background="linear-gradient(90deg, #1a2130 50%, rgba(26, 33, 48, 0) 100%)"
+            background="#1a2130"
             _hover={hoverStyle}
           >
             <StatLabel fontSize="lg">Consumable ports</StatLabel>

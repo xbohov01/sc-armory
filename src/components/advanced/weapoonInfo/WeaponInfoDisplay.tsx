@@ -19,7 +19,7 @@ type WeaponInfoDisplayProps = {
 
 const hoverStyle = {
   background:
-    "linear-gradient(90deg, rgba(245, 143, 41, 0.2) 0%, rgba(245, 143, 41, 0) 12.65%), linear-gradient(90deg, #1a2130 50%, rgba(40, 50, 65, 0) 101.34%)",
+    "linear-gradient(90deg, rgba(245, 143, 41, 0.2) 0%, rgba(245, 143, 41, 0) 12.65%), #1a2130",
 };
 
 export default function WeaponInfoDisplay(props: WeaponInfoDisplayProps) {
@@ -33,7 +33,7 @@ export default function WeaponInfoDisplay(props: WeaponInfoDisplayProps) {
         textAlign="left"
         borderLeft="3px solid #F58F29"
         padding="5pt"
-        background="linear-gradient(90deg, #1a2130 50%, rgba(26, 33, 48, 0) 100%)"
+        background="#1a2130"
         _hover={hoverStyle}
       >
         {props.weapon.localizedName}
@@ -49,7 +49,7 @@ export default function WeaponInfoDisplay(props: WeaponInfoDisplayProps) {
           <Stat
             borderLeft="3px solid #F58F29"
             padding="5pt"
-            background="linear-gradient(90deg, #1a2130 50%, rgba(26, 33, 48, 0) 100%)"
+            background="#1a2130"
             _hover={hoverStyle}
           >
             <StatLabel fontSize="lg">Range</StatLabel>
@@ -60,7 +60,7 @@ export default function WeaponInfoDisplay(props: WeaponInfoDisplayProps) {
           <Stat
             borderLeft="3px solid #F58F29"
             padding="5pt"
-            background="linear-gradient(90deg, #1a2130 50%, rgba(26, 33, 48, 0) 100%)"
+            background="#1a2130"
             _hover={hoverStyle}
           >
             <StatLabel fontSize="lg">Type</StatLabel>
@@ -71,7 +71,7 @@ export default function WeaponInfoDisplay(props: WeaponInfoDisplayProps) {
           <Stat
             borderLeft="3px solid #F58F29"
             padding="5pt"
-            background="linear-gradient(90deg, #1a2130 50%, rgba(26, 33, 48, 0) 100%)"
+            background="#1a2130"
             _hover={hoverStyle}
           >
             <StatLabel fontSize="lg">Magazine capacity</StatLabel>
@@ -82,7 +82,7 @@ export default function WeaponInfoDisplay(props: WeaponInfoDisplayProps) {
           <Stat
             borderLeft="3px solid #F58F29"
             padding="5pt"
-            background="linear-gradient(90deg, #1a2130 50%, rgba(26, 33, 48, 0) 100%)"
+            background="#1a2130"
             _hover={hoverStyle}
           >
             <StatLabel fontSize="lg">Alpha damage</StatLabel>
@@ -96,7 +96,7 @@ export default function WeaponInfoDisplay(props: WeaponInfoDisplayProps) {
             <Stat
               borderLeft="3px solid #F58F29"
               padding="5pt"
-              background="linear-gradient(90deg, #1a2130 50%, rgba(26, 33, 48, 0) 100%)"
+              background="#1a2130"
               _hover={hoverStyle}
             >
               <StatLabel fontSize="lg">Semi RoF</StatLabel>
@@ -113,7 +113,7 @@ export default function WeaponInfoDisplay(props: WeaponInfoDisplayProps) {
             <Stat
               borderLeft="3px solid #F58F29"
               padding="5pt"
-              background="linear-gradient(90deg, #1a2130 50%, rgba(26, 33, 48, 0) 100%)"
+              background="#1a2130"
               _hover={hoverStyle}
             >
               <StatLabel fontSize="lg">Auto RoF</StatLabel>
@@ -130,7 +130,7 @@ export default function WeaponInfoDisplay(props: WeaponInfoDisplayProps) {
             <Stat
               borderLeft="3px solid #F58F29"
               padding="5pt"
-              background="linear-gradient(90deg, #1a2130 50%, rgba(26, 33, 48, 0) 100%)"
+              background="#1a2130"
               _hover={hoverStyle}
             >
               <StatLabel fontSize="lg">Burst RoF</StatLabel>
@@ -147,7 +147,7 @@ export default function WeaponInfoDisplay(props: WeaponInfoDisplayProps) {
             <Stat
               borderLeft="3px solid #F58F29"
               padding="5pt"
-              background="linear-gradient(90deg, #1a2130 50%, rgba(26, 33, 48, 0) 100%)"
+              background="#1a2130"
               _hover={hoverStyle}
             >
               <StatLabel fontSize="lg">Burst size</StatLabel>
@@ -159,7 +159,7 @@ export default function WeaponInfoDisplay(props: WeaponInfoDisplayProps) {
           colSpan={2}
           borderLeft="3px solid #F58F29"
           padding="5pt"
-          background="linear-gradient(90deg, #1a2130 50%, rgba(26, 33, 48, 0) 100%)"
+          background="#1a2130"
           _hover={hoverStyle}
         >
           <DamageDropDisplay
@@ -170,7 +170,7 @@ export default function WeaponInfoDisplay(props: WeaponInfoDisplayProps) {
           colSpan={2}
           borderLeft="3px solid #F58F29"
           padding="5pt"
-          background="linear-gradient(90deg, #1a2130 50%, rgba(26, 33, 48, 0) 100%)"
+          background="#1a2130"
           _hover={hoverStyle}
         >
           <Accordion allowToggle width="inherit" bgColor="#1a2130">
