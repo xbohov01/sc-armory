@@ -60,7 +60,7 @@ export default function DamageDropDisplay(props: DamageDropDisplayProps) {
   };
 
   return (
-    <Box borderLeft="1pt solid whitesmoke" padding="5pt" bgColor="#1a2130">
+    <Box>
       <Heading size="sm" textAlign="center" paddingTop="5pt">
         Damage over distance
       </Heading>
@@ -95,7 +95,7 @@ export default function DamageDropDisplay(props: DamageDropDisplayProps) {
               titleColor: "whitesmoke",
             },
             legend: "none",
-            backgroundColor: "#1a2130",
+            backgroundColor: "transparent",
             chartArea: { width: "80%", height: "70%" },
           }}
         />

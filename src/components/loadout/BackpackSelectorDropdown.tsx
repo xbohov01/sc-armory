@@ -54,7 +54,7 @@ export function BackpackSelectorDropdown(props: BackpackSelectorDropdownProps) {
   };
 
   return (
-    <Box maxWidth="300pt" id="component-backpack" padding="2pt" margin="auto">
+    <Box width="360pt" id="component-backpack" padding="2pt" margin="auto">
       <Heading fontSize="md">Backpack</Heading>
       {sizeWarning ? <WrongSizeWarning /> : ""}
       <Box paddingTop="2pt">

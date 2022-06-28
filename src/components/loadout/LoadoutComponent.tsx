@@ -40,10 +40,10 @@ export default function LoadoutComponent(props: LoadoutComponentProps) {
 
   return (
     <Box
-      maxWidth="300pt"
       id={`component-${props.type}`}
       padding="2pt"
       margin="auto"
+      width="360pt"
     >
       <Heading fontSize="md">{props.type}</Heading>
       <Box paddingTop="2pt">

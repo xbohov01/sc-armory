@@ -41,8 +41,9 @@ function IsWeapon(name: string): boolean {
 }
 
 const tabSelectedStyle = {
-  backgroundColor: "#1a2130",
-  border: "solid 1pt whitesmoke",
+  borderTopRightRadius: "5px",
+  backgroundColor: "#495867",
+  boxShadow: "none"
 };
 
 export default function AdvancedInfo(props: AdvancedInfoProps) {
@@ -50,9 +51,14 @@ export default function AdvancedInfo(props: AdvancedInfoProps) {
     <Box
       id="advanced-info"
       color="whitesmoke"
-      width="30vw"
-      maxWidth="300pt"
-      minWidth="200pt"
+      width="32vw"
+      maxWidth="320pt"
+      minWidth="260pt"
+      backgroundColor="#1A2130"
+      borderRadius="8px"
+      paddingTop="15px"
+      paddingBottom="11px"
+      boxShadow="4px 4px 8px rgba(0, 0, 0, 0.25), -2px -2px 6px #293342"
     >
       <Heading size="lg" marginBottom="10pt">
         Loadout information
@@ -68,12 +74,31 @@ export default function AdvancedInfo(props: AdvancedInfoProps) {
             isLazy
             width="30vw"
             maxWidth="300pt"
-            minWidth="200pt"
+            minWidth="250pt"
             variant="enclosed"
+            backgroundColor="#495867"
+            borderRadius="5px"
           >
-            <TabList fontFamily="Exo" fontWeight="bold">
-              <Tab _selected={tabSelectedStyle}>Armor</Tab>
-              <Tab _selected={tabSelectedStyle}>Weapons</Tab>
+            <TabList 
+              fontFamily="Exo" 
+              fontWeight="bold"
+              backgroundColor="transparent"
+              border="none"
+            >
+              <Tab
+                _selected={tabSelectedStyle}
+                _active={tabSelectedStyle}
+                boxShadow="inset -4px -8px 6px rgba(0, 0, 0, 0.25)"
+              >
+                Armor
+              </Tab>
+              <Tab 
+                _selected={tabSelectedStyle}
+                _active={tabSelectedStyle}
+                boxShadow="inset 4px -8px 6px rgba(0, 0, 0, 0.25)"
+              >
+                Weapons
+              </Tab>
             </TabList>
             <TabPanels>
               <TabPanel>

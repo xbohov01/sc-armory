@@ -28,9 +28,13 @@ export default function ImageDisplay(props: ImageDisplayProps) {
     <Box
       id="image-display"
       color="whitesmoke"
-      width="30vw"
-      maxWidth="300pt"
-      minWidth="200pt"
+      width="32vw"
+      maxWidth="320pt"
+      minWidth="260pt"
+      boxShadow="4px 4px 8px rgba(0, 0, 0, 0.25), -2px -2px 6px #293342"
+      backgroundColor="#1a2130"
+      borderRadius="8px"
+      padding="10px"
     >
       <Heading size="lg" marginBottom="10pt">
         Images
@@ -38,7 +42,12 @@ export default function ImageDisplay(props: ImageDisplayProps) {
       {isLoading ? (
         "Loading... "
       ) : (
-        <Accordion width="30vw" maxWidth="300pt" minWidth="200pt" allowMultiple>
+        <Accordion 
+          width="30vw"
+          maxWidth="305pt"
+          minWidth="255pt" 
+          allowMultiple
+        >
           {!references
             ? "No images"
             : references.map((r) => (

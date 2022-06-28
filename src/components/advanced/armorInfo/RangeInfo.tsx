@@ -32,15 +32,13 @@ export default function RangeInfo(props: RangeInfoProps) {
 
   return (
     <>
-      <Stat borderLeft="1pt solid whitesmoke" padding="5pt" bgColor="#1a2130">
+      <Stat padding="5pt">
         <StatLabel fontSize="lg">{props.label}</StatLabel>
         <StatNumber fontSize="md">{getRangeString()}</StatNumber>
       </Stat>
       <Accordion
         allowToggle
         width="inherit"
-        borderLeft="1pt solid whitesmoke"
-        padding="5pt"
         bgColor="#1a2130"
       >
         <AccordionItem>
