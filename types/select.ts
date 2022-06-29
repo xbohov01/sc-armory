@@ -9,7 +9,8 @@ export type KeyValue<K, V> = {
   value: V;
 };
 
-export type LooseAutocomplete<T extends string> = T | Omit<string, T>;
+// eslint-disable-next-line @typescript-eslint/ban-types
+export type LooseAutocomplete<T extends string> = T | string & {};
 
 export type ArmorType = typeof armorTypes[number];
 

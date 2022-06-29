@@ -40,10 +40,10 @@ export default function SecondarySelectorComponent(
     <>
       <LoadoutComponent
         type="Secondary"
-        updater={props.setSecondary}
+        onUpdate={props.setSecondary}
         isDisabled={!isVisible}
       />
-      {/* {isVisible ? <LoadoutComponent type='Secondary' updater={props.setSecondary} /> : "" } */}
+      {/* {isVisible ? <LoadoutComponent type='Secondary' onUpdate={props.setSecondary} /> : "" } */}
     </>
   );
 }

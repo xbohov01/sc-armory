@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { useQuery } from "react-query";
 import Select from "react-select";
 
@@ -13,7 +13,7 @@ import type { SelectOption } from "~type/select";
 
 type LoadoutComponentProps = {
   type: string;
-  updater: Dispatch<SetStateAction<string>>;
+  onUpdate: Dispatch<SetStateAction<string>>;
   isDisabled: boolean;
 };
 
@@ -22,10 +22,10 @@ export default function LoadoutComponent(props: LoadoutComponentProps) {
   const handleGearChange = (selected: SelectOption | null) => {
     // Check for selection clearing
     if (selected === null) {
-      props.updater("");
+      props.onUpdate("");
       return;
     }
-    props.updater(selected.label);
+    props.onUpdate(selected.label);
   };
 
   const { data: options } = useQuery(

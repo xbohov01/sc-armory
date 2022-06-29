@@ -83,7 +83,7 @@ function App(): JSX.Element {
         <HStack width="auto" margin="auto" alignItems="start" spacing="10pt">
           {showInfo ? <AdvancedInfo gear={gear} /> : ""}
           <VStack id="loadout-section" width="400pt">
-            <LoadoutBuilder updater={setGear} listRefresher={setShowList} />
+            <LoadoutBuilder onUpdate={setGear} listRefresher={setShowList} />
             <Divider
               orientation="horizontal"
               width="40vw"
