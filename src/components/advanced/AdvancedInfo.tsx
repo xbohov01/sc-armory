@@ -1,11 +1,13 @@
 import { Box, Heading, VStack } from "@chakra-ui/layout";
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/tabs";
 
+import { LoadoutFormValues } from "../loadout/LoadoutBuilder";
+
 import ArmorInfo from "./ArmorInfo";
 import WeaponInfo from "./WeaponInfo";
 
 type AdvancedInfoProps = {
-  gear: string[];
+  gear: LoadoutFormValues;
 };
 
 function IsArmor(name: string): boolean {
@@ -43,10 +45,14 @@ function IsWeapon(name: string): boolean {
 const tabSelectedStyle = {
   borderTopRightRadius: "5px",
   backgroundColor: "#495867",
-  boxShadow: "none"
+  boxShadow: "none",
 };
 
 export default function AdvancedInfo(props: AdvancedInfoProps) {
+  const items: string[] = Object.values(props.gear)
+    .flat()
+    .filter((item) => item.length);
+
   return (
     <Box
       id="advanced-info"
@@ -64,7 +70,7 @@ export default function AdvancedInfo(props: AdvancedInfoProps) {
         Loadout information
       </Heading>
       <VStack>
-        {props.gear.length === 0 ? (
+        {items.length === 0 ? (
           <Heading size="sm" fontStyle="normal">
             Information about selected gear will appear here
           </Heading>
@@ -79,8 +85,8 @@ export default function AdvancedInfo(props: AdvancedInfoProps) {
             backgroundColor="#495867"
             borderRadius="5px"
           >
-            <TabList 
-              fontFamily="Exo" 
+            <TabList
+              fontFamily="Exo"
               fontWeight="bold"
               backgroundColor="transparent"
               border="none"
@@ -92,7 +98,7 @@ export default function AdvancedInfo(props: AdvancedInfoProps) {
               >
                 Armor
               </Tab>
-              <Tab 
+              <Tab
                 _selected={tabSelectedStyle}
                 _active={tabSelectedStyle}
                 boxShadow="inset 4px -8px 6px rgba(0, 0, 0, 0.25)"
@@ -102,17 +108,17 @@ export default function AdvancedInfo(props: AdvancedInfoProps) {
             </TabList>
             <TabPanels>
               <TabPanel>
-                {props.gear.length === 0 ? (
+                {items.length === 0 ? (
                   "No gear selected"
                 ) : (
-                  <ArmorInfo armors={props.gear.filter((a) => IsArmor(a))} />
+                  <ArmorInfo armors={items.filter((a) => IsArmor(a))} />
                 )}
               </TabPanel>
               <TabPanel>
-                {props.gear.length === 0 ? (
+                {items.length === 0 ? (
                   "No gear selected"
                 ) : (
-                  <WeaponInfo weapons={props.gear.filter((a) => IsWeapon(a))} />
+                  <WeaponInfo weapons={items.filter((a) => IsWeapon(a))} />
                 )}
               </TabPanel>
             </TabPanels>

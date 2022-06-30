@@ -4,18 +4,23 @@ import { useQuery } from "react-query";
 import { Accordion, Box, Heading } from "@chakra-ui/react";
 import { Cloudinary } from "@cloudinary/url-gen";
 
+import { LoadoutFormValues } from "../loadout/LoadoutBuilder";
+
 import { ImageItem } from "./ImageItem";
 
 import { getGearListReferences } from "~/util/gearInfo";
 
 type ImageDisplayProps = {
-  gear: string[];
+  gear: LoadoutFormValues;
 };
 
 export default function ImageDisplay(props: ImageDisplayProps) {
+  
+  const items: string[] = Object.values(props.gear).flat().filter(item => item.length)
+
   const { data: references, isLoading } = useQuery(
-    ["references", props.gear],
-    () => getGearListReferences(props.gear)
+    ["references", items],
+    () => getGearListReferences(items)
   );
 
   const cloudinary = new Cloudinary({
