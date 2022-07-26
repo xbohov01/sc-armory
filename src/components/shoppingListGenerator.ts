@@ -32,10 +32,10 @@ class ShoppingListGenerator {
         ...result.data.map(
           (saleLocation): LocatedItem => ({
             item: saleLocation.itemName,
-            storeId: saleLocation.saleLocationId,
-            storeName: saleLocation.saleLocationName,
-            storeLocation: `${saleLocation.saleLocationName} - ${saleLocation.saleLocationChain}`,
-            storeChain: saleLocation.saleLocationChain,
+            storeId: saleLocation.storeNameId,
+            storeName: saleLocation.storeName,
+            storeLocation: `${saleLocation.storeName} - ${saleLocation.storeLocationChain}`,
+            storeChain: saleLocation.storeLocationChain,
             price: saleLocation.price.toString(),
             isBought: false,
           })
@@ -77,16 +77,16 @@ class ShoppingListGenerator {
 
       const saleLocations = result.data;
       locations = saleLocations.map(
-        (l) => l.saleLocationChain.split(" - ").reverse()[0]
+        (l) => l.storeLocationChain.split(" - ").reverse()[0]
       );
 
       locatedItems.push(
         ...saleLocations.map((saleLocation) => ({
           item: saleLocation.itemName,
-          storeId: saleLocation.saleLocationId,
-          storeName: saleLocation.saleLocationName,
-          storeLocation: `${saleLocation.saleLocationName} - ${saleLocation.saleLocationChain}`,
-          storeChain: saleLocation.saleLocationChain,
+          storeId: saleLocation.storeNameId,
+          storeName: saleLocation.storeName,
+          storeLocation: `${saleLocation.storeName} - ${saleLocation.storeLocationChain}`,
+          storeChain: saleLocation.storeLocationChain,
           price: saleLocation.price.toString(),
           isBought: false,
         }))
