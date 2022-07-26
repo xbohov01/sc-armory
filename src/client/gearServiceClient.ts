@@ -139,7 +139,8 @@ class GearServiceClient extends ApiClient {
 
   async GetConsumable(filter = ""): Promise<FPSGear[]> {
     const result = await this.instance.get(
-      this.url + ConsumablesEndpoint + filter
+      this.url + ConsumablesEndpoint + 
+      `?$filter=contains(tolower(LocalizedName),'${filter.toLowerCase()}')`
     );
     return orderBy(result.data, (v: Weapon) => v.localizedName);
   }
