@@ -39,7 +39,8 @@ export class ShopServiceClient extends ApiClient {
 
     this.authenticationPromise = super.Authorize(
       "/authentication/applogin",
-      password
+      password,
+      "ShopService"
     );
   }
 
