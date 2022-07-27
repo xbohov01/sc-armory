@@ -1,22 +1,18 @@
-import React, { Dispatch, SyntheticEvent, useEffect, useState } from "react";
+import React, { Dispatch, SyntheticEvent, useState } from "react";
 
 import { Button } from "@chakra-ui/button";
 import { Box, VStack } from "@chakra-ui/layout";
 
 import OptionalLoadoutComponent from "./OptionalLoadoutComponent";
 
-import type { KeyValue } from '~type/select'
+import type { KeyValue } from '~type/select';
 
 type OptionalLoadoutItemsProps = {
-  updater: Dispatch<React.SetStateAction<string[]>>;
+  onUpdate: Dispatch<React.SetStateAction<string[]>>;
 };
 
 export default function OptionalLoadoutItems(props: OptionalLoadoutItemsProps) {
   const [optionals, setOptionals] = useState<KeyValue<number, string>[]>([]);
-
-  useEffect(() => {
-    props.updater(optionals.map((o) => o.value));
-  }, [optionals]);
 
   const addOptional = (e: SyntheticEvent) => {
     e.preventDefault();
@@ -27,7 +23,7 @@ export default function OptionalLoadoutItems(props: OptionalLoadoutItemsProps) {
     const removed = optionals.filter((o) => o.key !== key);
     setOptionals(removed);
 
-    props.updater(optionals.map((o) => o.value));
+    props.onUpdate(optionals.map((o) => o.value));
   };
 
   const updateOptional = (item: KeyValue<number, string>) => {
@@ -35,7 +31,7 @@ export default function OptionalLoadoutItems(props: OptionalLoadoutItemsProps) {
     opts.filter((o) => o.key === item.key)[0].value = item.value;
 
     setOptionals(opts);
-    props.updater(optionals.map((o) => o.value));
+    props.onUpdate(optionals.map((o) => o.value));
   };
 
   return (
@@ -55,8 +51,8 @@ export default function OptionalLoadoutItems(props: OptionalLoadoutItemsProps) {
             id={o.key}
             key={o.key}
             type="Usable"
-            remover={removeOptional}
-            updater={updateOptional}
+            onDelete={removeOptional}
+            onUpdate={updateOptional}
           />
         ))}
       </VStack>

@@ -12,7 +12,7 @@ import { SelectOption } from "~type/select";
 
 export type WeaponAttachmentSelectorProps = {
   attachmentSlot: WeaponAttachmentSlot;
-  updater: (type: string, name: string) => void;
+  onUpdate: (type: string, name: string) => void;
 };
 export function WeaponAttachmentSelector(props: WeaponAttachmentSelectorProps) {
   const [filter, setFilter] = useState("");
@@ -48,11 +48,11 @@ export function WeaponAttachmentSelector(props: WeaponAttachmentSelectorProps) {
   ) => {
     // Check for selection clearing
     if (selectedOption === null) {
-      props.updater(props.attachmentSlot.Type, "");
+      props.onUpdate(props.attachmentSlot.Type, "");
       setSelected("");
       return;
     }
-    props.updater(props.attachmentSlot.Type, selectedOption.label);
+    props.onUpdate(props.attachmentSlot.Type, selectedOption.label);
     setSelected(selectedOption.label);
   };
 

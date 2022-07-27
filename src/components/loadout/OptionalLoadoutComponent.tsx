@@ -12,8 +12,8 @@ import type { KeyValue } from "~type/select";
 type OptionalLoadoutComponentProps = {
   type: string;
   id: number;
-  updater: (item: KeyValue<number, string>) => void;
-  remover: (key: number) => void;
+  onUpdate: (item: KeyValue<number, string>) => void;
+  onDelete: (key: number) => void;
 };
 
 export default function OptionalLoadoutComponent(
@@ -24,11 +24,11 @@ export default function OptionalLoadoutComponent(
   const loadOptions = async () => getGearOptions(props.type, filter);
 
   const handleGearChange = (selected: Record<string, string> | null) => {
-    props.updater({ key: props.id, value: selected?.label || "" });
+    props.onUpdate({ key: props.id, value: selected?.label || "" });
   };
 
   const handleRemove = () => {
-    props.remover(props.id);
+    props.onDelete(props.id);
   };
 
   return (

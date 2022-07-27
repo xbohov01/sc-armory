@@ -1,168 +1,284 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { useState } from "react";
+import { Field, Form } from "react-final-form";
 
 import { Button } from "@chakra-ui/button";
-import { Box, Heading } from "@chakra-ui/layout";
+import { Box, Divider, Heading, HStack, VStack } from "@chakra-ui/layout";
+
+import AdvancedInfo from "../advanced/AdvancedInfo";
+import ImageDisplay from "../images/ImageDisplay";
+import ShopsLoot from "../page/ShopsLoot";
 
 import BackpackSelectorComponent from "./BackpackSelectorComponent";
 import LoadoutComponent from "./LoadoutComponent";
+import LoadoutExporter from "./LoadoutExporter";
 import OptionalLoadoutItems from "./OptionalLoadoutItems";
 import SecondarySelectorComponent from "./SecondarySelectorComponent";
 import WeaponAttachmentsList from "./WeaponAttachmentsList";
 
+import { ListKey, LocatedItem } from "~type/search";
+import { KeyValue } from "~type/select";
+
 type LoadoutBuilderProps = {
-  updater: Dispatch<SetStateAction<string[]>>;
-  listRefresher: Dispatch<SetStateAction<boolean>>;
+  showImages: boolean;
+  showInfo: boolean;
+  showList: boolean;
+};
+
+export type LoadoutFormValues = {
+  undersuit: string;
+  helmet: string;
+  arms: string;
+  core: string;
+  legs: string;
+  backpack: string;
+  pistol: string;
+  primary: string;
+  secondary: string;
+  tool: string;
+  optionals: string[];
+  primAttachments: string[];
+  secAttachments: string[];
+  sideAttachments: string[];
 };
 
 export default function LoadoutBuilder(props: LoadoutBuilderProps) {
-  const [helmet, setHelmet] = useState<string>("");
-  const [undersuit, setUndersuit] = useState<string>("");
-  const [arms, setArms] = useState<string>("");
-  const [core, setCore] = useState<string>("");
-  const [legs, setLegs] = useState<string>("");
-  const [backpack, setBackpack] = useState<string>("");
-  const [pistol, setPistol] = useState<string>("");
-  const [primary, setPrimary] = useState<string>("");
-  const [secondary, setSecondary] = useState<string>("");
-  const [tool, setTool] = useState<string>("");
-  const [optionals, setOptionals] = useState<string[]>([]);
-  const [primAttachments, setPrimAttachments] = useState<string[]>([]);
-  const [secAttachments, setSecAttachments] = useState<string[]>([]);
-  const [sideAttachments, setSideAttachments] = useState<string[]>([]);
-
-  useEffect(() => {
-    props.updater(
-      [
-        helmet,
-        arms,
-        core,
-        legs,
-        backpack,
-        pistol,
-        primary,
-        secondary,
-        tool,
-        undersuit,
-        ...optionals,
-        ...sideAttachments,
-        ...primAttachments,
-        ...secAttachments,
-      ].filter((g) => g !== "")
-    );
-  }, [
-    helmet,
-    arms,
-    core,
-    legs,
-    backpack,
-    pistol,
-    primary,
-    secondary,
-    tool,
-    undersuit,
-    optionals,
-    sideAttachments,
-    primAttachments,
-    secAttachments,
-  ]);
-
-  const sendBuildToList = () => {
-    props.listRefresher(true);
+  const [list, setList] = useState<KeyValue<ListKey, LocatedItem[]>[]>([]);
+  const initialGearFormValues: LoadoutFormValues = {
+    undersuit: "",
+    helmet: "",
+    arms: "",
+    core: "",
+    legs: "",
+    backpack: "",
+    pistol: "",
+    primary: "",
+    secondary: "",
+    tool: "",
+    optionals: [],
+    primAttachments: [],
+    secAttachments: [],
+    sideAttachments: [],
   };
 
-  const isUndersuitArmored = () =>
-    undersuit !== ""
-      ? undersuit.includes("Pembroke") || undersuit.includes("Novikov")
+  const isUndersuitArmored = (values: LoadoutFormValues): boolean =>
+    values.undersuit !== ""
+      ? values.undersuit.includes("Pembroke") ||
+        values.undersuit.includes("Novikov")
       : false;
 
+  const onSubmit = (values: LoadoutFormValues) => {
+    console.log(values);
+  };
+
   return (
-    <Box
-      backgroundColor="#1a2130"
-      padding="10px"
-      borderRadius="8px"
-      color="whitesmoke"
-      id="loadout-builder"
-      marginBottom="10pt"
-      boxShadow="4px 4px 8px rgba(0, 0, 0, 0.25), -2px -2px 6px #293342"
-    >
-      <Heading size="lg">Build your loadout:</Heading>
-      <Box marginBottom="10pt" fontSize="md">
-        <LoadoutComponent
-          isDisabled={false}
-          type="Undersuit"
-          updater={setUndersuit}
-        />
-        <LoadoutComponent
-          isDisabled={false}
-          type="Helmet"
-          updater={setHelmet}
-        />
-        <LoadoutComponent
-          type="Arms"
-          updater={setArms}
-          isDisabled={isUndersuitArmored()}
-        />
-        <LoadoutComponent
-          type="Core"
-          updater={setCore}
-          isDisabled={isUndersuitArmored()}
-        />
-        <BackpackSelectorComponent
-          coreName={core}
-          undersuitName={undersuit}
-          setBackpack={setBackpack}
-        />
-        <LoadoutComponent
-          type="Legs"
-          updater={setLegs}
-          isDisabled={isUndersuitArmored()}
-        />
-        <LoadoutComponent
-          isDisabled={false}
-          type="Sidearm"
-          updater={setPistol}
-        />
-        {pistol !== "" ? (
-          <WeaponAttachmentsList weapon={pistol} updater={setSideAttachments} />
-        ) : (
-          ""
-        )}
-        <LoadoutComponent
-          type="Primary"
-          updater={setPrimary}
-          isDisabled={false}
-        />
-        {primary !== "" ? (
-          <WeaponAttachmentsList
-            weapon={primary}
-            updater={setPrimAttachments}
-          />
-        ) : (
-          ""
-        )}
-        <SecondarySelectorComponent
-          coreName={core}
-          undersuitName={undersuit}
-          setSecondary={setSecondary}
-        />
-        {secondary !== "" ? (
-          <WeaponAttachmentsList
-            weapon={secondary}
-            updater={setSecAttachments}
-          />
-        ) : (
-          ""
-        )}
-        <LoadoutComponent type="Tool" updater={setTool} isDisabled={false} />
-        <OptionalLoadoutItems updater={setOptionals} />
-      </Box>
-      <Button
-        width="100%"
-        colorScheme="teal"
-        onClick={sendBuildToList}
-      >
-        Get shopping list
-      </Button>
-    </Box>
+    <Form onSubmit={onSubmit} initialValues={initialGearFormValues}>
+      {({ values, handleSubmit }) => (
+        <form onSubmit={handleSubmit}>
+          <HStack width="auto" margin="auto" alignItems="start" spacing="10pt">
+            {props.showInfo ? <AdvancedInfo gear={values} /> : ""}
+            <VStack id="loadout-section" width="400pt">
+              <Box
+                backgroundColor="#1a2130"
+                padding="10px"
+                borderRadius="8px"
+                color="whitesmoke"
+                id="loadout-builder"
+                marginBottom="10pt"
+                boxShadow="4px 4px 8px rgba(0, 0, 0, 0.25), -2px -2px 6px #293342"
+              >
+                <Heading size="lg">Build your loadout:</Heading>
+                <Box marginBottom="10pt" fontSize="md">
+                  <Field
+                    name="undersuit"
+                    render={({ input }) => {
+                      return (
+                        <LoadoutComponent
+                          type="Undersuit"
+                          isDisabled={false}
+                          onUpdate={input.onChange}
+                        />
+                      );
+                    }}
+                  />
+                  <Field
+                    name="helmet"
+                    render={({ input }) => {
+                      return (
+                        <LoadoutComponent
+                          type="Helmet"
+                          isDisabled={false}
+                          onUpdate={input.onChange}
+                        />
+                      );
+                    }}
+                  />
+                  <Field
+                    name="arms"
+                    render={({ input }) => {
+                      return (
+                        <LoadoutComponent
+                          type="Arms"
+                          isDisabled={false}
+                          onUpdate={input.onChange}
+                        />
+                      );
+                    }}
+                  />
+                  <Field
+                    name="core"
+                    render={({ input }) => {
+                      return (
+                        <LoadoutComponent
+                          type="Core"
+                          isDisabled={false}
+                          onUpdate={input.onChange}
+                        />
+                      );
+                    }}
+                  />
+                  <Field
+                    name="backpack"
+                    render={({ input }) => {
+                      return (
+                        <BackpackSelectorComponent
+                          coreName={values.core}
+                          undersuitName={values.undersuit}
+                          setBackpack={input.onChange}
+                        />
+                      );
+                    }}
+                  />
+                  <Field
+                    name="legs"
+                    render={({ input }) => {
+                      return (
+                        <LoadoutComponent
+                          type="Legs"
+                          isDisabled={isUndersuitArmored(values)}
+                          onUpdate={input.onChange}
+                        />
+                      );
+                    }}
+                  />
+                  <Field
+                    name="sidearm"
+                    render={({ input }) => {
+                      return (
+                        <LoadoutComponent
+                          type="Sidearm"
+                          isDisabled={false}
+                          onUpdate={input.onChange}
+                        />
+                      );
+                    }}
+                  />
+                  {values.pistol ? (
+                    <Field
+                      name="sideAttachments"
+                      render={({ input }) => {
+                        return (
+                          <WeaponAttachmentsList
+                            weapon={values.pistol}
+                            onUpdate={input.onChange}
+                          />
+                        );
+                      }}
+                    />
+                  ) : null}
+                  <Field
+                    name="primary"
+                    render={({ input }) => {
+                      return (
+                        <LoadoutComponent
+                          type="Primary"
+                          isDisabled={false}
+                          onUpdate={input.onChange}
+                        />
+                      );
+                    }}
+                  />
+                  {values.primary ? (
+                    <Field
+                      name="primAttachments"
+                      render={({ input }) => {
+                        return (
+                          <WeaponAttachmentsList
+                            weapon={values.primary}
+                            onUpdate={input.onChange}
+                          />
+                        );
+                      }}
+                    />
+                  ) : null}
+                  <Field
+                    name="secondary"
+                    render={({ input }) => {
+                      return (
+                        <SecondarySelectorComponent
+                          coreName={values.core}
+                          undersuitName={values.undersuit}
+                          setSecondary={input.onChange}
+                        />
+                      );
+                    }}
+                  />
+                  {values.secondary ? (
+                    <Field
+                      name="secAttachments"
+                      render={({ input }) => {
+                        return (
+                          <WeaponAttachmentsList
+                            weapon={values.secondary}
+                            onUpdate={input.onChange}
+                          />
+                        );
+                      }}
+                    />
+                  ) : null}
+                  <Field
+                    name="tool"
+                    render={({ input }) => {
+                      return (
+                        <LoadoutComponent
+                          type="Tool"
+                          isDisabled={false}
+                          onUpdate={input.onChange}
+                        />
+                      );
+                    }}
+                  />
+                  <Field
+                    name="optionals"
+                    render={({ input }) => {
+                      return <OptionalLoadoutItems onUpdate={input.onChange} />;
+                    }}
+                  />
+                  <Button width="100%" colorScheme="teal" type="submit">
+                    Get shopping list
+                  </Button>
+                </Box>
+              </Box>
+
+              <Divider
+                orientation="horizontal"
+                width="40vw"
+                maxWidth="350pt"
+                minWidth="200pt"
+                margin="auto"
+              />
+              {Object.values(values)
+                .flat()
+                .filter((item) => item.length).length > 0 && props.showList ? (
+                <ShopsLoot gear={values} listSetter={setList} />
+              ) : (
+                ""
+              )}
+              <LoadoutExporter gear={list} />
+            </VStack>
+            {props.showImages ? <ImageDisplay gear={values} /> : ""}
+          </HStack>
+        </form>
+      )}
+    </Form>
   );
 }

@@ -18,7 +18,7 @@ import type { KeyValue } from "~type/select";
 
 function App(): JSX.Element {
   const [gear, setGear] = useState<string[]>([]);
-  const [list, setList] = useState<KeyValue<ListKey, LocatedItem[]>[]>([]);
+  
   const [showInfo, setShowInfo] = useState(false);
   const [showList, setShowList] = useState(false);
   const [showImages, setShowImages] = useState(false);
@@ -80,26 +80,7 @@ function App(): JSX.Element {
             Show images
           </Switch>
         </HStack>
-        <HStack width="auto" margin="auto" alignItems="start" spacing="10pt">
-          {showInfo ? <AdvancedInfo gear={gear} /> : ""}
-          <VStack id="loadout-section" width="400pt">
-            <LoadoutBuilder updater={setGear} listRefresher={setShowList} />
-            <Divider
-              orientation="horizontal"
-              width="40vw"
-              maxWidth="350pt"
-              minWidth="200pt"
-              margin="auto"
-            />
-            {gear.length > 0 && showList ? (
-              <ShopsLoot gear={gear} listSetter={setList}/>
-            ) : (
-              ""
-            )}
-            <LoadoutExporter gear={list} />
-          </VStack>
-          {showImages ? <ImageDisplay gear={gear} /> : ""}
-        </HStack>
+        <LoadoutBuilder showInfo={showInfo} showImages={showImages} showList={showList} />
       </div>
       <footer className="App-footer">
         <Footer />

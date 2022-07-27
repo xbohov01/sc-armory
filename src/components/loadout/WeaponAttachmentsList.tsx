@@ -10,7 +10,7 @@ import type { KeyValue } from "~type/select";
 
 type WeaponAttachmentsListProps = {
   weapon: string;
-  updater: Dispatch<SetStateAction<string[]>>;
+  onUpdate: Dispatch<SetStateAction<string[]>>;
 };
 
 export default function WeaponAttachmentsList(
@@ -28,7 +28,7 @@ export default function WeaponAttachmentsList(
     newSelected.push({ key: type, value: name });
 
     setSelected(newSelected);
-    props.updater(newSelected.map((s) => s.value));
+    props.onUpdate(newSelected.map((s) => s.value));
   };
 
   if (isLoading || !slots) {
@@ -48,7 +48,7 @@ export default function WeaponAttachmentsList(
         <WeaponAttachmentSelector
           key={s.Type}
           attachmentSlot={s}
-          updater={update}
+          onUpdate={update}
         />
       ))}
     </HStack>
