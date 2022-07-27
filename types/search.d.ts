@@ -1,6 +1,6 @@
 export type LocatedItem = {
   item: string;
-  storeId: number;
+  storeId: string;
   storeName: string;
   storeLocation: string;
   storeChain: string;
@@ -9,18 +9,23 @@ export type LocatedItem = {
 };
 
 export type ListKey = {
-  id: number;
+  id: string;
   name: string;
   chain: string;
 };
 
 export type SaleLocation = {
-  itemId: number;
+  color: string;
+  colorInvariantName: string;
+  colorTag: string;
+  id: number;
   itemName: string;
+  itemType: string;
   price: number;
-  saleLocationChain: string;
-  saleLocationId: number;
-  saleLocationName: string;
+  storeLocationChain: string;
+  storeName: string;
+  storeNameId: string;
+  storeType: string;
 };
 
 type GroupedSaleLocation = {

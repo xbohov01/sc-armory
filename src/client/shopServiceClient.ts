@@ -39,7 +39,8 @@ export class ShopServiceClient extends ApiClient {
 
     this.authenticationPromise = super.Authorize(
       "/authentication/applogin",
-      password
+      password,
+      "ShopService"
     );
   }
 
@@ -70,12 +71,17 @@ export class ShopServiceClient extends ApiClient {
             ? data
             : [
                 {
-                  saleLocationId: 0,
-                  saleLocationName: "N/A",
-                  itemId: 0,
+                  color: "",
+                  colorInvariantName: "",
+                  colorTag: "",
+                  storeName: "N/A",
+                  id: 0,
                   price: 0,
-                  saleLocationChain: "N/A",
+                  storeLocationChain: "N/A",
                   itemName,
+                  itemType: "",
+                  storeNameId: "",
+                  storeType: ""
                 },
               ],
       };
@@ -86,12 +92,17 @@ export class ShopServiceClient extends ApiClient {
           message: "Not sold",
           data: [
             {
-              saleLocationId: 0,
-              saleLocationName: "N/A",
-              itemId: 0,
+              color: "",
+              colorInvariantName: "",
+              colorTag: "",
+              storeName: "N/A",
+              id: 0,
               price: 0,
-              saleLocationChain: "N/A",
+              storeLocationChain: "N/A",
               itemName,
+              itemType: "",
+              storeNameId: "",
+              storeType: ""
             },
           ],
         };

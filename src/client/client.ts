@@ -32,9 +32,10 @@ export class ApiClient {
     endpoint = "",
     password: string = this.isPtu
       ? import.meta.env.VITE_PTU_PASSWORD
-      : import.meta.env.VITE_PASSWORD
+      : import.meta.env.VITE_PASSWORD,
+    application: string
   ): Promise<string> {
-    const code = (Math.random() + 1).toString(36).substring(2);
+    const sequence = (Math.random() + 1).toString(36).substring(2);
     const username = this.isPtu
       ? import.meta.env.VITE_PTU_LOGIN
       : import.meta.env.VITE_LOGIN;
@@ -46,8 +47,9 @@ export class ApiClient {
         }`,
         {
           username,
-          sequence: sha3_512(password + code),
-          code,
+          hash: sha3_512(password + sequence),
+          sequence,
+          application
         }
       );
 

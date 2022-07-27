@@ -60,7 +60,7 @@ export default function ArmorInfo(props: ArmorInfoProps) {
           <BreakDownInfo
             unit="microSCU"
             breakdownText="Capacity by piece"
-            label="InventoryCapacity"
+            label="Inventory Capacity"
             namedValues={
               armorData
                 ? armorData.map((a: Armor) => ({
