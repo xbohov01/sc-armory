@@ -66,7 +66,7 @@ export default function LoadoutBuilder(props: LoadoutBuilderProps) {
         values.undersuit.includes("Novikov")
       : false;
 
-  const onSubmit = (values) => {
+  const onSubmit = (values: LoadoutFormValues) => {
     console.log(values);
   };
 
